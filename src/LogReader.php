@@ -2,6 +2,8 @@
 
 namespace Fcno\LogReader;
 
+use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -27,5 +29,23 @@ final class LogReader
         $this->file_system = Storage::disk($disk);
 
         return $this;
+    }
+
+    /**
+     * Sumário de determinado log.
+     *
+     * Sumariza:
+     * - Data do log
+     * - Quantidade de registros por level
+     *
+     * @param string  $log_file Ex.: laravel-2000-12-30.log
+     *
+     * @return \Illuminate\Support\Collection
+     *
+     * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
+     */
+    public function getDailySummary(string $log_file)
+    {
+        throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
     }
 }

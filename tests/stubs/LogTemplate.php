@@ -4,7 +4,6 @@ namespace Fcno\LogReader\Tests\Stubs;
 
 use Faker\Factory;
 use Illuminate\Support\Carbon;
-use phpDocumentor\Reflection\Types\Mixed_;
 
 /**
  * Template para geração de registros de log.

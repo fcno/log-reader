@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Fcno\LogReader\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LogReaderCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'log-reader';
 
     public $description = 'My command';
 

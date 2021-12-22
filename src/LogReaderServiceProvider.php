@@ -2,9 +2,9 @@
 
 namespace Fcno\LogReader;
 
+use Fcno\LogReader\Commands\LogReaderCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Fcno\LogReader\Commands\LogReaderCommand;
 
 class LogReaderServiceProvider extends PackageServiceProvider
 {

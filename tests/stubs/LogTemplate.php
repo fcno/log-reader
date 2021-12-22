@@ -4,6 +4,7 @@ namespace Fcno\LogReader\Tests\Stubs;
 
 use Faker\Factory;
 use Illuminate\Support\Carbon;
+use phpDocumentor\Reflection\Types\Mixed_;
 
 /**
  * Template para geração de registros de log.
@@ -78,8 +79,9 @@ final class LogRecordTemplate
      *
      * @return string
      */
-    public function getRecords(int $amount = 1, array $fields = null): string
+    public function getRecords(int $amount, ?array $fields): string
     {
+        throw_if($amount < 1);
         $records = collect();
 
         for ($i = 0; $i < $amount; $i++) {

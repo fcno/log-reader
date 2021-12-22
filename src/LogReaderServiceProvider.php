@@ -6,6 +6,12 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Fcno\LogReader\Commands\LogReaderCommand;
 
+
+/**
+ * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
+ *
+ * @link https://github.com/spatie/package-skeleton-laravel
+ */
 class LogReaderServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
@@ -21,5 +27,12 @@ class LogReaderServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_log-reader_table')
             ->hasCommand(LogReaderCommand::class);
+    }
+
+    public function registeringPackage()
+    {
+        $this->app->bind('log-reader', function ($app) {
+            return new LogReader();
+        });
     }
 }

@@ -81,10 +81,8 @@ test('obtém todas as informações sobre os registros de um determinado arquivo
                 ->count(files: 1, records: $amount);
 
     $response = LogReader::from($this->fs_name)->fullInfoAbout($file_name);
-dd($response);
 
-    expect($response)
-    ->get('date')->toBe($today)
-    ->get($level)->toBe($amount)
-    ->get('emergency')->toBeNull();
+    expect($response->first())
+    ->toHaveKeys(['date', 'time', 'env', 'level', 'message', 'context', 'extra'])
+    ->get('date')->toBe($today);
 });

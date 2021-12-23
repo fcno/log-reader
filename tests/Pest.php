@@ -2,4 +2,4 @@
 
 use Fcno\LogReader\Tests\TestCase;
 
-uses(TestCase::class)->in(__DIR__, 'stubs');
+uses(TestCase::class)->in(__DIR__);

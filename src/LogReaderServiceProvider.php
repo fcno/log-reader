@@ -6,7 +6,6 @@ use Fcno\LogReader\Commands\LogReaderCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *

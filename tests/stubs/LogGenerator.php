@@ -3,8 +3,9 @@
 namespace Fcno\LogReader\Tests\Stubs;
 
 use Fcno\LogReader\Exceptions\FileNotFoundException;
-use Illuminate\Support\{Carbon, Str};
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use RuntimeException;
 
 /**
@@ -15,7 +16,7 @@ use RuntimeException;
 final class LogGenerator
 {
     /**
-     * @var string  $date
+     * @var string 
      *
      * Data que será usada para a criação do arquivo de log.
      *
@@ -24,25 +25,25 @@ final class LogGenerator
     private $date = '';
 
     /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem  $storage
+     * @var \Illuminate\Contracts\Filesystem\Filesystem 
      *
      * File system onde os logs serão armazenados.
      */
     private $file_system;
 
     /**
-     * @var array  $definition
+     * @var array 
      *
      * Definição do modelo de registro que será criado
      */
     private $definition = [
-        'date'    => null,
-        'time'    => null,
-        'env'     => null,
-        'level'   => null,
+        'date' => null,
+        'time' => null,
+        'env' => null,
+        'level' => null,
         'message' => null,
         'context' => null,
-        'extra'   => null
+        'extra' => null,
     ];
 
     /**
@@ -128,7 +129,7 @@ final class LogGenerator
         }
 
         $original = collect($this->definition);
-        $new_def  = collect($def)->forget('date');
+        $new_def = collect($def)->forget('date');
 
         $original->transform(function ($item, $key) use ($new_def) {
             return $new_def->has($key)
@@ -225,7 +226,6 @@ final class LogGenerator
 
         return $records->join(PHP_EOL);
     }
-
 
     /**
      * Registro a ser inserido no arquivo de log

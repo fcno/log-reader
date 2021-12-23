@@ -33,9 +33,9 @@ test('lança exceção ao tentar ler sumário de arquivo inexistente', function 
 });
 
 test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua data', function () {
-    $level           = 'ALERT';
+    $level           = 'alert';
     $amount          = 5;
-    $appended_level  = 'DEBUG';
+    $appended_level  = 'debug';
     $appended_amount = 10;
 
     $today = now()
@@ -61,12 +61,12 @@ test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua 
     ->get('date')->toBe($today)
     ->get($level)->toBe($amount)
     ->get($appended_level)->toBe($appended_amount)
-    ->get('EMERGENCY')->toBeNull();
+    ->get('emergency')->toBeNull();
 });
 
 test('obtém todas as informações sobre os registros de um determinado arquivo de log', function () {
-    $level           = 'alert';
-    $amount          = 5;
+    $level  = 'alert';
+    $amount = 5;
 
     $today = now()
                 ->subDay()

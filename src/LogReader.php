@@ -42,6 +42,33 @@ final class LogReader
     }
 
     /**
+     * Informações completas de todos os registros de um determinado log.
+     *
+     * Informações contidas em cada registro:
+     * - date    - data do evento
+     * - time    - hora do evento
+     * - env     - ambiente em que o evento ocorreu
+     * - level   - nível do evento nos termos da PSR-3
+     * - message - mensagem
+     * - context - mensagem de contexto
+     * - extra   - dados extras sobre o evento
+     *
+     * @param string  $log_file Ex.: laravel-2000-12-30.log
+     *
+     * @return \Illuminate\Support\Collection
+     *
+     * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
+     */
+    public function fullInfoAbout(string $log_file): Collection
+    {
+        throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
+
+        $this->log_file = $log_file;
+
+        return $this->readLog();
+    }
+
+    /**
      * Sumário de determinado log.
      *
      * Sumariza:
@@ -133,5 +160,4 @@ final class LogReader
     {
         return $this->file_system->path($this->log_file);
     }
-
 }

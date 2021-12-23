@@ -63,3 +63,28 @@ test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua 
     ->get($appended_level)->toBe($appended_amount)
     ->get('EMERGENCY')->toBeNull();
 });
+
+test('obtém todas as informações sobre os registros de um determinado arquivo de log', function () {
+    $level           = 'alert';
+    $amount          = 5;
+
+    $today = now()
+                ->subDay()
+                ->format('Y-m-d');
+
+    $file_name = Str::of('laravel-')
+                    ->append($today)
+                    ->finish('.log');
+
+    LogGenerator::on($this->fs_name)
+                ->create(['level' => $level])
+                ->count(files: 1, records: $amount);
+
+    $response = LogReader::from($this->fs_name)->fullInfoAbout($file_name);
+dd($response);
+
+    expect($response)
+    ->get('date')->toBe($today)
+    ->get($level)->toBe($amount)
+    ->get('emergency')->toBeNull();
+});

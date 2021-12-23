@@ -3,8 +3,8 @@
 namespace Fcno\LogReader\Tests\Stubs;
 
 use Fcno\LogReader\Exceptions\FileNotFoundException;
-use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use RuntimeException;
 
@@ -49,11 +49,11 @@ final class LogGenerator
     /**
      * Define o file system onde os logs serão armazenados.
      *
-     * @param \Illuminate\Contracts\Filesystem\Filesystem  $disk
+     * @param string  $disk nome do file system
      *
      * @return static
      */
-    public static function on(Filesystem $disk): static
+    public static function on(string $disk): static
     {
         return new static($disk);
     }
@@ -61,11 +61,11 @@ final class LogGenerator
     /**
      * Cria uma instância do objeto.
      *
-     * @param \Illuminate\Contracts\Filesystem\Filesystem  $disk
+     * @param string  $disk nome do file system
      */
-    public function __construct(Filesystem $disk)
+    public function __construct(string $disk)
     {
-        $this->file_system = $disk;
+        $this->file_system = Storage::disk($disk);
     }
 
     /**

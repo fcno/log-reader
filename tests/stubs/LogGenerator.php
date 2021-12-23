@@ -16,7 +16,7 @@ use RuntimeException;
 final class LogGenerator
 {
     /**
-     * @var string 
+     * @var string
      *
      * Data que será usada para a criação do arquivo de log.
      *
@@ -25,14 +25,14 @@ final class LogGenerator
     private $date = '';
 
     /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem 
+     * @var \Illuminate\Contracts\Filesystem\Filesystem
      *
      * File system onde os logs serão armazenados.
      */
     private $file_system;
 
     /**
-     * @var array 
+     * @var array
      *
      * Definição do modelo de registro que será criado
      */

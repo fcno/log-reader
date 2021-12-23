@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Storage;
 final class LogReader
 {
     /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem 
+     * @var \Illuminate\Contracts\Filesystem\Filesystem
      *
      * File System onde estão armazenados os arquivos de log da aplicação.
      */
     private $file_system;
 
     /**
-     * @var string 
+     * @var string
      *
      * Nome do arquivo de log que está sendo trabalhado.
      *

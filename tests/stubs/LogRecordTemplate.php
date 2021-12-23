@@ -24,7 +24,7 @@ use Illuminate\Support\Carbon;
 final class LogRecordTemplate
 {
     /**
-     * @var string 
+     * @var string
      *
      * Template de criação de um registro de log.
      */
@@ -39,7 +39,7 @@ final class LogRecordTemplate
         "@#@";
 
     /**
-     * @var \Faker\Generator 
+     * @var \Faker\Generator
      *
      * Faker utilizado para gerar dados aleatórios
      */

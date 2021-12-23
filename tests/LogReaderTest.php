@@ -33,9 +33,9 @@ test('lança exceção ao tentar ler sumário de arquivo inexistente', function 
 });
 
 test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua data', function () {
-    $level           = 'alert';
-    $amount          = 5;
-    $appended_level  = 'debug';
+    $level = 'alert';
+    $amount = 5;
+    $appended_level = 'debug';
     $appended_amount = 10;
 
     $today = now()
@@ -65,7 +65,7 @@ test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua 
 });
 
 test('obtém todas as informações sobre os registros de um determinado arquivo de log', function () {
-    $level  = 'alert';
+    $level = 'alert';
     $amount = 5;
 
     $today = now()

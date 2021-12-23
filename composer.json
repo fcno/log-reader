@@ -45,7 +45,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Fcno\\LogReader\\Tests\\": "tests"
+            "Fcno\\LogReader\\Tests\\": "tests",
+            "Fcno\\LogReader\\Tests\\Stubs\\": "tests/stubs"
         }
     },
     "scripts": {

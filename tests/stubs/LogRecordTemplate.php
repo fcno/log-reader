@@ -24,7 +24,7 @@ use Illuminate\Support\Carbon;
 final class LogRecordTemplate
 {
     /**
-     * @var string  $log_record
+     * @var string 
      *
      * Template de criação de um registro de log.
      */
@@ -39,7 +39,7 @@ final class LogRecordTemplate
         "@#@";
 
     /**
-     * @var \Faker\Generator  $faker
+     * @var \Faker\Generator 
      *
      * Faker utilizado para gerar dados aleatórios
      */
@@ -180,7 +180,7 @@ final class LogRecordTemplate
                 'warning',
                 'notice',
                 'info',
-                'debug'
+                'debug',
             ])
         );
 
@@ -253,5 +253,4 @@ final class LogRecordTemplate
     {
         $this->log_record = mb_eregi_replace($pattern, $replacement, $this->log_record);
     }
-
 }

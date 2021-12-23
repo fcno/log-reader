@@ -10,14 +10,14 @@ use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Fcno\LogReader\Facades\LogReader;
 use Fcno\LogReader\LogReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
-use illuminate\support\Str;
 use Illuminate\Support\Facades\Storage;
+use illuminate\support\Str;
 
 beforeEach(function () {
     $this->fs_name = 'log-aplicacao';
 
     $this->file_system = Storage::fake($this->fs_name, [
-        'driver' => 'local'
+        'driver' => 'local',
     ]);
 });
 
@@ -27,7 +27,7 @@ test('o facade retorna o objeto da classe corretamente', function () {
 
 test('lança exceção ao tentar ler sumário de arquivo inexistente', function () {
     expect(
-        fn() => LogReader::from($this->fs_name)
+        fn () => LogReader::from($this->fs_name)
                             ->getDailySummary('laravel-2500-12-30.log')
     )->toThrow(FileNotFoundException::class);
 });

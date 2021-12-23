@@ -9,6 +9,8 @@
 use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Fcno\LogReader\Facades\LogReader;
 use Fcno\LogReader\LogReader as Reader;
+use Fcno\LogReader\Tests\Stubs\LogGenerator;
+use illuminate\support\Str;
 use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
@@ -28,4 +30,36 @@ test('lança exceção ao tentar ler sumário de arquivo inexistente', function 
         fn() => LogReader::from($this->fs_name)
                             ->getDailySummary('laravel-2500-12-30.log')
     )->toThrow(FileNotFoundException::class);
+});
+
+test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua data', function () {
+    $level           = 'ALERT';
+    $amount          = 5;
+    $appended_level  = 'DEBUG';
+    $appended_amount = 10;
+
+    $today = now()
+                ->subDay()
+                ->format('Y-m-d');
+
+    $file_name = Str::of('laravel-')
+                    ->append($today)
+                    ->finish('.log');
+
+    LogGenerator::on($this->fs_name)
+                ->create(['level' => $level])
+                ->count(files: 1, records: $amount)
+                ->appendLevel(
+                    log_file: $file_name,
+                    records: $appended_amount,
+                    level: $appended_level
+                );
+
+    $summary = LogReader::from($this->fs_name)->getDailySummary($file_name);
+
+    expect($summary)
+    ->get('date')->toBe($today)
+    ->get($level)->toBe($amount)
+    ->get($appended_level)->toBe($appended_amount)
+    ->get('EMERGENCY')->toBeNull();
 });

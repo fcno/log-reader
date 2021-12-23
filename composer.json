@@ -17,10 +17,15 @@
     ],
     "require": {
         "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.9.2",
-        "illuminate/contracts": "^8.73"
+        "bcremer/line-reader": "^1.2",
+        "illuminate/collections": "^8.77",
+        "illuminate/contracts": "^8.77",
+        "illuminate/filesystem": "^8.77",
+        "illuminate/support": "^8.77",
+        "spatie/laravel-package-tools": "^1.9.2"
     },
     "require-dev": {
+        "fakerphp/faker": "^1.17",
         "nunomaduro/collision": "^5.10",
         "nunomaduro/larastan": "^1.0",
         "orchestra/testbench": "^6.22",
@@ -40,7 +45,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Fcno\\LogReader\\Tests\\": "tests"
+            "Fcno\\LogReader\\Tests\\": "tests",
+            "Fcno\\LogReader\\Tests\\Stubs\\": "tests/stubs"
         }
     },
     "scripts": {
@@ -49,7 +55,11 @@
         "test-coverage": "vendor/bin/pest coverage"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {

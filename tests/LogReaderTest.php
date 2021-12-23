@@ -46,7 +46,7 @@ test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua 
                     ->append($today)
                     ->finish('.log');
 
-    LogGenerator::on($this->fs_name)
+    LogGenerator::on($this->file_system)
                 ->create(['level' => $level])
                 ->count(files: 1, records: $amount)
                 ->appendLevel(
@@ -76,7 +76,7 @@ test('obtém todas as informações sobre os registros de um determinado arquivo
                     ->append($today)
                     ->finish('.log');
 
-    LogGenerator::on($this->fs_name)
+    LogGenerator::on($this->file_system)
                 ->create(['level' => $level])
                 ->count(files: 1, records: $amount);
 

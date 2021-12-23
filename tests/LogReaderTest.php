@@ -86,3 +86,31 @@ test('obtém todas as informações sobre os registros de um determinado arquivo
     ->toHaveKeys(['date', 'time', 'env', 'level', 'message', 'context', 'extra'])
     ->get('date')->toBe($today);
 });
+
+test('retorna o conteúdo do arquivo de log de acordo com a paginação informada', function () {
+    $amount = 10;
+    $per_page = 3;
+    $page = 3;
+    $expected_amount = 3;
+
+    $today = now()
+                ->subDay()
+                ->format('Y-m-d');
+
+    $file_name = Str::of('laravel-')
+                    ->append($today)
+                    ->finish('.log');
+
+    LogGenerator::on($this->fs_name)
+                ->create(null)
+                ->count(files: 1, records: $amount);
+
+    $response = LogReader::from($this->fs_name)
+                            ->fullInfoAboutPaginated(
+                                log_file: $file_name,
+                                page: $page,
+                                per_page: $per_page
+                            );
+
+    expect($response)->toHaveCount($expected_amount);
+});

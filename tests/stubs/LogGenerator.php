@@ -115,7 +115,7 @@ final class LogGenerator
      * Notar que apenas serão sobrescritos os valores que possuírem as mesmas
      * chaves de definição.
      * Ou seja, se for informado um novo env, este será utilizado.
-     * Por fim, não é possível sobrescrever a propriedade date.
+     * Por fim, não é possível sobrescrever a propriedade **date**.
      *
      * @param array|null  $def
      *
@@ -213,12 +213,32 @@ final class LogGenerator
      */
     private function getFileContents(int $records): string
     {
-        $amount = ($records < 1)
+        $amount = ($records <= 0)
                     ? rand(1, 20)
                     : $records;
 
-        return LogRecordTemplate::create()
-                                 ->getRecords(amount: $amount, fields: $this->definition);
+        $records = collect();
 
+        for ($i = 0; $i < $amount; $i++) {
+            $records->push($this->getRecord());
+        }
+
+        return $records->join(PHP_EOL);
+    }
+
+
+    /**
+     * Registro a ser inserido no arquivo de log
+     *
+     * O registro é uma linha no arquivo de log e representa um determinado log
+     * ocorrido naquele dia.
+     * Um arquivo de log pode ter inúmeros registros, um para cada evento de
+     * interesse.
+     *
+     * @return string
+     */
+    private function getRecord(): string
+    {
+        return LogRecordTemplate::create()->getRecord($this->definition);
     }
 }

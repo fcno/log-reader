@@ -64,29 +64,21 @@ final class LogRecordTemplate
     }
 
     /**
-     * String com os registros prontos para armazenamento
+     * String com um registro pronto para armazenamento
      *
-     * A sua geração é de acordo com a quantidade, bem como com os campos
-     * informados.
+     * A sua geração é de acordo com as regras informadas para os campos.
      *
-     * Ex.: Se em `$fields` for informado ['env' => 'local'] todos os registros
-     * conterão esse valor. Já os campos não informados serão gerados com
+     * Ex.: Se em `$fields` for informado `['env' => 'local']` o registro gerado
+     * conterá esse valor. Já os campos não informados serão gerados com
      * valores randômicos.
      *
-     * @param array|null  $amount  quantidade de registros
      * @param array|null  $fields
      *
      * @return string
      */
-    public function getRecords(int $amount, ?array $fields): string
+    public function getRecord(?array $fields): string
     {
-        throw_if($amount < 1);
-        $records = collect();
-
-        for ($i = 0; $i < $amount; $i++) {
-            $records->push($this->generate($fields));
-        }
-        return $records->join(PHP_EOL);
+        return $this->generate($fields);
     }
 
     /**

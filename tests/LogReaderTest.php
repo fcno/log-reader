@@ -19,6 +19,10 @@ beforeEach(function () {
     $this->file_system = Storage::fake($this->fs_name, [
         'driver' => 'local',
     ]);
+
+    $this->file_name = Str::of('laravel-')
+                            ->append(now()->subDay()->format('Y-m-d'))
+                            ->finish('.log');
 });
 
 test('o facade retorna o objeto da classe corretamente', function () {
@@ -38,27 +42,20 @@ test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua 
     $appended_level = 'debug';
     $appended_amount = 10;
 
-    $today = now()
-                ->subDay()
-                ->format('Y-m-d');
-
-    $file_name = Str::of('laravel-')
-                    ->append($today)
-                    ->finish('.log');
-
     LogGenerator::on($this->fs_name)
                 ->create(['level' => $level])
                 ->count(files: 1, records: $amount)
                 ->appendLevel(
-                    log_file: $file_name,
+                    log_file: $this->file_name,
                     records: $appended_amount,
                     level: $appended_level
                 );
 
-    $summary = LogReader::from($this->fs_name)->getDailySummary($file_name);
+    $response = LogReader::from($this->fs_name)
+                            ->getDailySummary($this->file_name);
 
-    expect($summary)
-    ->get('date')->toBe($today)
+    expect($response)
+    ->get('date')->toBe(now()->subDay()->format('Y-m-d'))
     ->get($level)->toBe($amount)
     ->get($appended_level)->toBe($appended_amount)
     ->get('emergency')->toBeNull();
@@ -68,23 +65,16 @@ test('obtém todas as informações sobre os registros de um determinado arquivo
     $level = 'alert';
     $amount = 5;
 
-    $today = now()
-                ->subDay()
-                ->format('Y-m-d');
-
-    $file_name = Str::of('laravel-')
-                    ->append($today)
-                    ->finish('.log');
-
     LogGenerator::on($this->fs_name)
                 ->create(['level' => $level])
                 ->count(files: 1, records: $amount);
 
-    $response = LogReader::from($this->fs_name)->fullInfoAbout($file_name);
+    $response = LogReader::from($this->fs_name)
+                            ->fullInfoAbout($this->file_name);
 
     expect($response->first())
     ->toHaveKeys(['date', 'time', 'env', 'level', 'message', 'context', 'extra'])
-    ->get('date')->toBe($today);
+    ->get('date')->toBe(now()->subDay()->format('Y-m-d'));
 });
 
 test('retorna o conteúdo do arquivo de log de acordo com a paginação informada', function () {
@@ -93,21 +83,13 @@ test('retorna o conteúdo do arquivo de log de acordo com a paginação informad
     $page = 3;
     $expected_amount = 3;
 
-    $today = now()
-                ->subDay()
-                ->format('Y-m-d');
-
-    $file_name = Str::of('laravel-')
-                    ->append($today)
-                    ->finish('.log');
-
     LogGenerator::on($this->fs_name)
                 ->create(null)
                 ->count(files: 1, records: $amount);
 
     $response = LogReader::from($this->fs_name)
                             ->fullInfoAboutPaginated(
-                                log_file: $file_name,
+                                log_file: $this->file_name,
                                 page: $page,
                                 per_page: $per_page
                             );

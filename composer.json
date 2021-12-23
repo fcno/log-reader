@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "bcremer/line-reader": "^1.2",
         "illuminate/collections": "^8.77",
         "illuminate/contracts": "^8.77",
         "illuminate/filesystem": "^8.77",
@@ -53,7 +54,11 @@
         "test-coverage": "vendor/bin/pest coverage"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {

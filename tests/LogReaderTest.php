@@ -21,7 +21,7 @@ beforeEach(function () {
     ]);
 
     $this->file_name = Str::of('laravel-')
-                            ->append(now()->subDay()->format('Y-m-d'))
+                            ->append(now()->format('Y-m-d'))
                             ->finish('.log');
 });
 
@@ -55,7 +55,7 @@ test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua 
                             ->getDailySummary($this->file_name);
 
     expect($response)
-    ->get('date')->toBe(now()->subDay()->format('Y-m-d'))
+    ->get('date')->toBe(now()->format('Y-m-d'))
     ->get($level)->toBe($amount)
     ->get($appended_level)->toBe($appended_amount)
     ->get('emergency')->toBeNull();
@@ -74,7 +74,7 @@ test('obtém todas as informações sobre os registros de um determinado arquivo
 
     expect($response->first())
     ->toHaveKeys(['date', 'time', 'env', 'level', 'message', 'context', 'extra'])
-    ->get('date')->toBe(now()->subDay()->format('Y-m-d'));
+    ->get('date')->toBe(now()->format('Y-m-d'));
 });
 
 test('retorna o conteúdo do arquivo de log de acordo com a paginação informada', function () {

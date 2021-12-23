@@ -2,9 +2,9 @@
 
 namespace Fcno\LogReader\Tests;
 
+use Fcno\LogReader\LogReaderServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Fcno\LogReader\LogReaderServiceProvider;
 
 class TestCase extends Orchestra
 {

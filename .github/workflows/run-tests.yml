@@ -2,9 +2,9 @@ name: run-tests
 
 on:
   push:
-    branches: [main, develop, classe-principal]
+    branches: [main, develop]
   pull_request:
-    branches: [main, develop, classe-principal]
+    branches: [main, develop]
 
 jobs:
   test:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
         php: [8.0]
         laravel: [8.*]
         stability: [prefer-lowest, prefer-stable]
@@ -25,6 +25,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

@@ -79,18 +79,23 @@ test('obtém todas as informações sobre os registros de um determinado arquivo
 });
 
 test('lança exceção ao tentar paginar com página ou por página menor que 1', function () {
+
+    LogGenerator::on($this->fs_name)
+                ->create(null)
+                ->count(files: 1, records: 1);
+
     expect(
         fn () => LogReader::from($this->fs_name)
                             ->fullInfoAbout($this->file_name)
                             ->paginate(page:-1, per_page: 1)
-    )->toThrow(FileNotFoundException::class);
+    )->toThrow(RuntimeException::class);
 
     expect(
         fn () => LogReader::from($this->fs_name)
                             ->fullInfoAbout($this->file_name)
                             ->paginate(page: 1, per_page: -1)
-    )->toThrow(FileNotFoundException::class);
-});
+    )->toThrow(RuntimeException::class);
+})->only();
 
 test('retorna o conteúdo do arquivo de log de acordo com a paginação informada', function () {
     $amount = 10;

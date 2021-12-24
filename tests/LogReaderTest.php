@@ -78,6 +78,20 @@ test('obtém todas as informações sobre os registros de um determinado arquivo
     ->get('date')->toBe(now()->format('Y-m-d'));
 });
 
+test('lança exceção ao tentar paginar com página ou por página menor que 1', function () {
+    expect(
+        fn () => LogReader::from($this->fs_name)
+                            ->fullInfoAbout($this->file_name)
+                            ->paginate(-1, 1)
+    )->toThrow(FileNotFoundException::class);
+
+    expect(
+        fn () => LogReader::from($this->fs_name)
+                            ->fullInfoAbout($this->file_name)
+                            ->paginate(1, -1)
+    )->toThrow(FileNotFoundException::class);
+});
+
 test('retorna o conteúdo do arquivo de log de acordo com a paginação informada', function () {
     $amount = 10;
     $per_page = 3;
@@ -89,8 +103,8 @@ test('retorna o conteúdo do arquivo de log de acordo com a paginação informad
                 ->count(files: 1, records: $amount);
 
     $response = LogReader::from($this->fs_name)
-                            ->fullInfoAboutPaginated(
-                                log_file: $this->file_name,
+                            ->fullInfoAbout($this->file_name)
+                            ->paginate(
                                 page: $page,
                                 per_page: $per_page
                             );

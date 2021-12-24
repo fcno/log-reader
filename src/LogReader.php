@@ -109,7 +109,7 @@ final class LogReader
     {
         throw_if($page < 1 || $per_page < 1);
 
-        $this->page     = $page;
+        $this->page = $page;
         $this->per_page = $per_page;
 
         return $this->readLog();
@@ -169,7 +169,7 @@ final class LogReader
      */
     private function readLog(): Collection
     {
-        $data           = collect();
+        $data = collect();
         $line_generator = $this->getLineGenerator();
 
         // Lê linha a linha o log. Boa prática não carregar tudo em memória.
@@ -202,7 +202,8 @@ final class LogReader
         ? new \LimitIterator(
             iterator: $line_generator,
             offset: ($this->page - 1) * $this->per_page,
-            limit: $this->per_page)
+            limit: $this->per_page
+        )
         : $line_generator;
     }
 

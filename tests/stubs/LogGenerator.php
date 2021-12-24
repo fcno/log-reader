@@ -96,7 +96,7 @@ final class LogGenerator
     {
         throw_if($files < 1 || $records < 1);
 
-        for ($i = 1; $i <= $files; $i++) {
+        for ($i = 0; $i < $files; $i++) {
             $this->setDate($i);
 
             $this->file_system->put(

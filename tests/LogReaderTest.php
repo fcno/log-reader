@@ -108,3 +108,18 @@ test('retorna o conteúdo do arquivo de log de acordo com a paginação informad
 
     expect($response)->toHaveCount($expected_amount);
 });
+
+test('retorna a quantidade esperada de acordo com a paginação solicitada', function ($page, $expect) {
+    LogGenerator::on($this->fs_name)
+                ->create(null)
+                ->count(files: 17, records: 1);
+
+    $response = LogReader::from($this->fs_name)
+                            ->fullSummary(page: $page, per_page: 5);
+
+    expect($response)->toHaveCount($expect);
+})->with([
+    [3, 5], // página 3 retorna 5 arquivos. Página completa
+    [4, 2], // página 4 retorna 2 arquivos. Página incompleta, chegou-se ao fim
+    [5, 0]  // página 5 retorna 0 arquivos. Paginação já chegou ao fim
+]);

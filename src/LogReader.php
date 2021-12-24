@@ -73,6 +73,48 @@ final class LogReader
      *
      * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
      */
+    public function fullSummary(int $page, int $per_page): Collection
+    {
+        throw_if($page < 1 || $per_page < 1);
+
+        $files = collect($this->file_system->files())
+                    ->sortDesc()
+                    ->slice(
+                        offset: ($page - 1) * $per_page,
+                        length: $per_page
+                    );
+
+        $summary = collect();
+
+        foreach ($files as $file) {
+            $this->log_file = $file;
+
+            $summary->push(
+                $this->getDailySummary($file)
+            );
+        }
+
+        return $summary;
+    }
+
+    /**
+     * Informações completas de todos os registros de um determinado log.
+     *
+     * Informações contidas em cada registro:
+     * - date    - data do evento
+     * - time    - hora do evento
+     * - env     - ambiente em que o evento ocorreu
+     * - level   - nível do evento nos termos da PSR-3
+     * - message - mensagem
+     * - context - mensagem de contexto
+     * - extra   - dados extras sobre o evento
+     *
+     * @param string  $log_file Ex.: laravel-2000-12-30.log
+     *
+     * @return static
+     *
+     * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
+     */
     public function fullInfoAbout(string $log_file): static
     {
         throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
@@ -109,7 +151,7 @@ final class LogReader
     {
         throw_if($page < 1 || $per_page < 1);
 
-        $this->page = $page;
+        $this->page     = $page;
         $this->per_page = $per_page;
 
         return $this->readLog();

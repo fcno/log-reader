@@ -29,6 +29,20 @@ final class LogReader
     private $log_file;
 
     /**
+     * @var int
+     *
+     * Página da paginação que será exibida quando o resultado for paginado..
+     */
+    private $page;
+
+    /**
+     * @var int
+     *
+     * Quantidada de registros por página que serão exibidos quando da paginação.
+     */
+    private $per_page;
+
+    /**
      * Define o file system de armazenamento dos logs da aplicação de acordo
      * com o nome informado.
      *
@@ -95,7 +109,10 @@ final class LogReader
     {
         throw_if($page < 1 || $per_page < 1);
 
-        return $this->readPaginatedLog(page: $page, per_page: $per_page);
+        $this->page     = $page;
+        $this->per_page = $per_page;
+
+        return $this->readLog();
     }
 
     /**
@@ -143,49 +160,17 @@ final class LogReader
     }
 
     /**
-     * Lê o arquivo de log informado e o retorna como coleção
+     * Lê o arquivo de log informado e o retorna como coleção.
+     *
+     * O método leva em consideração se foi informada a necessidade de o
+     * resultado ser paginado.
      *
      * @return \Illuminate\Support\Collection
      */
     private function readLog(): Collection
     {
-        $data = collect();
-
-        // Lê linha a linha o log. Boa prática não carregar tudo em memória.
-        foreach (LineReader::readLines($this->getFullPath()) as $record) {
-            preg_match(
-                Regex::PATTERN,
-                (string) $record,
-                $output_array
-            );
-
-            $data->push(
-                $this->filteredData($output_array)
-            );
-        }
-
-        return $data;
-    }
-
-    /**
-     * Lê o arquivo de maneira paginada e o retorna como coleção
-     *
-     * @param int  $page
-     * @param int  $per_page
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    private function readPaginatedLog(int $page, int $per_page): Collection
-    {
-        $first_line = ($page - 1) * $per_page;
-
-        $line_generator = new \LimitIterator(
-            LineReader::readLines($this->getFullPath()),
-            $first_line,
-            $per_page
-        );
-
-        $data = collect();
+        $data           = collect();
+        $line_generator = $this->getLineGenerator();
 
         // Lê linha a linha o log. Boa prática não carregar tudo em memória.
         foreach ($line_generator as $record) {
@@ -201,6 +186,24 @@ final class LogReader
         }
 
         return $data;
+    }
+
+    /**
+     * Retorna um line generator de acordo com a necessidade ou não de
+     * paginação do resultado
+     *
+     * @return \LimitIterator|\Generator
+     */
+    private function getLineGenerator(): \LimitIterator|\Generator
+    {
+        $line_generator = LineReader::readLines($this->getFullPath());
+
+        return ($this->page && $this->per_page)
+        ? new \LimitIterator(
+            iterator: $line_generator,
+            offset: ($this->page - 1) * $this->per_page,
+            limit: $this->per_page)
+        : $line_generator;
     }
 
     /**

@@ -31,7 +31,7 @@ final class LogReader
     /**
      * @var int
      *
-     * Página da paginação que será exibida quando o resultado for paginado..
+     * Página da paginação que será exibida quando o resultado for paginado.
      */
     private $page;
 

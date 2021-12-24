@@ -109,6 +109,18 @@ test('retorna o conteúdo do arquivo de log de acordo com a paginação informad
     expect($response)->toHaveCount($expected_amount);
 });
 
+test('lança exceção ao tentar paginar os arquivos com página ou por página menor que 1', function () {
+    expect(
+        fn () => LogReader::from($this->fs_name)
+                            ->fullSummary(page:-1, per_page: 1)
+    )->toThrow(\RuntimeException::class);
+
+    expect(
+        fn () => LogReader::from($this->fs_name)
+                            ->fullSummary(page: 1, per_page: -1)
+    )->toThrow(\RuntimeException::class);
+});
+
 test('retorna a quantidade esperada de acordo com a paginação solicitada', function ($page, $expect) {
     LogGenerator::on($this->fs_name)
                 ->create(null)

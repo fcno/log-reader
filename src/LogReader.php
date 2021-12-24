@@ -71,7 +71,7 @@ final class LogReader
      *
      * @return static
      *
-     * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
+     * @throws \RuntimeException
      */
     public function fullSummary(int $page, int $per_page): Collection
     {

@@ -82,13 +82,13 @@ test('lança exceção ao tentar paginar com página ou por página menor que 1'
     expect(
         fn () => LogReader::from($this->fs_name)
                             ->fullInfoAbout($this->file_name)
-                            ->paginate(-1, 1)
+                            ->paginate(page:-1, per_page: 1)
     )->toThrow(FileNotFoundException::class);
 
     expect(
         fn () => LogReader::from($this->fs_name)
                             ->fullInfoAbout($this->file_name)
-                            ->paginate(1, -1)
+                            ->paginate(page: 1, per_page: -1)
     )->toThrow(FileNotFoundException::class);
 });
 
@@ -104,10 +104,7 @@ test('retorna o conteúdo do arquivo de log de acordo com a paginação informad
 
     $response = LogReader::from($this->fs_name)
                             ->fullInfoAbout($this->file_name)
-                            ->paginate(
-                                page: $page,
-                                per_page: $per_page
-                            );
+                            ->paginate(page: $page, per_page: $per_page);
 
     expect($response)->toHaveCount($expected_amount);
 });

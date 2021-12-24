@@ -85,16 +85,24 @@ final class LogReader
      *
      * @param string  $log_file Ex.: laravel-2000-12-30.log
      *
-     * @return \Illuminate\Support\Collection
+     * @return static
      *
      * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
      */
-    public function fullInfoAbout(string $log_file): Collection
+    public function fullInfoAbout(string $log_file): static
     {
         throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
 
         $this->log_file = $log_file;
 
+        return $this;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function get(): Collection
+    {
         return $this->readLog();
     }
 

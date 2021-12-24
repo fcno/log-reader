@@ -37,9 +37,9 @@ test('lança exceção ao tentar ler sumário de arquivo inexistente', function 
 });
 
 test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua data', function () {
-    $level = 'alert';
-    $amount = 5;
-    $appended_level = 'debug';
+    $level           = 'alert';
+    $amount          = 5;
+    $appended_level  = 'debug';
     $appended_amount = 10;
 
     LogGenerator::on($this->fs_name)
@@ -62,12 +62,9 @@ test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua 
 });
 
 test('obtém todas as informações sobre os registros de um determinado arquivo de log', function () {
-    $level = 'alert';
-    $amount = 5;
-
     LogGenerator::on($this->fs_name)
-                ->create(['level' => $level])
-                ->count(files: 1, records: $amount);
+                ->create(null)
+                ->count(files: 1, records: 1);
 
     $response = LogReader::from($this->fs_name)
                             ->fullInfoAbout($this->file_name)
@@ -95,12 +92,12 @@ test('lança exceção ao tentar paginar com página ou por página menor que 1'
                             ->fullInfoAbout($this->file_name)
                             ->paginate(page: 1, per_page: -1)
     )->toThrow(RuntimeException::class);
-})->only();
+});
 
 test('retorna o conteúdo do arquivo de log de acordo com a paginação informada', function () {
-    $amount = 10;
-    $per_page = 3;
-    $page = 3;
+    $amount          = 10;
+    $per_page        = 3;
+    $page            = 3;
     $expected_amount = 3;
 
     LogGenerator::on($this->fs_name)

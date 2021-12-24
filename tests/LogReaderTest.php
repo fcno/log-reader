@@ -94,22 +94,21 @@ test('lança exceção ao tentar paginar com página ou por página menor que 1'
     )->toThrow(RuntimeException::class);
 });
 
-test('retorna o conteúdo do arquivo de log de acordo com a paginação informada', function () {
-    $amount          = 10;
-    $per_page        = 3;
-    $page            = 3;
-    $expected_amount = 3;
-
+test('retorna a quantidade de registros do arquivo de log de acordo com a paginação solicitada', function ($page, $expect) {
     LogGenerator::on($this->fs_name)
                 ->create(null)
-                ->count(files: 1, records: $amount);
+                ->count(files: 1, records: 17);
 
     $response = LogReader::from($this->fs_name)
                             ->fullInfoAbout($this->file_name)
-                            ->paginate(page: $page, per_page: $per_page);
+                            ->paginate(page: $page, per_page: 5);
 
-    expect($response)->toHaveCount($expected_amount);
-});
+    expect($response)->toHaveCount($expect);
+})->with([
+    [3, 5], // página 3 retorna 5 registros. Página completa
+    [4, 2], // página 4 retorna 2 registros. Página incompleta, chegou-se ao fim
+    [5, 0]  // página 5 retorna 0 registros. Paginação já chegou ao fim
+]);
 
 test('lança exceção ao tentar paginar os arquivos com página ou por página menor que 1', function () {
     expect(
@@ -123,7 +122,7 @@ test('lança exceção ao tentar paginar os arquivos com página ou por página 
     )->toThrow(\RuntimeException::class);
 });
 
-test('retorna a quantidade esperada de acordo com a paginação solicitada', function ($page, $expect) {
+test('retorna a quantidade de arquivos esperada de acordo com a paginação solicitada', function ($page, $expect) {
     LogGenerator::on($this->fs_name)
                 ->create(null)
                 ->count(files: 17, records: 1);

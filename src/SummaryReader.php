@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class SummaryReader implements IReader
+final class SummaryReader implements IContentReader
 {
     /**
      * @var \Illuminate\Contracts\Filesystem\Filesystem
@@ -45,13 +45,7 @@ final class SummaryReader implements IReader
     }
 
     /**
-     * Define o arquivo de log que será trabalhado.
-     *
-     * @param string  $log_file Ex.: laravel-2000-12-30.log
-     *
-     * @return static
-     *
-     * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
+     * @inheritdoc
      */
     public function infoAbout(string $log_file): static
     {
@@ -63,13 +57,11 @@ final class SummaryReader implements IReader
     }
 
     /**
-     * Sumário do arquivo de log.
+     * @inheritdoc
      *
      * Sumariza:
      * - Data do log (Y-m-d)
      * - Quantidade de registros por level
-     *
-     * @return \Illuminate\Support\Collection
      */
     public function get(): Collection
     {

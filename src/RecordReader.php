@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Storage;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class RecordReader implements IReader
+final class RecordReader implements IContentReader
 {
     /**
      * @var \Illuminate\Contracts\Filesystem\Filesystem
@@ -64,13 +64,7 @@ final class RecordReader implements IReader
     }
 
     /**
-     * Define o arquivo de log que será trabalhado.
-     *
-     * @param string  $log_file Ex.: laravel-2000-12-30.log
-     *
-     * @return static
-     *
-     * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
+     * @inheritdoc
      */
     public function infoAbout(string $log_file): static
     {
@@ -82,9 +76,9 @@ final class RecordReader implements IReader
     }
 
     /**
-     * Registros do arquivo de log.
+     * @inheritdoc
      *
-     * @return \Illuminate\Support\Collection
+     * Nesse caso, os registros do arquivo de log.
      */
     public function get(): Collection
     {

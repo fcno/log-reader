@@ -17,6 +17,13 @@ interface IReader
      */
     public function from(string $disk): static;
 
+    /**
+     * Obtém as informações solicitadas.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function get(): Collection;
+
     // /**
     //  * Informações sobre um determinado log.
     //  *

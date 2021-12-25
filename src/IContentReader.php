@@ -20,13 +20,6 @@ interface IContentReader extends IReader
      */
     public function infoAbout(string $log_file): static;
 
-    /**
-     * Obtém as informações solicitadas.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function get(): Collection;
-
     // /**
     //  * Resultados paginados.
     //  *

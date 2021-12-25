@@ -30,10 +30,9 @@ final class LogReader implements IReader
     }
 
     /**
-     * Todos os arquivos de log do file system ordenados do mais recente para o
-     * mais antigo.
+     * @inheritdoc
      *
-     * @return \Illuminate\Support\Collection
+     * Nesse caso, os arquivos de log
      */
     public function get(): Collection
     {

@@ -67,7 +67,9 @@
                 "Fcno\\LogReader\\LogReaderServiceProvider"
             ],
             "aliases": {
-                "LogReader": "Fcno\\LogReader\\Facades\\LogReader"
+                "LogReader": "Fcno\\LogReader\\Facades\\LogReader",
+                "RecordReader": "Fcno\\LogReader\\Facades\\RecordReader",
+                "SummaryReader": "Fcno\\LogReader\\Facades\\SummaryReader"
             }
         }
     },

@@ -8,6 +8,15 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 /**
+ * Manipular um arquivo de log sumarizando seu conteúdo.
+ *
+ * O sumário é feito por meio da contabilização da quantidade de níveis de logs
+ * no arquivo, ou seja, a quantidade de registros do tipo debug, info, etc, bem
+ * como a data desses resgistros.
+ *
+ * Ex.:
+ * date
+ *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 final class SummaryReader
@@ -62,9 +71,9 @@ final class SummaryReader
     /**
      * Sumário do arquivo de log.
      *
-     * Sumário:
-     * - date: string com a data do log Y-m-d
-     * - debug: int quantidade de registros do tipo debug
+     * Sumariza:
+     * - Data do log (Y-m-d)
+     * - Quantidade de registros por level
      *
      * @return \Illuminate\Support\Collection
      */
@@ -127,9 +136,8 @@ final class SummaryReader
     /**
      * Prepara o sumário para ser retornado ao chamador.
      *
-     * Sumariza:
-     * - Data do log
-     * - Quantidade de registros por level
+     * Contabiliza a quantidade de logs por nível e adiciona o data dos
+     * registros.
      *
      * @param \Illuminate\Support\Collection  $summary_in_process
      *
@@ -137,14 +145,14 @@ final class SummaryReader
      */
     private function readyToGoSummary(Collection $summary_in_process): Collection
     {
-        $filtered = $summary_in_process->countBy('level');
+        $summary = $summary_in_process->countBy('level');
 
-        $filtered->put(
+        $summary->put(
             'date',
             $summary_in_process->first()->get('date')
         );
 
-        return $filtered;
+        return $summary;
     }
 
     /**

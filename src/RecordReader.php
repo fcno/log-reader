@@ -3,10 +3,8 @@
 namespace Fcno\LogReader;
 
 use Bcremer\LineReader\LineReader;
-use Fcno\LogReader\Contracts\IContentReader;
-use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Contracts\BaseContentReader;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Manipular um arquivo de log para extrair seus registros completos.
@@ -22,24 +20,8 @@ use Illuminate\Support\Facades\Storage;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class RecordReader implements IContentReader
+final class RecordReader extends BaseContentReader
 {
-    /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem
-     *
-     * File System onde estão armazenados os arquivos de log da aplicação.
-     */
-    private $file_system;
-
-    /**
-     * @var string
-     *
-     * Nome do arquivo de log que está sendo trabalhado.
-     *
-     * Ex.: laravel-2020-12-30.log
-     */
-    private $log_file;
-
     /**
      * @var int
      *
@@ -53,28 +35,6 @@ final class RecordReader implements IContentReader
      * Quantidada de registros por página que serão exibidos quando da paginação.
      */
     private $per_page;
-
-    /**
-     * @inheritdoc
-     */
-    public function from(string $disk): static
-    {
-        $this->file_system = Storage::disk($disk);
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function infoAbout(string $log_file): static
-    {
-        throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
-
-        $this->log_file = $log_file;
-
-        return $this;
-    }
 
     /**
      * @inheritdoc
@@ -110,38 +70,9 @@ final class RecordReader implements IContentReader
     }
 
     /**
-     * Lê o arquivo de log e o retorna como coleção.
-     *
-     * @return \Illuminate\Support\Collection
+     * @inheritdoc
      */
-    private function readLog(): Collection
-    {
-        $data = collect();
-        $line_generator = $this->getLineGenerator();
-
-        // Lê linha a linha o log. Boa prática não carregar tudo em memória.
-        foreach ($line_generator as $record) {
-            preg_match(
-                Regex::PATTERN,
-                (string) $record,
-                $output_array
-            );
-
-            $data->push(
-                $this->filteredData($output_array)
-            );
-        }
-
-        return $data;
-    }
-
-    /**
-     * Retorna um line generator de acordo com a necessidade ou não de
-     * paginação do resultado
-     *
-     * @return \LimitIterator|\Generator
-     */
-    private function getLineGenerator(): \LimitIterator|\Generator
+    protected function getLineGenerator(): \LimitIterator|\Generator
     {
         $line_generator = LineReader::readLines($this->getFullPath());
 
@@ -155,25 +86,20 @@ final class RecordReader implements IContentReader
     }
 
     /**
-     * Filtra o array para conter apenas os índices de valores de interesse.
+     * @inheritdoc
      *
-     * @param array  $data
-     *
-     * @return \Illuminate\Support\Collection
+     * Interesse em:
+     * - date
+     * - time
+     * - env
+     * - level
+     * - message
+     * - context
+     * - extra
      */
-    private function filteredData(array $data): Collection
+    protected function filteredData(array $data): Collection
     {
         return collect($data)
                 ->only(['date', 'time', 'env', 'level', 'message', 'context', 'extra']);
-    }
-
-    /**
-     * Caminho completo do arquivo de log que está sendo trabalhado
-     *
-     * @return string  Full path
-     */
-    private function getFullPath(): string
-    {
-        return $this->file_system->path($this->log_file);
     }
 }

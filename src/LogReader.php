@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class LogReader
+final class LogReader implements IReader
 {
     /**
      * @var \Illuminate\Contracts\Filesystem\Filesystem
@@ -20,10 +20,7 @@ final class LogReader
     private $file_system;
 
     /**
-     * Define o file system de armazenamento dos logs da aplicação de acordo
-     * com o nome informado.
-     *
-     * @param string  $disk nome do file system
+     * @inheritdoc
      */
     public function from(string $disk): static
     {

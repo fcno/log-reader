@@ -20,15 +20,6 @@ final class LogReader
     private $file_system;
 
     /**
-     * @var string
-     *
-     * Nome do arquivo de log que está sendo trabalhado.
-     *
-     * Ex.: laravel-2020-12-30.log
-     */
-    private $log_file;
-
-    /**
      * Define o file system de armazenamento dos logs da aplicação de acordo
      * com o nome informado.
      *

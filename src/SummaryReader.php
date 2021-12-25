@@ -48,7 +48,7 @@ final class SummaryReader
     }
 
     /**
-     * Define o arquivo de log que será sumarizado.
+     * Define o arquivo de log que será trabalhado.
      *
      * @param string  $log_file Ex.: laravel-2000-12-30.log
      *

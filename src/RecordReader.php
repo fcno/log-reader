@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Storage;
 /**
  * Manipular um arquivo de log para extrair seus registros completos.
  *
+ * Informações contidas em cada registro:
+ * - date    - data do evento
+ * - time    - hora do evento
+ * - env     - ambiente em que o evento ocorreu
+ * - level   - nível do evento nos termos da PSR-3
+ * - message - mensagem
+ * - context - mensagem de contexto
+ * - extra   - dados extras sobre o evento
+ *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 final class RecordReader

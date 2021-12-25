@@ -2,8 +2,6 @@
 
 namespace Fcno\LogReader;
 
-use Bcremer\LineReader\LineReader;
-use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,7 +56,7 @@ final class LogReader
 
     /**
      * Arquivos de log do file system ordenados do mais recente para o mais
-     * antigo paginados.
+     * antigo de maneira paginados.
      *
      * Retornará uma coleção vazia ou com a quantidade de itens menor que a
      * solicitada se o file system não possuir mais arquivos para leitura.

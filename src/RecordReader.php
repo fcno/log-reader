@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 /**
  * Manipular um arquivo de log para extrair seus registros completos.
  *
- *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 final class RecordReader

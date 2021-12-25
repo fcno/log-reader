@@ -2,6 +2,7 @@
 
 namespace Fcno\LogReader;
 
+use Fcno\LogReader\Contracts\IReader;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 

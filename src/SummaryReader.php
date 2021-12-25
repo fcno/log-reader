@@ -3,6 +3,7 @@
 namespace Fcno\LogReader;
 
 use Bcremer\LineReader\LineReader;
+use Fcno\LogReader\Contracts\IContentReader;
 use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;

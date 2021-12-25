@@ -1,6 +1,6 @@
 <?php
 
-namespace Fcno\LogReader;
+namespace Fcno\LogReader\Contracts;
 
 use Illuminate\Support\Collection;
 

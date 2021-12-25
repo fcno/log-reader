@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Storage;
  * no arquivo, ou seja, a quantidade de registros do tipo debug, info, etc, bem
  * como a data desses resgistros.
  *
- * Ex.:
- * date
- *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 final class SummaryReader

@@ -5,14 +5,14 @@ namespace Fcno\LogReader\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Fcno\LogReader\LogReader
+ * @see \Fcno\LogReader\RecordReader
  *
  * @link https://laravel.com/docs/8.x/facades
  */
-class LogReader extends Facade
+class RecordReader extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'log-reader';
+        return 'record-reader';
     }
 }

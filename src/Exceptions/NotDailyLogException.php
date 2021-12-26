@@ -5,13 +5,14 @@ namespace Fcno\LogReader\Exceptions;
 use Exception;
 
 /**
- * Arquivo de log diário não existe no file system.
+ * Arquivo informado não respeita o padrão de log diário do laravel, isto é, o
+ * padrão `laravel-yyyy-mm-dd.log`.
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
  * @link https://laravel.com/docs/8.x/errors
  */
-class FileNotFoundException extends Exception
+class NotDailyLogException extends Exception
 {
     //
 }

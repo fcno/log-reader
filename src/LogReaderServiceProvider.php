@@ -33,5 +33,13 @@ class LogReaderServiceProvider extends PackageServiceProvider
         $this->app->bind('log-reader', function ($app) {
             return new LogReader();
         });
+
+        $this->app->bind('record-reader', function ($app) {
+            return new RecordReader();
+        });
+
+        $this->app->bind('summary-reader', function ($app) {
+            return new SummaryReader();
+        });
     }
 }

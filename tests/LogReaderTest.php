@@ -6,12 +6,11 @@
  * @link https://pestphp.com/docs/
  */
 
-use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Fcno\LogReader\Facades\LogReader;
 use Fcno\LogReader\LogReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
 use Illuminate\Support\Facades\Storage;
-use illuminate\support\Str;
+use Illuminate\Support\Str;
 
 beforeEach(function () {
     $this->fs_name = 'log-aplicacao';
@@ -22,89 +21,60 @@ beforeEach(function () {
 
     $this->file_name = Str::of('laravel-')
                             ->append(now()->format('Y-m-d'))
-                            ->finish('.log');
+                            ->finish('.log')
+                            ->__toString();
 });
 
 test('o facade retorna o objeto da classe corretamente', function () {
     expect(LogReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });
 
-test('lança exceção ao tentar ler sumário de arquivo inexistente', function () {
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->getDailySummary('laravel-2500-12-30.log')
-    )->toThrow(FileNotFoundException::class);
-});
-
-test('sumariza corretamente a quantidade de logs de um determinado tipo e a sua data', function () {
-    $level = 'alert';
-    $amount = 5;
-    $appended_level = 'debug';
-    $appended_amount = 10;
+test('obtém todos os arquivos de log do file system ordenados do mais recente para o mais antigo', function () {
+    $amount = 10;
+    $last_log_file = Str::of('laravel-')
+                        ->append(
+                            now()
+                            ->subDays($amount - 1)
+                            ->format('Y-m-d')
+                        )
+                        ->finish('.log')
+                        ->__toString();
 
     LogGenerator::on($this->fs_name)
-                ->create(['level' => $level])
-                ->count(files: 1, records: $amount)
-                ->appendLevel(
-                    log_file: $this->file_name,
-                    records: $appended_amount,
-                    level: $appended_level
-                );
+                ->create(null)
+                ->count(files: $amount, records: 1);
 
-    $response = LogReader::from($this->fs_name)
-                            ->getDailySummary($this->file_name);
+    $response = LogReader::from($this->fs_name)->get();
 
     expect($response)
-    ->get('date')->toBe(now()->format('Y-m-d'))
-    ->get($level)->toBe($amount)
-    ->get($appended_level)->toBe($appended_amount)
-    ->get('emergency')->toBeNull();
-});
-
-test('obtém todas as informações sobre os registros de um determinado arquivo de log', function () {
-    $level = 'alert';
-    $amount = 5;
-
-    LogGenerator::on($this->fs_name)
-                ->create(['level' => $level])
-                ->count(files: 1, records: $amount);
-
-    $response = LogReader::from($this->fs_name)
-                            ->fullInfoAbout($this->file_name)
-                            ->get();
-
-    expect($response->first())
-    ->toHaveKeys(['date', 'time', 'env', 'level', 'message', 'context', 'extra'])
-    ->get('date')->toBe(now()->format('Y-m-d'));
+    ->toHaveCount($amount)
+    ->first()->toBe($this->file_name)
+    ->last()->toBe($last_log_file);
 });
 
 test('lança exceção ao tentar paginar com página ou por página menor que 1', function () {
     expect(
         fn () => LogReader::from($this->fs_name)
-                            ->fullInfoAbout($this->file_name)
-                            ->paginate(page:-1, per_page: 1)
-    )->toThrow(FileNotFoundException::class);
+                                ->paginate(page:-1, per_page: 1)
+    )->toThrow(RuntimeException::class);
 
     expect(
         fn () => LogReader::from($this->fs_name)
-                            ->fullInfoAbout($this->file_name)
-                            ->paginate(page: 1, per_page: -1)
-    )->toThrow(FileNotFoundException::class);
+                                ->paginate(page: 1, per_page: -1)
+    )->toThrow(RuntimeException::class);
 });
 
-test('retorna o conteúdo do arquivo de log de acordo com a paginação informada', function () {
-    $amount = 10;
-    $per_page = 3;
-    $page = 3;
-    $expected_amount = 3;
-
+test('obtém a quantidade de arquivos esperada de acordo com a paginação solicitada ordenados do mais recente para o mais antigo', function ($page, $expect) {
     LogGenerator::on($this->fs_name)
                 ->create(null)
-                ->count(files: 1, records: $amount);
+                ->count(files: 17, records: 1);
 
     $response = LogReader::from($this->fs_name)
-                            ->fullInfoAbout($this->file_name)
-                            ->paginate(page: $page, per_page: $per_page);
+                            ->paginate(page: $page, per_page: 5);
 
-    expect($response)->toHaveCount($expected_amount);
-});
+    expect($response)->toHaveCount($expect);
+})->with([
+    [2, 5], // página 3 retorna 5 arquivos. Página completa
+    [4, 2], // página 4 retorna 2 arquivos. Página incompleta, chegou-se ao fim
+    [5, 0],  // página 5 retorna 0 arquivos. Paginação já chegou ao fim
+]);

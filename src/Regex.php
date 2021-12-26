@@ -3,7 +3,7 @@
 namespace Fcno\LogReader;
 
 /**
- * Regex usada para para extrair as informações do Log
+ * Regex usadas na library.
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
@@ -15,9 +15,11 @@ namespace Fcno\LogReader;
 class Regex
 {
     /**
-     * @var string Padrão da regex para extração dos dados do log da aplicação
+     * @var string
+     *
+     * Padrão da regex para extração dos dados de um registro de log diário.
      */
-    public const PATTERN = '/
+    public const RECORD = '/
     ^\#@\#                                  # Caracteres que definem o inicio do padrão
     (?<date>[0-9]{4}-[0-9]{2}-[0-9]{2})     # Captura a data e insere no índice date
     \s                                      # Espaço em branco
@@ -33,5 +35,18 @@ class Regex
     \|{3}                                   # Sequência de delimitadores
     (?<extra>.*?)                           # Captura os dados extras e insere no índice extra
     @\#@                                    # Caracteres que definem o fim do padrão
+    /x';
+
+    /**
+     * @var string
+     *
+     * Padrão para o nome do arquivo de log diário.
+     *
+     * Ex.: laravel-2020-04-30.log
+     */
+    public const LOG_FILE = '/
+    ^laravel-                           # Caracteres que definem o inicio do padrão
+    (?<date>[0-9]{4}-[0-9]{2}-[0-9]{2}) # Captura a data e insere no índice date
+    .log                                # Caracteres que definem o fim do padrão
     /x';
 }

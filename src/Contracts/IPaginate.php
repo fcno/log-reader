@@ -12,8 +12,8 @@ interface IPaginate
     /**
      * Resultados paginados.
      *
-     * Coleção vazia ou com a quantidade de itens menor que a solicitada se o
-     * arquivo já tiver chegado ao final do arquivo.
+     * Coleção vazia ou com a quantidade de itens menor que a solicitada se já
+     * tiver chegado ao final.
      *
      * @param int  $page
      * @param int  $per_page

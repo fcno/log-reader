@@ -2,7 +2,7 @@
 
 namespace Fcno\LogReader\Contracts;
 
-use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Exceptions\{FileNotFoundException, NotDailyLogException};
 use Fcno\LogReader\Regex;
 use Illuminate\Support\Collection;
 
@@ -14,7 +14,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
     /**
      * @var string
      *
-     * Nome do arquivo de log que está sendo trabalhado.
+     * Nome do arquivo de log diário que está sendo trabalhado.
      *
      * Ex.: laravel-2020-12-30.log
      */
@@ -26,6 +26,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
     public function infoAbout(string $log_file): static
     {
         throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
+        throw_if(! preg_match(Regex::LOG_FILE, $log_file), NotDailyLogException::class);
 
         $this->log_file = $log_file;
 
@@ -34,7 +35,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
 
     /**
      * Retorna um Generator ou LimitIterator de acordo com a necessidade ou não
-     * paginação do resultado
+     * paginação do resultado.
      *
      * @return \LimitIterator|\Generator
      */
@@ -50,7 +51,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
     abstract protected function filteredData(array $data): Collection;
 
     /**
-     * Lê o arquivo de log e o retorna como coleção.
+     * Lê o arquivo de log diário e o retorna como coleção.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -59,7 +60,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
         $data = collect();
         $line_generator = $this->getLineGenerator();
 
-        // Lê linha a linha o log. Boa prática não carregar tudo em memória.
+        // Lê linha a linha do log. Boa prática não carregar tudo em memória.
         foreach ($line_generator as $record) {
             preg_match(
                 Regex::RECORD,
@@ -76,7 +77,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
     }
 
     /**
-     * Caminho completo do arquivo de log que está sendo trabalhado
+     * Caminho completo do arquivo de log diário que está sendo trabalhado.
      *
      * @return string  Full path
      */

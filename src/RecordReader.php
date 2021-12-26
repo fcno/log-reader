@@ -7,7 +7,7 @@ use Fcno\LogReader\Contracts\{BaseContentReader, IPaginate};
 use Illuminate\Support\Collection;
 
 /**
- * Manipular um arquivo de log para extrair seus registros completos.
+ * Manipular um arquivo de log diário para extrair seus registros completos.
  *
  * Informações contidas em cada registro:
  * - date    - data do evento
@@ -39,7 +39,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
     /**
      * @inheritdoc
      *
-     * Nesse caso, os registros do arquivo de log.
+     * Nesse caso, os registros do arquivo de log diário.
      */
     public function get(): Collection
     {
@@ -47,7 +47,9 @@ final class RecordReader extends BaseContentReader implements IPaginate
     }
 
     /**
-     *@inheritdoc
+     * @inheritdoc
+     *
+     * Nesse caso, os registros do arquivo de log diário.
      */
     public function paginate(int $page, int $per_page): Collection
     {

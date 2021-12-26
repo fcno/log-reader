@@ -7,7 +7,7 @@ use Fcno\LogReader\Contracts\BaseContentReader;
 use Illuminate\Support\Collection;
 
 /**
- * Manipular um arquivo de log sumarizando seu conteúdo.
+ * Manipular um arquivo de log diário sumarizando seu conteúdo.
  *
  * O sumário é feito por meio da contabilização da quantidade de níveis de logs
  * no arquivo, ou seja, a quantidade de registros do tipo debug, info, etc, bem
@@ -59,8 +59,7 @@ final class SummaryReader extends BaseContentReader
     /**
      * Prepara o sumário para ser retornado ao chamador.
      *
-     * Contabiliza a quantidade de logs por nível e adiciona o data dos
-     * registros.
+     * Contabiliza a quantidade de registros por nível e adiciona o data deles.
      *
      * @param \Illuminate\Support\Collection  $summary_in_process
      *

@@ -6,7 +6,8 @@ use Fcno\LogReader\Contracts\{BaseReader, IPaginate, IReader};
 use Illuminate\Support\Collection;
 
 /**
- * Manipular os arquivos de log do file system.
+ * Manipular os arquivos de log do file system gerados no padrão laravel diário
+ * isto é, no padrão `laravel-2020-09-20.log`.
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
@@ -15,11 +16,17 @@ final class LogReader extends BaseReader implements IReader, IPaginate
     /**
      * @inheritdoc
      *
-     * Nesse caso, os arquivos de log
+     * Nesse caso, a lista dos arquivos de log diários.
      */
     public function get(): Collection
     {
-        return collect($this->file_system->files())
+        $collection = collect($this->file_system->files());
+
+        $filtered = $collection->filter(function ($value, $key) {
+            return preg_match(Regex::LOG_FILE, $value);
+        });
+
+        return $filtered
                 ->sortDesc()
                 ->values();
     }
@@ -27,7 +34,7 @@ final class LogReader extends BaseReader implements IReader, IPaginate
     /**
      * @inheritdoc
      *
-     * Nesse caso, a lista de arquivos de log.
+     * Nesse caso, a lista de arquivos de log diários.
      */
     public function paginate(int $page, int $per_page): Collection
     {

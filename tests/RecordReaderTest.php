@@ -6,7 +6,8 @@
  * @link https://pestphp.com/docs/
  */
 
-use Fcno\LogReader\Exceptions\{FileNotFoundException, NotDailyLogException};
+use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\RecordReader;
 use Fcno\LogReader\RecordReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
@@ -69,7 +70,6 @@ test('obtém informações completas acerca dos registros de um determinado arqu
 });
 
 test('lança exceção ao tentar paginar com página ou por página menor que 1', function () {
-
     LogGenerator::on($this->fs_name)
                 ->create(null)
                 ->count(files: 1, records: 1);
@@ -100,5 +100,5 @@ test('obtém a quantidade de registros do arquivo de log de acordo com a pagina�
 })->with([
     [3, 5], // página 3 retorna 5 registros. Página completa
     [4, 2], // página 4 retorna 2 registros. Página incompleta, chegou-se ao fim
-    [5, 0]  // página 5 retorna 0 registros. Paginação já chegou ao fim
+    [5, 0],  // página 5 retorna 0 registros. Paginação já chegou ao fim
 ]);

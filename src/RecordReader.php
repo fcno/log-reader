@@ -3,7 +3,8 @@
 namespace Fcno\LogReader;
 
 use Bcremer\LineReader\LineReader;
-use Fcno\LogReader\Contracts\{BaseContentReader, IPaginate};
+use Fcno\LogReader\Contracts\BaseContentReader;
+use Fcno\LogReader\Contracts\IPaginate;
 use Illuminate\Support\Collection;
 
 /**
@@ -55,7 +56,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
     {
         throw_if($page < 1 || $per_page < 1);
 
-        $this->page     = $page;
+        $this->page = $page;
         $this->per_page = $per_page;
 
         return $this->readLog();

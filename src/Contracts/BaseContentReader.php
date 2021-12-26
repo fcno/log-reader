@@ -2,7 +2,8 @@
 
 namespace Fcno\LogReader\Contracts;
 
-use Fcno\LogReader\Exceptions\{FileNotFoundException, NotDailyLogException};
+use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Regex;
 use Illuminate\Support\Collection;
 

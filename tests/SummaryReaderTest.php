@@ -6,7 +6,8 @@
  * @link https://pestphp.com/docs/
  */
 
-use Fcno\LogReader\Exceptions\{FileNotFoundException, NotDailyLogException};
+use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\SummaryReader;
 use Fcno\LogReader\SummaryReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
@@ -56,9 +57,9 @@ test('lança exceção ao tentar ler sumário de arquivo de log com nome fora do
 });
 
 test('sumariza corretamente a quantidade de registros de um determinado tipo e a sua data', function () {
-    $level           = 'alert';
-    $amount          = 5;
-    $appended_level  = 'debug';
+    $level = 'alert';
+    $amount = 5;
+    $appended_level = 'debug';
     $appended_amount = 10;
 
     LogGenerator::on($this->fs_name)

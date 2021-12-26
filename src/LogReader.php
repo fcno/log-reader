@@ -2,7 +2,9 @@
 
 namespace Fcno\LogReader;
 
-use Fcno\LogReader\Contracts\{BaseReader, IPaginate, IReader};
+use Fcno\LogReader\Contracts\BaseReader;
+use Fcno\LogReader\Contracts\IPaginate;
+use Fcno\LogReader\Contracts\IReader;
 use Illuminate\Support\Collection;
 
 /**

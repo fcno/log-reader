@@ -3,8 +3,7 @@
 namespace Fcno\LogReader;
 
 use Fcno\LogReader\Commands\LogReaderCommand;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Spatie\LaravelPackageTools\{Package, PackageServiceProvider};
 
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>

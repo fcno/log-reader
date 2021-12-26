@@ -3,7 +3,7 @@
 namespace Fcno\LogReader;
 
 use Bcremer\LineReader\LineReader;
-use Fcno\LogReader\Contracts\BaseContentReader;
+use Fcno\LogReader\Contracts\{BaseContentReader, IPaginate};
 use Illuminate\Support\Collection;
 
 /**
@@ -20,7 +20,7 @@ use Illuminate\Support\Collection;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class RecordReader extends BaseContentReader
+final class RecordReader extends BaseContentReader implements IPaginate
 {
     /**
      * @var int
@@ -47,17 +47,7 @@ final class RecordReader extends BaseContentReader
     }
 
     /**
-     * Registros do arquivo de log de maneira paginada.
-     *
-     * Retornará uma coleção vazia ou com a quantidade de itens menor que a
-     * solicitada se o arquivo já tiver chegado ao final do arquivo.
-     *
-     * @param int  $page
-     * @param int  $per_page
-     *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \RuntimeException
+     *@inheritdoc
      */
     public function paginate(int $page, int $per_page): Collection
     {

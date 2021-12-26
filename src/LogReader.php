@@ -2,34 +2,16 @@
 
 namespace Fcno\LogReader;
 
-use Fcno\LogReader\Contracts\IReader;
+use Fcno\LogReader\Contracts\{BaseReader, IPaginate, IReader};
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Manipular os arquivos de log do file system.
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class LogReader implements IReader
+final class LogReader extends BaseReader implements IReader, IPaginate
 {
-    /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem
-     *
-     * File System onde estão armazenados os arquivos de log da aplicação.
-     */
-    private $file_system;
-
-    /**
-     * @inheritdoc
-     */
-    public function from(string $disk): static
-    {
-        $this->file_system = Storage::disk($disk);
-
-        return $this;
-    }
-
     /**
      * @inheritdoc
      *
@@ -43,18 +25,9 @@ final class LogReader implements IReader
     }
 
     /**
-     * Arquivos de log do file system ordenados do mais recente para o mais
-     * antigo de maneira paginados.
+     * @inheritdoc
      *
-     * Retornará uma coleção vazia ou com a quantidade de itens menor que a
-     * solicitada se o file system não possuir mais arquivos para leitura.
-     *
-     * @param int  $page
-     * @param int  $per_page
-     *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \RuntimeException
+     * Nesse caso, a lista de arquivos de log.
      */
     public function paginate(int $page, int $per_page): Collection
     {

@@ -5,20 +5,12 @@ namespace Fcno\LogReader\Contracts;
 use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Fcno\LogReader\Regex;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-abstract class BaseContentReader implements IContentReader
+abstract class BaseContentReader extends BaseReader implements IContentReader
 {
-    /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem
-     *
-     * File System onde estão armazenados os arquivos de log da aplicação.
-     */
-    protected $file_system;
-
     /**
      * @var string
      *
@@ -27,16 +19,6 @@ abstract class BaseContentReader implements IContentReader
      * Ex.: laravel-2020-12-30.log
      */
     protected $log_file;
-
-    /**
-     * @inheritdoc
-     */
-    public function from(string $disk): static
-    {
-        $this->file_system = Storage::disk($disk);
-
-        return $this;
-    }
 
     /**
      * @inheritdoc

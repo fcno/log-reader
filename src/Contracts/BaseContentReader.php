@@ -62,7 +62,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
         // Lê linha a linha o log. Boa prática não carregar tudo em memória.
         foreach ($line_generator as $record) {
             preg_match(
-                Regex::PATTERN,
+                Regex::RECORD,
                 (string) $record,
                 $output_array
             );

@@ -3,7 +3,7 @@
 namespace Fcno\LogReader;
 
 /**
- * Regex usada para para extrair as informações do Log
+ * Regex usadas na library
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
@@ -15,9 +15,9 @@ namespace Fcno\LogReader;
 class Regex
 {
     /**
-     * @var string Padrão da regex para extração dos dados do log da aplicação
+     * @var string Padrão da regex para extração dos daddos de um registro de log.
      */
-    public const PATTERN = '/
+    public const RECORD = '/
     ^\#@\#                                  # Caracteres que definem o inicio do padrão
     (?<date>[0-9]{4}-[0-9]{2}-[0-9]{2})     # Captura a data e insere no índice date
     \s                                      # Espaço em branco

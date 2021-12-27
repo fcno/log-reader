@@ -9,7 +9,7 @@ Leitor de arquivos de log diários para aplicações **[Laravel](https://laravel
 
 Além da função primária, este *package* oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha possibilitando trabalhos com arquivos grandes, sem carregá-los inteiramente em memória.
 
-```bash
+```php
 use Fcno\LogReader\Facades\RecordReader;
 
 RecordReader::from('file_system_name')
@@ -19,58 +19,59 @@ RecordReader::from('file_system_name')
 
 ## Notas
 
-- Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocadas.
-- O termo 'disk_name' é usado ao longo dessa documentação para representar a string com o nome do disco de armazenamento dos arquivos de log configurado no *[File System](https://laravel.com/docs/8.x/filesystem]*. Não se trata de uma instãncia da classe, mas apenas de seu nome.
-- O termo 'file_name.log' é usado ao longo dessa documentação para representar o nome do arquivo de log diário, gerado no padrão **laravel-yyyy-mm-dd.log**. Ex.: laravel-2020-01-30.log
+- Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
+- O termo 'disk_name' é usado ao longo desta documentação para representar a *string* com o nome do disco de armazenamento dos arquivos de log configurado no *[File System](https://laravel.com/docs/8.x/filesystem)*. Não se trata de uma instãncia da classe, mas apenas de seu nome.
+- O termo 'file_name.log' é usado ao longo desta documentação para representar o nome do arquivo de log diário, gerado no padrão **laravel-yyyy-mm-dd.log**. Ex.: laravel-2020-01-30.log
 
 ## Instalação
+
 1. Configurar o *custom channel* para definir os campos e os delimitadores dos registros do arquivo de log
 
-```bash
-// config/logging.php
+    ```php
+    // config/logging.php
 
-'channels' => [
-    ...
-    'custom' => [
-        'driver' => 'daily',
-        'path' => storage_path('logs/laravel.log'),
-        'level' => env('LOG_LEVEL', 'debug'),
-        'days' => 30,
-        'formatter' => Monolog\Formatter\LineFormatter::class,
-        'formatter_with' => [
-            'format' => "#@#%datetime%|||%channel%|||%level_name%|||%message%|||%context%|||%extra%@#@\n",
-            'dateFormat' => 'd-m-Y H:i:s',
+    'channels' => [
+        ...
+        'custom' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'), // de acordo com sua necessidade
+            'days' => 30,                         // de acordo com sua necessidade
+            'formatter' => Monolog\Formatter\LineFormatter::class,
+            'formatter_with' => [
+                'format' => "#@#%datetime%|||%channel%|||%level_name%|||%message%|||%context%|||%extra%@#@\n",
+                'dateFormat' => 'd-m-Y H:i:s',
+            ],
         ],
     ],
-],
-```
+    ```
 
 2. Definir a variável **LOG_CHANNEL** para usar o *channel* criado
 
-```bash
-// .env
-LOG_CHANNEL=custom
-```
+    ```php
+    // .env
+    LOG_CHANNEL=custom
+    ```
 
 3. Definir e configurar o disco em que os arquivos de log são armazenados
 
-```bash
-// config/filesystems.php
+    ```php
+    // config/filesystems.php
 
-'disks' => [
-    ...
-    'disk_name' => [
-        'driver' => 'local',
-        'root' => storage_path('logs'),
+    'disks' => [
+        // ...
+        'disk_name' => [
+            'driver' => 'local',
+            'root' => storage_path('logs'), // de acordo com sua necessidade
+        ],
     ],
-],
-```
+    ```
 
 4. Instalar o *package* via **[composer](https://getcomposer.org/)**:
 
-```bash
-composer require fcno/log-reader
-```
+    ```bash
+    composer require fcno/log-reader
+    ```
 
 ## Uso
 
@@ -78,98 +79,142 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
 1. **Fcno\LogReader\Facades\LogReader**
 
-Responsável por manipular os arquivos (no padrão laravel-yyyy-mm-dd.log), sem contudo ler o seu conteúdo.
+    Responsável por manipular os arquivos (no padrão **laravel-yyyy-mm-dd.log**), sem contudo ler o seu conteúdo.
 
-- Retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** com todos os arquivos de log do disco informado ordenados do mais recente para o mais antigo.
+    - O métido ***get*** retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** com todos os arquivos de log do disco informado ordenados do mais recente para o mais antigo.
 
-```bash
-use Fcno\LogReader\Facades\LogReader;
+    ```php
+    use Fcno\LogReader\Facades\LogReader;
 
-LogReader::from('disk_name')
-            ->get();
-```
+    LogReader::from('disk_name')
+                ->get();
+    ```
 
-- Retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** paginada dos arquivos de log do disco informado ordenados do mais recente para o mais antigo. No exemplo, retorna 5 arquivos da página 2, ou seja, do 6º ao 10º arquivo.
+    Retorno: A coleção possuirá todos os arquivos de log do disco.
 
-```bash
-use Fcno\LogReader\Facades\LogReader;
+    ```php
+    // \Illuminate\Support\Collection;
+    [
+        0 => "laravel-2021-12-27.log"
+        1 => "laravel-2021-12-26.log"
+        2 => "laravel-2021-12-25.log"
+        3 => "laravel-2021-12-24.log"
+        4 => "laravel-2021-12-23.log"
+        5 => "laravel-2021-12-22.log"
+        6 => "laravel-2021-12-21.log"
+        7 => "laravel-2021-12-20.log"
+        8 => "laravel-2021-12-19.log"
+        9 => "laravel-2021-12-18.log"
+    ]
+    ```
 
-LogReader::from('disk_name')
-            ->paginate(page: 2, per_page: 5);
-```
+    - O método ***paginate*** retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** paginada dos arquivos de log do disco informado ordenados do mais recente para o mais antigo. No exemplo, retorna 5 arquivos da página 2, ou seja, do 6º ao 10º arquivo.
 
-> Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso a listagem dos arquivos já tenha chegado ao seu fim.
+    ```php
+    use Fcno\LogReader\Facades\LogReader;
 
----
+    LogReader::from('disk_name')
+                ->paginate(page: 2, per_page: 5);
+    ```
+
+    Retorno: Coleção paginada com dados no mesmo formato do método ***get***.
+
+    > Retornará uma Coleção vazia ou com quantidade de itens menor que a esperada, caso a listagem dos arquivos já tenha chegado ao seu fim.
+
+    ---
 
 2. **Fcno\LogReader\Facades\RecordReader**
 
-Responsável por ler o conteúdo (registros / *records*) do arquivo de log.
+    Responsável por ler o conteúdo (registros / *records*) do arquivo de log.
 
-O registro (*record*) é o nome dado ao conjunto de informações que foram adicionadas ao registro de log para registrar um evento de interesse.
+    O registro (*record*) é o nome dado ao conjunto de informações que foram adicionadas ao log para registrar dados sobre um evento de interesse.
 
-Um arquivo de log pode conter um ou mais registros e, dada a sua infinidade, podem ser paginados a critério do desenvolvedor.
+    Um arquivo de log pode conter um ou mais registros e, dada a sua infinidade, podem ser paginados a critério do desenvolvedor.
 
-- Retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** com todos os registros do arquivo de log informado.
+    - O método ***get*** retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** com todos os registros do arquivo de log informado.
 
-```bash
-use Fcno\LogReader\Facades\RecordReader;
+    ```php
+    use Fcno\LogReader\Facades\RecordReader;
 
-RecordReader::from('disk_name')
-            ->infoAbout('filename.log')
-            ->get();
-```
+    RecordReader::from('disk_name')
+                ->infoAbout('filename.log')
+                ->get();
+    ```
 
-- Retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** paginada dos registros do arquivo de log informado. No exemplo, retorna 20 registros da página 3, ou seja, do 41º ao 60º registro do arquivo.
+    Retorno: A coleção possuirá todos os registros do arquivo de log.
 
-```bash
-use Fcno\LogReader\Facades\RecordReader;
+    ```php
+    // \Illuminate\Support\Collection;
+    [
+        "date" => "2021-12-27"
+        "time" => "03:05:08"
+        "env" => "production"
+        "level" => "emergency"
+        "message" => "Lorem ipsum dolor sit amet."
+        "context" => "Donec ultrices ex libero, ut euismod dui vulputate et. Quisque et vestibulum eros, quis dapibus ipsum."
+        "extra" => ""
+    ],
+    [
+        "date" => "2021-12-27"
+        "time" => "04:05:08"
+        "env" => "local"
+        "level" => "info"
+        "message" => "Donec imperdiet dapibus facilisis."
+        "context" => "Integer sollicitudin, mauris sit amet luctus finibus, arcu lorem fringilla velit, eget scelerisque ex metus in ante."
+        "extra" => "velit"
+    ]
+    ```
 
-RecordReader::from('disk_name')
-            ->infoAbout('filename.log')
-            ->paginate(page: 3, per_page: 20);
-```
+    - O método ***paginate*** retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** paginada dos registros do arquivo de log informado. No exemplo, retorna 20 registros da página 3, ou seja, do 41º ao 60º registro do arquivo.
 
-> Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso os registros já tenham chegado ao seu fim.
+    ```php
+    use Fcno\LogReader\Facades\RecordReader;
 
-> Os registros são exibidos na ordem em que estão gravados no arquivo. Não existe ordenação alguma feita por este *package*.
+    RecordReader::from('disk_name')
+                ->infoAbout('filename.log')
+                ->paginate(page: 3, per_page: 20);
+    ```
 
----
+    Retorno: Coleção paginada com dados no mesmo formato do método ***get***.
+
+    >Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso os registros já tenham chegado ao seu fim.
+    >
+    > Os registros são exibidos na ordem em que estão gravados no arquivo. Não existe ordenação alguma feita por este *package*.
+
+    ---
 
 3. **Fcno\LogReader\Facades\SummaryReader**
 
-Responsável por ler o conteúdo (registros / *records*) do arquivo de log e gerar um sumário.
+    Responsável por ler o conteúdo (registros / *records*) do arquivo de log e gerar um sumário.
 
-O sumário (*summary*) é o nome dado a contabilização dos registros (*records*) por *level*, isto é, a quantidade de registros do tipo *debug*, *info*, etc.
+    O sumário (*summary*) é o nome dado a contabilização dos registros (*records*) por nível, isto é, a quantidade de registros do tipo ***debug***, ***info***, ***notice*** etc.
 
-- Retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** com o sumário de todos os registros do arquivo de log informado bem como a sua data.
+    - Retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** com o sumário de todos os registros do arquivo de log informado bem como a sua data.
 
-```bash
-use Fcno\LogReader\Facades\SummaryReader;
+    ```php
+    use Fcno\LogReader\Facades\SummaryReader;
 
-SummaryReader::from('disk_name')
-                ->infoAbout('filename.log')
-                ->get();
-```
+    SummaryReader::from('disk_name')
+                    ->infoAbout('filename.log')
+                    ->get();
+    ```
 
-Retorno:
+    Retorno: A coleção possuirá a quantidade de ocorrências dos diversos níveis de log presentes no arquivo, bem como a data de suas ocorrências.
 
-```bash
-\Illuminate\Support\Collection;
-[
-    "alert" => 5
-    "debug" => 10
-    "date" => "2021-12-27"
-]
-```
+    ```php
+    // \Illuminate\Support\Collection;
+    [
+        "alert" => 5
+        "debug" => 10
+        "date" => "2021-12-27"
+    ]
+    ```
 
-> Este *package* não possui, cravado em seu código, a necessidade de os níveis de log da aplicação serem aderentes à **[PSR-3](https://www.php-fig.org/psr/psr-3/)**. Contudo, é considerado boa prática implementar esse tipo de padrão.
-
-> Nivels que não possuírem registros, não serão retornados (contabilizados).
-
-> A data, no padrão **yyyy-mm-dd**, retornada é a do primeiro registro. Parte-se do princípio que todos os registros do arquivo foram gerados no mesmo dia, visto que este *package* destina-se aos logs diários.
-
----
+    > Este *package* não possui, cravado em seu código, a necessidade de os níveis de log da aplicação serem aderentes à **[PSR-3](https://www.php-fig.org/psr/psr-3/)**. Contudo, é considerado boa prática implementar esse tipo de padrão na aplicação.
+    >
+    > Níveis que não possuírem registros, não serão retornados (contabilizados) na Coleção.
+    >
+    > A data, no padrão **yyyy-mm-dd**, retornada é a presente no primeiro registro. Parte-se do princípio que todos os registros do arquivo foram gerados no mesmo dia, visto que este *package* destina-se aos logs diários.
 
 ## Testes e Integração Contínua
 

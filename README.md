@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/fcno/log-reader/Check%20&%20fix%20styling?label=code%20style)](https://github.com/fcno/log-reader/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/fcno/log-reader.svg?style=flat-square)](https://packagist.org/packages/fcno/log-reader)
 
-Leitor de arquivos de log diários para aplicações **[Laravel](https://laravel.com/)**.
+Leitor de arquivos de log diários para aplicações **[Laravel](https://laravel.com/docs)**.
 
 Além da função primária, este *package* oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha de maneira transparente, possibilitando trabalhos com arquivos grandes, sem carregá-los inteiramente em memória.
 
@@ -27,7 +27,7 @@ Notas 🔹 Instalação 🔹 Uso (LogReader 🔸 RecordReader 🔸 SummaryReader
 
 ## Notas
 
-⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
+⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/docs)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
 
 ⭐ Esta *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada dada as preferências pessoas de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
 

@@ -7,7 +7,7 @@
 
 Leitor de arquivos de log diários para aplicações **[Laravel](https://laravel.com/)**.
 
-Além da função primária, este *package* oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha possibilitando trabalhos com arquivos grandes, sem carregá-los inteiramente em memória.
+Além da função primária, este *package* oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha de maneira transparente, possibilitando trabalhos com arquivos grandes, sem carregá-los inteiramente em memória.
 
 ```php
 use Fcno\LogReader\Facades\RecordReader;
@@ -22,10 +22,6 @@ RecordReader::from('file_system_name')
 ## Notas
 
 ⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
-
-⭐ O termo 'disk_name' é usado ao longo desta documentação para representar a *string* com o nome do disco de armazenamento dos arquivos de log configurado no *[File System](https://laravel.com/docs/8.x/filesystem)*. Não se trata de uma instãncia da classe, mas apenas de seu nome.
-
-⭐O termo 'file_name.log' é usado ao longo desta documentação para representar o nome do arquivo de log diário, gerado no padrão **laravel-yyyy-mm-dd.log**. Ex.: laravel-2020-01-30.log
 
 &nbsp;
 
@@ -63,7 +59,7 @@ RecordReader::from('file_system_name')
 
     &nbsp;
 
-3. Definir e configurar o disco em que os arquivos de log são armazenados
+3. Definir e configurar o disco em que os arquivos de log estão armazenados
 
     ```php
     // config/filesystems.php
@@ -99,7 +95,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***from***
 
-    Assinatura: define o disco em que estão armazenados os arquivos de log.
+    Assinatura e uso: informa a este *package* em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\LogReader;
@@ -120,7 +116,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***get***
 
-    Assinatura: Todos os arquivos de log do disco.
+    Assinatura e uso: Todos os arquivos de log do disco
 
     ```php
     use Fcno\LogReader\Facades\LogReader;
@@ -134,7 +130,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** com todos os arquivos de log do disco informado ordenados do mais recente para o mais antigo.
+    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** com todos os arquivos de log do disco informado ordenados do mais recente para o mais antigo
 
     ```php
     // \Illuminate\Support\Collection;
@@ -149,6 +145,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
         7 => "laravel-2021-12-20.log"
         8 => "laravel-2021-12-19.log"
         9 => "laravel-2021-12-18.log"
+        // ...
     ]
     ```
 
@@ -156,7 +153,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***paginate***
 
-    Assinatura: 5 arquivos de log da página 2, ou seja, do 6º ao 10º.
+    Assinatura e uso: 5 arquivos de log da página 2, ou seja, do 6º ao 10º arquivos
 
     ```php
     use Fcno\LogReader\Facades\LogReader;
@@ -166,6 +163,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * @param int  $per_page itens por página
      * 
      * @return \Illuminate\Support\Collection
+     * 
+     * @throws \RuntimeException $page < 1 || $per_page < 1
      */
     LogReader::from(disk: 'disk_name')
                 ->paginate(page: 2, per_page: 5);
@@ -173,7 +172,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** paginada com dados no mesmo formato do método ***get***.
+    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** paginada com dados no mesmo formato do método ***get***
 
     > Retornará uma Coleção vazia ou com quantidade de itens menor que a esperada, caso a listagem dos arquivos já tenha chegado ao seu fim.
 
@@ -200,7 +199,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***from***
 
-    Assinatura: define o disco em que estão armazenados os arquivos de log.
+    Assinatura e uso: informa a este *package* em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\RecordReader;
@@ -219,9 +218,34 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
+    ✏️ ***infoAbout***
+
+    Assinatura e uso: informa a este *package* qual arquivo de log deve ser trabalhado
+
+    ```php
+    use Fcno\LogReader\Facades\RecordReader;
+
+    /**
+     * @param string  $log_file nome do arquivo de log que deve ser trabalhado
+     * 
+     * @return static
+     * 
+     * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
+     * @throws \Fcno\LogReader\Exceptions\NotDailyLogException
+     */
+    RecordReader::from(disk: 'disk_name')
+                ->infoAbout(log_file: 'filename.log');
+    ```
+
+    &nbsp;
+
+    Retorno: Instância da classe **RecordReader**
+
+    &nbsp;
+
     ✏️ ***get***
 
-    Assinatura: Todos os registros do arquivo de log.
+    Assinatura e uso: Todos os registros do arquivo de log
 
     ```php
     use Fcno\LogReader\Facades\RecordReader;
@@ -236,7 +260,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** com todos os registros do arquivo de log informado.
+    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** com todos os registros do arquivo de log
 
     ```php
     // \Illuminate\Support\Collection;
@@ -264,7 +288,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***paginate***
 
-    Assinatura: 5 registros da página 2 do arquivo de log, ou seja, do 6º ao 10º.
+    Assinatura e uso: 5 registros da página 2 do arquivo de log, ou seja, do 6º ao 10º
 
     ```php
     use Fcno\LogReader\Facades\RecordReader;
@@ -274,6 +298,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * @param int  $per_page itens por página
      * 
      * @return \Illuminate\Support\Collection
+     * 
+     * @throws \RuntimeException $page < 1 || $per_page < 1
      */
     RecordReader::from(disk: 'disk_name')
                 ->infoAbout(log_file: 'filename.log')
@@ -282,7 +308,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)**  paginada com dados no mesmo formato do método ***get***.
+    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)**  paginada com dados no mesmo formato do método ***get***
 
     >Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso os registros já tenham chegado ao seu fim.
     >
@@ -296,7 +322,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 
-        - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**;
+        - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**.
 
     - O método ***paginate*** lança:
         - ***\RuntimeException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
@@ -317,7 +343,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***from***
 
-    Assinatura: define o disco em que estão armazenados os arquivos de log.
+    Assinatura: informa a este *package* em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
@@ -336,9 +362,30 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
+    ✏️ ***infoAbout***
+
+    Assinatura e uso: informa a este *package* qual arquivo de log deve ser trabalhado
+
+    ```php
+    use Fcno\LogReader\Facades\SummaryReader;
+
+    /**
+     * @param string  $log_file nome do arquivo de log que deve ser trabalhado
+     * 
+     * @return static
+     * 
+     * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
+     * @throws \Fcno\LogReader\Exceptions\NotDailyLogException
+     */
+    SummaryReader::from(disk: 'disk_name')
+                    ->infoAbout(log_file: 'filename.log');
+    ```
+
+    &nbsp;
+
     ✏️ ***get***
 
-    Assinatura: Sumário de todos os registros do arquivo de log, bem como a sua data.
+    Assinatura e uso: Sumário de todos os registros do arquivo de log, bem como a sua data
 
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
@@ -353,7 +400,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** com o sumário de todos os registros do arquivo de log informado bem como a sua data, isto é, a quantidade de ocorrências dos diversos níveis de log presentes no arquivo, bem como a data de suas ocorrências.
+    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** com o sumário de todos os registros do arquivo de log informado bem como a sua data, isto é, a quantidade de ocorrências dos diversos níveis de log presentes no arquivo, bem como a data de suas ocorrências
 
     ```php
     // \Illuminate\Support\Collection;
@@ -380,7 +427,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 
-        - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**;
+        - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**.
 
     &nbsp;
 

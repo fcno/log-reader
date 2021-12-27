@@ -23,7 +23,8 @@ beforeEach(function () {
 
     $this->file_name = Str::of('laravel-')
                             ->append(now()->format('Y-m-d'))
-                            ->finish('.log');
+                            ->finish('.log')
+                            ->__toString();;
 });
 
 test('o facade retorna o objeto da classe corretamente', function () {
@@ -90,7 +91,7 @@ test('lança exceção ao tentar paginar com página ou por página menor que 1'
 test('obtém a quantidade de registros do arquivo de log de acordo com a paginação solicitada', function ($page, $expect) {
     LogGenerator::on($this->fs_name)
                 ->create(null)
-                ->count(files: 1, records: 17);
+                ->count(files: 1, records: 14);
 
     $response = RecordReader::from($this->fs_name)
                             ->infoAbout($this->file_name)
@@ -98,7 +99,7 @@ test('obtém a quantidade de registros do arquivo de log de acordo com a pagina�
 
     expect($response)->toHaveCount($expect);
 })->with([
-    [3, 5], // página 3 retorna 5 registros. Página completa
-    [4, 2], // página 4 retorna 2 registros. Página incompleta, chegou-se ao fim
-    [5, 0],  // página 5 retorna 0 registros. Paginação já chegou ao fim
+    [2, 5], // página 2 retorna 5 registros. Página completa
+    [3, 4], // página 3 retorna 4 registros. Página incompleta, chegou-se ao fim
+    [4, 0]  // página 3 retorna 0 registros. Paginação já chegou ao fim
 ]);

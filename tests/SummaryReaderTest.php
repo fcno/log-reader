@@ -23,7 +23,8 @@ beforeEach(function () {
 
     $this->file_name = Str::of('laravel-')
                             ->append(now()->format('Y-m-d'))
-                            ->finish('.log');
+                            ->finish('.log')
+                            ->__toString();
 });
 
 test('o facade retorna o objeto da classe corretamente', function () {

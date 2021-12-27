@@ -67,14 +67,14 @@ test('lança exceção ao tentar paginar com página ou por página menor que 1'
 test('obtém a quantidade de arquivos esperada de acordo com a paginação solicitada ordenados do mais recente para o mais antigo', function ($page, $expect) {
     LogGenerator::on($this->fs_name)
                 ->create(null)
-                ->count(files: 17, records: 1);
+                ->count(files: 14, records: 1);
 
     $response = LogReader::from($this->fs_name)
                             ->paginate(page: $page, per_page: 5);
 
     expect($response)->toHaveCount($expect);
 })->with([
-    [2, 5], // página 3 retorna 5 arquivos. Página completa
-    [4, 2], // página 4 retorna 2 arquivos. Página incompleta, chegou-se ao fim
-    [5, 0],  // página 5 retorna 0 arquivos. Paginação já chegou ao fim
+    [2, 5], // página 2 retorna 5 arquivos. Página completa
+    [3, 4], // página 3 retorna 4 arquivos. Página incompleta, chegou-se ao fim
+    [4, 0]  // página 4 retorna 0 arquivos. Paginação já chegou ao fim
 ]);

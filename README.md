@@ -21,7 +21,7 @@ RecordReader::from('file_system_name')
 
 ---
 
-Notas 🔹 [Instalação](#instalacao) 🔹 Uso (LogReader 🔸 RecordReader 🔸 SummaryReader) 🔹 Testes e Integração Contínua 🔹 Changelog 🔹 Contribuição 🔹 Vulnerabilidades e Segurança 🔹 Créditos 🔹 Licença
+[Notas](#notas) 🔹 [Instalação](#instalacao) 🔹 [Uso](#uso) (LogReader 🔸 RecordReader 🔸 SummaryReader) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Licença](#licença)
 
 ---
 
@@ -33,7 +33,7 @@ Notas 🔹 [Instalação](#instalacao) 🔹 Uso (LogReader 🔸 RecordReader �
 
 &nbsp;
 
-## Instalação {#instalacao}
+## Instalação
 
 1. Configurar o *custom channel* para definir os campos e os delimitadores dos registros do arquivo de log
 

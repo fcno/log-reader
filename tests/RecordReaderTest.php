@@ -24,7 +24,8 @@ beforeEach(function () {
     $this->file_name = Str::of('laravel-')
                             ->append(now()->format('Y-m-d'))
                             ->finish('.log')
-                            ->__toString();;
+                            ->__toString();
+    ;
 });
 
 test('o facade retorna o objeto da classe corretamente', function () {
@@ -101,5 +102,5 @@ test('obtém a quantidade de registros do arquivo de log de acordo com a pagina�
 })->with([
     [2, 5], // página 2 retorna 5 registros. Página completa
     [3, 4], // página 3 retorna 4 registros. Página incompleta, chegou-se ao fim
-    [4, 0]  // página 3 retorna 0 registros. Paginação já chegou ao fim
+    [4, 0],  // página 3 retorna 0 registros. Paginação já chegou ao fim
 ]);

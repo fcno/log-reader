@@ -76,5 +76,5 @@ test('obtém a quantidade de arquivos esperada de acordo com a paginação solic
 })->with([
     [2, 5], // página 2 retorna 5 arquivos. Página completa
     [3, 4], // página 3 retorna 4 arquivos. Página incompleta, chegou-se ao fim
-    [4, 0]  // página 4 retorna 0 arquivos. Paginação já chegou ao fim
+    [4, 0],  // página 4 retorna 0 arquivos. Paginação já chegou ao fim
 ]);

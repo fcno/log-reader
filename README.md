@@ -122,7 +122,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    ✏️ ***[get](#log-reader-get)***
+    ✏️ ***get***
 
     Assinatura e uso: Todos os arquivos de log do disco
 
@@ -180,7 +180,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** paginada com dados no mesmo formato do método ***[get](#log-reader-get)***
+    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** paginada com dados no mesmo formato do método ***get***
 
     > Retornará uma Coleção vazia ou com quantidade de itens menor que a esperada, caso a listagem dos arquivos já tenha chegado ao seu fim.
 
@@ -251,7 +251,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    ✏️ ***[get](#record-reader-get)***
+    ✏️ ***get***
 
     Assinatura e uso: Todos os registros do arquivo de log
 
@@ -316,7 +316,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)**  paginada com dados no mesmo formato do método ***[get](#record-reader-get)***
+    Retorno: **[Collection](https://laravel.com/docs/8.x/collections)**  paginada com dados no mesmo formato do método ***get***
 
     >Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso os registros já tenham chegado ao seu fim.
     >

@@ -97,7 +97,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
 &nbsp;
 
-1. **Fcno\LogReader\Facades\LogReader**
+1. ### **Fcno\LogReader\Facades\LogReader**
 
     Responsável por manipular os arquivos (no padrão **laravel-yyyy-mm-dd.log**), sem contudo ler o seu conteúdo.
 
@@ -197,7 +197,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-2. **Fcno\LogReader\Facades\RecordReader**
+2. ### **Fcno\LogReader\Facades\RecordReader**
 
     Responsável por ler o conteúdo (registros / *records*) do arquivo de log.
 
@@ -341,7 +341,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-3. **Fcno\LogReader\Facades\SummaryReader**
+3. ### **Fcno\LogReader\Facades\SummaryReader**
 
     Responsável por ler o conteúdo (registros / *records*) do arquivo de log e gerar um sumário.
 

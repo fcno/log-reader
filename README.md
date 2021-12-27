@@ -17,11 +17,15 @@ RecordReader::from('file_system_name')
             ->get();
 ```
 
+&nbsp;
+
 ## Notas
 
 - Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
 - O termo 'disk_name' é usado ao longo desta documentação para representar a *string* com o nome do disco de armazenamento dos arquivos de log configurado no *[File System](https://laravel.com/docs/8.x/filesystem)*. Não se trata de uma instãncia da classe, mas apenas de seu nome.
 - O termo 'file_name.log' é usado ao longo desta documentação para representar o nome do arquivo de log diário, gerado no padrão **laravel-yyyy-mm-dd.log**. Ex.: laravel-2020-01-30.log
+
+&nbsp;
 
 ## Instalação
 
@@ -46,12 +50,16 @@ RecordReader::from('file_system_name')
     ],
     ```
 
+    &nbsp;
+
 2. Definir a variável **LOG_CHANNEL** para usar o *channel* criado
 
     ```php
     // .env
     LOG_CHANNEL=custom
     ```
+
+    &nbsp;
 
 3. Definir e configurar o disco em que os arquivos de log são armazenados
 
@@ -67,15 +75,21 @@ RecordReader::from('file_system_name')
     ],
     ```
 
+    &nbsp;
+
 4. Instalar o *package* via **[composer](https://getcomposer.org/)**:
 
     ```bash
     composer require fcno/log-reader
     ```
 
+&nbsp;
+
 ## Uso
 
 Este *package* expôe três maneiras de interagir com os arquivos de log, cada uma por meio de uma **[Facade](https://laravel.com/docs/8.x/facades)** com objetivos específicos:
+
+&nbsp;
 
 1. **Fcno\LogReader\Facades\LogReader**
 
@@ -89,6 +103,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     LogReader::from('disk_name')
                 ->get();
     ```
+
+    &nbsp;
 
     Retorno: A coleção possuirá todos os arquivos de log do disco.
 
@@ -108,6 +124,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     ]
     ```
 
+    &nbsp;
+
     - O método ***paginate*** retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** paginada dos arquivos de log do disco informado ordenados do mais recente para o mais antigo. No exemplo, retorna 5 arquivos da página 2, ou seja, do 6º ao 10º arquivo.
 
     ```php
@@ -117,11 +135,24 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
                 ->paginate(page: 2, per_page: 5);
     ```
 
+    &nbsp;
+
     Retorno: Coleção paginada com dados no mesmo formato do método ***get***.
 
     > Retornará uma Coleção vazia ou com quantidade de itens menor que a esperada, caso a listagem dos arquivos já tenha chegado ao seu fim.
 
+    &nbsp;
+
+    ***Exceptions***:
+
+    - O método ***paginate*** da classe **LogReader** lança:
+        - ***\RuntimeException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
+
+    &nbsp;
+
     ---
+
+    &nbsp;
 
 2. **Fcno\LogReader\Facades\RecordReader**
 
@@ -130,6 +161,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     O registro (*record*) é o nome dado ao conjunto de informações que foram adicionadas ao log para registrar dados sobre um evento de interesse.
 
     Um arquivo de log pode conter um ou mais registros e, dada a sua infinidade, podem ser paginados a critério do desenvolvedor.
+
+    &nbsp;
 
     - O método ***get*** retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** com todos os registros do arquivo de log informado.
 
@@ -140,6 +173,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
                 ->infoAbout('filename.log')
                 ->get();
     ```
+
+    &nbsp;
 
     Retorno: A coleção possuirá todos os registros do arquivo de log.
 
@@ -165,6 +200,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     ]
     ```
 
+    &nbsp;
+
     - O método ***paginate*** retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** paginada dos registros do arquivo de log informado. No exemplo, retorna 20 registros da página 3, ou seja, do 41º ao 60º registro do arquivo.
 
     ```php
@@ -175,13 +212,32 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
                 ->paginate(page: 3, per_page: 20);
     ```
 
+    &nbsp;
+
     Retorno: Coleção paginada com dados no mesmo formato do método ***get***.
 
     >Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso os registros já tenham chegado ao seu fim.
     >
     > Os registros são exibidos na ordem em que estão gravados no arquivo. Não existe ordenação alguma feita por este *package*.
 
+    &nbsp;
+
+    ***Exceptions***:
+
+    - O método **infoAbout** da classe **RecordReader** lança:
+
+        - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
+
+        - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**;
+
+    - O método ***paginate*** lança:
+        - ***\RuntimeException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
+
+    &nbsp;
+
     ---
+
+    &nbsp;
 
 3. **Fcno\LogReader\Facades\SummaryReader**
 
@@ -189,7 +245,9 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     O sumário (*summary*) é o nome dado a contabilização dos registros (*records*) por nível, isto é, a quantidade de registros do tipo ***debug***, ***info***, ***notice*** etc.
 
-    - Retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** com o sumário de todos os registros do arquivo de log informado bem como a sua data.
+    &nbsp;
+
+    - O método ***get*** retorna uma **[Collection](https://laravel.com/docs/8.x/collections)** com o sumário de todos os registros do arquivo de log informado bem como a sua data.
 
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
@@ -198,6 +256,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
                     ->infoAbout('filename.log')
                     ->get();
     ```
+
+    &nbsp;
 
     Retorno: A coleção possuirá a quantidade de ocorrências dos diversos níveis de log presentes no arquivo, bem como a data de suas ocorrências.
 
@@ -210,11 +270,25 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     ]
     ```
 
+    &nbsp;
+
     > Este *package* não possui, cravado em seu código, a necessidade de os níveis de log da aplicação serem aderentes à **[PSR-3](https://www.php-fig.org/psr/psr-3/)**. Contudo, é considerado boa prática implementar esse tipo de padrão na aplicação.
     >
     > Níveis que não possuírem registros, não serão retornados (contabilizados) na Coleção.
     >
     > A data, no padrão **yyyy-mm-dd**, retornada é a presente no primeiro registro. Parte-se do princípio que todos os registros do arquivo foram gerados no mesmo dia, visto que este *package* destina-se aos logs diários.
+
+    &nbsp;
+
+    ***Exceptions***:
+
+    - O método **infoAbout** da classe **SummaryReader** lança:
+
+        - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
+
+        - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**;
+
+    &nbsp;
 
 ## Testes e Integração Contínua
 
@@ -224,22 +298,32 @@ composer test
 composer test-coverage
 ```
 
+&nbsp;
+
 ## Changelog
 
 Por favor, veja o [CHANGELOG](CHANGELOG.md) para maiores informações sobre o que mudou recentemente.
+
+&nbsp;
 
 ## Contribuição
 
 Por favor, veja [CONTRIBUTING](.github/CONTRIBUTING.md) para maiores detalhes.
 
+&nbsp;
+
 ## Vulnerabilidades e Segurança
 
 Por favor, veja na [política de segurança](../../security/policy) como reportar uma vulnerabilidade.
+
+&nbsp;
 
 ## Crédidos
 
 - [Fabio Cassiano](https://github.com/fcno)
 - [All Contributors](../../contributors)
+
+&nbsp;
 
 ## Licença
 

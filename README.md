@@ -23,6 +23,8 @@ RecordReader::from('file_system_name')
 
 ⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
 
+⭐ Esta *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada dada as preferências pessoas de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
+
 &nbsp;
 
 ## Instalação
@@ -195,7 +197,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     O registro (*record*) é o nome dado ao conjunto de informações que foram adicionadas ao log para registrar dados sobre um evento de interesse.
 
-    Um arquivo de log pode conter um ou mais registros e, dada a sua infinidade, podem ser paginados a critério do desenvolvedor.
+    Um arquivo de log pode conter um ou mais registros e, dada a sua infinidade, podem ser paginados a critério do desenvolvedor da aplicação.
 
     ✏️ ***from***
 

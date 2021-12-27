@@ -19,6 +19,12 @@ RecordReader::from('file_system_name')
 
 &nbsp;
 
+---
+
+Notas 🔹 Instalação 🔹 Uso (LogReader 🔸 RecordReader 🔸 SummaryReader) 🔹 Testes e Integração Contínua 🔹 Changelog 🔹 Contribuição 🔹 Vulnerabilidades e Segurança 🔹 Créditos 🔹 Licença
+
+---
+
 ## Notas
 
 ⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
@@ -461,7 +467,7 @@ Por favor, veja na [política de segurança](../../security/policy) como reporta
 
 &nbsp;
 
-## Crédidos
+## Créditos
 
 - [Fabio Cassiano](https://github.com/fcno)
 - [All Contributors](../../contributors)

@@ -56,12 +56,12 @@ test('obtém todos os arquivos de log do file system ordenados do mais recente p
 test('lança exceção ao tentar paginar com página ou por página menor que 1', function () {
     expect(
         fn () => LogReader::from($this->fs_name)
-                                ->paginate(page: -1, per_page: 1)
+                            ->paginate(page: -1, per_page: 1)
     )->toThrow(InvalidPaginationException::class);
 
     expect(
         fn () => LogReader::from($this->fs_name)
-                                ->paginate(page: 1, per_page: -1)
+                            ->paginate(page: 1, per_page: -1)
     )->toThrow(InvalidPaginationException::class);
 });
 

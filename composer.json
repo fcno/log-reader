@@ -42,8 +42,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Fcno\\LogReader\\": "src",
-            "Fcno\\LogReader\\Database\\Factories\\": "database/factories"
+            "Fcno\\LogReader\\": "src"
         }
     },
     "autoload-dev": {

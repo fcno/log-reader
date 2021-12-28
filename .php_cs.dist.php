@@ -19,7 +19,7 @@ return (new PhpCsFixer\Config())
         '@Symfony' => true,
         'not_operator_with_successor_space' => true,
         'blank_line_before_statement' => [
-            'statements' => ['break', 'case', 'continue', 'declare', 'default', 'exit', 'goto', 'include', 'include_once', 'phpdoc', 'require', 'require_once', 'return', 'switch', 'throw', 'try']
+            'statements' => ['break', 'continue', 'declare', 'return', 'throw', 'try'],
         ],
         'phpdoc_line_span' => true,
         'phpdoc_var_without_name' => false,

@@ -119,3 +119,41 @@ test('deleta um arquivo de log como esperado', function () {
     )->toBeTrue();
     $this->file_system->assertMissing($this->file_name);
 });
+
+
+test('lança exceção ao tentar fazer download de arquivo de log inexistente', function () {
+    expect(
+        fn () => LogReader::from($this->fs_name)
+                            ->download('laravel-2500-12-30.log')
+    )->toThrow(FileNotFoundException::class);
+});
+
+test('lança exceção ao tentar fazer download de arquivo de log com nome fora do padrão laravel diário', function () {
+    $new_name = 'laravel.log';
+
+    LogGenerator::on($this->fs_name)
+                ->create(null)
+                ->count(files: 1, records: 1);
+
+    $this->file_system->move(
+        from: $this->file_name,
+        to: $new_name
+    );
+
+    expect(
+        fn () => LogReader::from($this->fs_name)
+                            ->download($new_name)
+    )->toThrow(NotDailyLogException::class);
+});
+
+test('faz o download de um arquivo de log como esperado', function () {
+    LogGenerator::on($this->fs_name)
+                ->create(null)
+                ->count(files: 1, records: 1);
+
+    $response = LogReader::from($this->fs_name)
+                            ->download($this->file_name);
+
+    expect($response->headers->get('content-disposition'))
+    ->toBe("attachment; filename={$this->file_name}");
+});

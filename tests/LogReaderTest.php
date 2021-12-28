@@ -106,3 +106,16 @@ test('lança exceção ao tentar deletar arquivo de log com nome fora do padrão
                             ->delete($new_name)
     )->toThrow(NotDailyLogException::class);
 });
+
+test('deleta um arquivo de log como esperado', function () {
+    LogGenerator::on($this->fs_name)
+                ->create(null)
+                ->count(files: 1, records: 1);
+
+    $this->file_system->assertExists($this->file_name);
+    expect(
+        LogReader::from($this->fs_name)
+                    ->delete($this->file_name)
+    )->toBeTrue();
+    $this->file_system->assertMissing($this->file_name);
+});

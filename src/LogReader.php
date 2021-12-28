@@ -3,8 +3,11 @@
 namespace Fcno\LogReader;
 
 use Fcno\LogReader\Contracts\BaseReader;
+use Fcno\LogReader\Contracts\IDelete;
 use Fcno\LogReader\Contracts\IPaginate;
+use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
+use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Illuminate\Support\Collection;
 
 /**
@@ -13,7 +16,7 @@ use Illuminate\Support\Collection;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class LogReader extends BaseReader implements IPaginate
+final class LogReader extends BaseReader implements IPaginate, IDelete
 {
     /**
      * {@inheritdoc}
@@ -47,5 +50,16 @@ final class LogReader extends BaseReader implements IPaginate
                         offset: ($page - 1) * $per_page,
                         length: $per_page
                     );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(string $log_file): bool
+    {
+        throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
+        throw_if(! preg_match(Regex::LOG_FILE, $log_file), NotDailyLogException::class);
+        // filesystem not definied exception
+        return $this->file_system->delete($log_file);
     }
 }

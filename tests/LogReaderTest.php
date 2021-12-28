@@ -6,7 +6,9 @@
  * @see https://pestphp.com/docs/
  */
 
+use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
+use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\LogReader;
 use Fcno\LogReader\LogReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
@@ -79,3 +81,28 @@ test('obtém a quantidade de arquivos esperada de acordo com a paginação solic
     [3, 4], // página 3 retorna 4 arquivos. Página incompleta, chegou-se ao fim
     [4, 0],  // página 4 retorna 0 arquivos. Paginação já chegou ao fim
 ]);
+
+test('lança exceção ao tentar deletar arquivo de log inexistente', function () {
+    expect(
+        fn () => LogReader::from($this->fs_name)
+                            ->delete('laravel-2500-12-30.log')
+    )->toThrow(FileNotFoundException::class);
+});
+
+test('lança exceção ao tentar deletar arquivo de log com nome fora do padrão laravel diário', function () {
+    $new_name = 'laravel.log';
+
+    LogGenerator::on($this->fs_name)
+                ->create(null)
+                ->count(files: 1, records: 1);
+
+    $this->file_system->move(
+        from: $this->file_name,
+        to: $new_name
+    );
+
+    expect(
+        fn () => LogReader::from($this->fs_name)
+                            ->delete($new_name)
+    )->toThrow(NotDailyLogException::class);
+});

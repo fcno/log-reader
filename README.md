@@ -12,8 +12,8 @@ Além da função primária, este *package* oferece paginação do conteúdo e d
 ```php
 use Fcno\LogReader\Facades\RecordReader;
 
-RecordReader::from('file_system_name')
-            ->infoAbout('filename.log')
+RecordReader::from(disk: 'file_system_name')
+            ->infoAbout(log_file: 'filename.log')
             ->get();
 ```
 
@@ -29,7 +29,7 @@ RecordReader::from('file_system_name')
 
 ⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/docs)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
 
-⭐ Esta *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada dada as preferências pessoas de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
+⭐ Este *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada dada as preferências pessoais de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
 
 &nbsp;
 
@@ -234,7 +234,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\RecordReader;
 
     /**
-     * @param string  $log_file nome do arquivo de log que deve ser trabalhado
+     * @param string  $log_file nome do arquivo de log que deve ser examinado
      * 
      * @return static
      * 
@@ -378,7 +378,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\SummaryReader;
 
     /**
-     * @param string  $log_file nome do arquivo de log que deve ser trabalhado
+     * @param string  $log_file nome do arquivo de log que deve ser examinado
      * 
      * @return static
      * 

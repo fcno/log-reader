@@ -21,7 +21,7 @@ RecordReader::from(disk: 'file_system_name')
 
 ---
 
-[Notas](#notas) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Licença](#licença)
+[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Licença](#licença)
 
 ---
 
@@ -30,6 +30,18 @@ RecordReader::from(disk: 'file_system_name')
 ⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/docs)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
 
 ⭐ Este *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada dada as preferências pessoais de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
+
+&nbsp;
+
+## Pré-requisitos
+
+PHP ^8.0
+
+Para uma [checagem completa dos pré-requisitos](https://getcomposer.org/doc/03-cli.md#check-platform-reqs):
+
+```bash
+composer check-platform-reqs
+```
 
 &nbsp;
 

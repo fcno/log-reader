@@ -1,13 +1,12 @@
 {
     "name": "fcno/log-reader",
     "description": "Log Reader para aplicações Laravel",
+    "license": "MIT",
     "keywords": [
         "fcno",
         "laravel",
         "log-reader"
     ],
-    "homepage": "https://github.com/fcno/log-reader",
-    "license": "MIT",
     "authors": [
         {
             "name": "Fabio Cassiano",
@@ -15,6 +14,7 @@
             "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/fcno/log-reader",
     "require": {
         "php": "^8.0",
         "bcremer/line-reader": "^1.2",
@@ -38,6 +38,8 @@
         "phpunit/phpunit": "^9.5",
         "spatie/laravel-ray": "^1.26"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Fcno\\LogReader\\": "src",
@@ -50,30 +52,28 @@
             "Fcno\\LogReader\\Tests\\Stubs\\": "tests/stubs"
         }
     },
-    "scripts": {
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage"
-    },
     "config": {
-        "sort-packages": true,
         "allow-plugins": {
-            "phpstan/extension-installer": true,
-            "pestphp/pest-plugin": true
-        }
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        },
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
-            "providers": [
-                "Fcno\\LogReader\\LogReaderServiceProvider"
-            ],
             "aliases": {
                 "LogReader": "Fcno\\LogReader\\Facades\\LogReader",
                 "RecordReader": "Fcno\\LogReader\\Facades\\RecordReader",
                 "SummaryReader": "Fcno\\LogReader\\Facades\\SummaryReader"
-            }
+            },
+            "providers": [
+                "Fcno\\LogReader\\LogReaderServiceProvider"
+            ]
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
+    }
 }

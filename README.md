@@ -40,6 +40,7 @@ PHP ^8.0
 Para uma [checagem completa dos pré-requisitos](https://getcomposer.org/doc/03-cli.md#check-platform-reqs):
 
 ```bash
+composer require fcno/log-reader
 composer check-platform-reqs
 ```
 
@@ -463,7 +464,7 @@ composer test-coverage
 
 ## Changelog
 
-Por favor, veja o [CHANGELOG](CHANGELOG.md) para maiores informações sobre o que mudou recentemente.
+Por favor, veja o [CHANGELOG](CHANGELOG.md) para maiores informações sobre o que mudou em cada versão.
 
 &nbsp;
 
@@ -475,7 +476,7 @@ Por favor, veja [CONTRIBUTING](.github/CONTRIBUTING.md) para maiores detalhes.
 
 ## Vulnerabilidades e Segurança
 
-Por favor, veja na [política de segurança](../../security/policy) como reportar uma vulnerabilidade ou falha de segurança.
+Por favor, veja na [política de segurança](../../security/policy) como reportar vulnerabilidades ou falha de segurança.
 
 &nbsp;
 

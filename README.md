@@ -184,7 +184,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * 
      * @return \Illuminate\Support\Collection
      * 
-     * @throws \RuntimeException $page < 1 || $per_page < 1
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException $page < 1 || $per_page < 1
      */
     LogReader::from(disk: 'disk_name')
                 ->paginate(page: 2, per_page: 5);
@@ -201,7 +201,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     🚨 ***Exceptions***:
 
     - O método ***paginate*** da classe **LogReader** lança:
-        - ***\RuntimeException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
+        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1..
 
     &nbsp;
 
@@ -319,7 +319,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * 
      * @return \Illuminate\Support\Collection
      * 
-     * @throws \RuntimeException $page < 1 || $per_page < 1
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException $page < 1 || $per_page < 1
      */
     RecordReader::from(disk: 'disk_name')
                 ->infoAbout(log_file: 'filename.log')
@@ -345,7 +345,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
         - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**.
 
     - O método ***paginate*** lança:
-        - ***\RuntimeException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
+        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
 
     &nbsp;
 

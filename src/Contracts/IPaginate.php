@@ -20,7 +20,7 @@ interface IPaginate
      *
      * @return \Illuminate\Support\Collection
      *
-     * @throws \RuntimeException
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException  `$page < 1 || $per_page < 1`
      */
     public function paginate(int $page, int $per_page): Collection;
 }

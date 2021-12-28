@@ -6,6 +6,7 @@
  * @link https://pestphp.com/docs/
  */
 
+use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Fcno\LogReader\Facades\LogReader;
 use Fcno\LogReader\LogReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
@@ -56,12 +57,12 @@ test('lança exceção ao tentar paginar com página ou por página menor que 1'
     expect(
         fn () => LogReader::from($this->fs_name)
                                 ->paginate(page:-1, per_page: 1)
-    )->toThrow(RuntimeException::class);
+    )->toThrow(InvalidPaginationException::class);
 
     expect(
         fn () => LogReader::from($this->fs_name)
                                 ->paginate(page: 1, per_page: -1)
-    )->toThrow(RuntimeException::class);
+    )->toThrow(InvalidPaginationException::class);
 });
 
 test('obtém a quantidade de arquivos esperada de acordo com a paginação solicitada ordenados do mais recente para o mais antigo', function ($page, $expect) {

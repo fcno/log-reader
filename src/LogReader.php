@@ -5,6 +5,7 @@ namespace Fcno\LogReader;
 use Fcno\LogReader\Contracts\BaseReader;
 use Fcno\LogReader\Contracts\IPaginate;
 use Fcno\LogReader\Contracts\IReader;
+use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Illuminate\Support\Collection;
 
 /**
@@ -40,7 +41,7 @@ final class LogReader extends BaseReader implements IReader, IPaginate
      */
     public function paginate(int $page, int $per_page): Collection
     {
-        throw_if($page < 1 || $per_page < 1);
+        throw_if($page < 1 || $per_page < 1, InvalidPaginationException::class);
 
         return $this->get()
                     ->slice(

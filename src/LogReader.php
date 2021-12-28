@@ -4,7 +4,6 @@ namespace Fcno\LogReader;
 
 use Fcno\LogReader\Contracts\BaseReader;
 use Fcno\LogReader\Contracts\IPaginate;
-use Fcno\LogReader\Contracts\IReader;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Illuminate\Support\Collection;
 
@@ -14,7 +13,7 @@ use Illuminate\Support\Collection;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class LogReader extends BaseReader implements IReader, IPaginate
+final class LogReader extends BaseReader implements IPaginate
 {
     /**
      * {@inheritdoc}

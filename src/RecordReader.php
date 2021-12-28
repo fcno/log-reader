@@ -5,6 +5,7 @@ namespace Fcno\LogReader;
 use Bcremer\LineReader\LineReader;
 use Fcno\LogReader\Contracts\BaseContentReader;
 use Fcno\LogReader\Contracts\IPaginate;
+use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Illuminate\Support\Collection;
 
 /**
@@ -26,19 +27,19 @@ final class RecordReader extends BaseContentReader implements IPaginate
     /**
      * @var int
      *
-     * Página da paginação que será exibida quando o resultado for paginado.
+     * Página da paginação que será exibida quando o resultado for paginado
      */
     private $page;
 
     /**
      * @var int
      *
-     * Quantidada de registros por página que serão exibidos quando da paginação.
+     * Quantidada de registros por página que serão exibidos quando da paginação
      */
     private $per_page;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Nesse caso, os registros do arquivo de log diário.
      */
@@ -48,13 +49,13 @@ final class RecordReader extends BaseContentReader implements IPaginate
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Nesse caso, os registros do arquivo de log diário.
      */
     public function paginate(int $page, int $per_page): Collection
     {
-        throw_if($page < 1 || $per_page < 1);
+        throw_if($page < 1 || $per_page < 1, InvalidPaginationException::class);
 
         $this->page = $page;
         $this->per_page = $per_page;
@@ -63,7 +64,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getLineGenerator(): \LimitIterator|\Generator
     {
@@ -79,7 +80,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Interesse em:
      * - date

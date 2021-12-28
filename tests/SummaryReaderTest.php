@@ -3,7 +3,7 @@
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use Fcno\LogReader\Exceptions\FileNotFoundException;
@@ -37,7 +37,6 @@ test('lança exceção ao tentar ler sumário de arquivo de log inexistente', fu
                                 ->infoAbout('laravel-2500-12-30.log')
     )->toThrow(FileNotFoundException::class);
 });
-
 
 test('lança exceção ao tentar ler sumário de arquivo de log com nome fora do padrão laravel diário', function () {
     $new_name = 'laravel.log';

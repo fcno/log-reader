@@ -22,7 +22,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
     protected $log_file;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function infoAbout(string $log_file): static
     {
@@ -37,24 +37,16 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
     /**
      * Retorna um Generator ou LimitIterator de acordo com a necessidade ou não
      * paginação do resultado.
-     *
-     * @return \LimitIterator|\Generator
      */
     abstract protected function getLineGenerator(): \LimitIterator|\Generator;
 
     /**
      * Filtra o array para conter apenas os índices de interesse.
-     *
-     * @param array  $data
-     *
-     * @return \Illuminate\Support\Collection
      */
     abstract protected function filteredData(array $data): Collection;
 
     /**
      * Lê o arquivo de log diário e o retorna como coleção.
-     *
-     * @return \Illuminate\Support\Collection
      */
     protected function readLog(): Collection
     {
@@ -80,7 +72,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
     /**
      * Caminho completo do arquivo de log diário que está sendo trabalhado.
      *
-     * @return string  Full path
+     * @return string Full path
      */
     protected function getFullPath(): string
     {

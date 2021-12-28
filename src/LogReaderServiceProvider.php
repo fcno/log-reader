@@ -2,14 +2,13 @@
 
 namespace Fcno\LogReader;
 
-use Fcno\LogReader\Commands\LogReaderCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
- * @link https://github.com/spatie/package-skeleton-laravel
+ * @see https://github.com/spatie/package-skeleton-laravel
  */
 class LogReaderServiceProvider extends PackageServiceProvider
 {
@@ -21,11 +20,7 @@ class LogReaderServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('log-reader')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_log-reader_table')
-            ->hasCommand(LogReaderCommand::class);
+            ->name('log-reader');
     }
 
     public function registeringPackage()

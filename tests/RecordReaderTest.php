@@ -3,10 +3,11 @@
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\RecordReader;
 use Fcno\LogReader\RecordReader as Reader;
@@ -25,7 +26,6 @@ beforeEach(function () {
                             ->append(now()->format('Y-m-d'))
                             ->finish('.log')
                             ->__toString();
-    ;
 });
 
 test('o facade retorna o objeto da classe corretamente', function () {
@@ -79,14 +79,14 @@ test('lança exceção ao tentar paginar com página ou por página menor que 1'
     expect(
         fn () => RecordReader::from($this->fs_name)
                                 ->infoAbout($this->file_name)
-                                ->paginate(page:-1, per_page: 1)
-    )->toThrow(RuntimeException::class);
+                                ->paginate(page: -1, per_page: 1)
+    )->toThrow(InvalidPaginationException::class);
 
     expect(
         fn () => RecordReader::from($this->fs_name)
                                 ->infoAbout($this->file_name)
                                 ->paginate(page: 1, per_page: -1)
-    )->toThrow(RuntimeException::class);
+    )->toThrow(InvalidPaginationException::class);
 });
 
 test('obtém a quantidade de registros do arquivo de log de acordo com a paginação solicitada', function ($page, $expect) {

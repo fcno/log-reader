@@ -15,12 +15,7 @@ interface IPaginate
      * Coleção vazia ou com a quantidade de itens menor que a solicitada se já
      * tiver chegado ao final.
      *
-     * @param int  $page
-     * @param int  $per_page
-     *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \RuntimeException
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException `$page < 1 || $per_page < 1`
      */
     public function paginate(int $page, int $per_page): Collection;
 }

@@ -13,12 +13,12 @@ abstract class BaseReader implements IReader
      * @var \Illuminate\Contracts\Filesystem\Filesystem
      *
      * File System onde estão armazenados os arquivos de log diário da
-     * aplicação.
+     * aplicação
      */
     protected $file_system;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function from(string $disk): static
     {

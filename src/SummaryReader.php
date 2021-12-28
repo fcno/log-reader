@@ -18,7 +18,7 @@ use Illuminate\Support\Collection;
 final class SummaryReader extends BaseContentReader
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Sumariza:
      * - Data do log (Y-m-d)
@@ -32,11 +32,9 @@ final class SummaryReader extends BaseContentReader
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Nesse caso, um Generator devido a desnecessidade de paginação.
-     *
-     * @return \Generator
      */
     protected function getLineGenerator(): \Generator
     {
@@ -44,7 +42,7 @@ final class SummaryReader extends BaseContentReader
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Interesse em:
      * - date
@@ -60,10 +58,6 @@ final class SummaryReader extends BaseContentReader
      * Prepara o sumário para ser retornado ao chamador.
      *
      * Contabiliza a quantidade de registros por nível e adiciona o data deles.
-     *
-     * @param \Illuminate\Support\Collection  $summary_in_process
-     *
-     * @return \Illuminate\Support\Collection
      */
     private function readyToGoSummary(Collection $summary_in_process): Collection
     {

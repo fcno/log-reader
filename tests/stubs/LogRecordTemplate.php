@@ -26,17 +26,17 @@ final class LogRecordTemplate
     /**
      * @var string
      *
-     * Template de criação de um registro de log.
+     * Template de criação de um registro de log
      */
     private $log_record =
-        "#@#"            .
-        ":date :time|||" .
-        ":env|||"        .
-        ":level|||"      .
-        ":message|||"    .
-        ":context|||"    .
-        ":extra"         .
-        "@#@";
+        '#@#'.
+        ':date :time|||'.
+        ':env|||'.
+        ':level|||'.
+        ':message|||'.
+        ':context|||'.
+        ':extra'.
+        '@#@';
 
     /**
      * @var \Faker\Generator
@@ -47,8 +47,6 @@ final class LogRecordTemplate
 
     /**
      * Cria uma instância do objeto.
-     *
-     * @return static
      */
     public static function create(): static
     {
@@ -64,17 +62,13 @@ final class LogRecordTemplate
     }
 
     /**
-     * String com um registro pronto para armazenamento
+     * String com um registro pronto para armazenamento.
      *
      * A sua geração é de acordo com as regras informadas para os campos.
      *
      * Ex.: Se em `$fields` for informado `['env' => 'local']` o registro gerado
      * conterá esse valor. Já os campos não informados serão gerados com
      * valores randômicos.
-     *
-     * @param array|null  $fields
-     *
-     * @return string
      */
     public function getRecord(?array $fields): string
     {
@@ -83,10 +77,6 @@ final class LogRecordTemplate
 
     /**
      * Gera um registro observando as definições para os campos informados.
-     *
-     * @param array|null  $fields
-     *
-     * @return string
      */
     private function generate(?array $fields): string
     {
@@ -107,9 +97,7 @@ final class LogRecordTemplate
     /**
      * Define a data do registro.
      *
-     * @param string|null  $date yyyy-mm-dd
-     *
-     * @return static
+     * @param string|null $date yyyy-mm-dd
      */
     private function setDate(?string $date): static
     {
@@ -124,9 +112,7 @@ final class LogRecordTemplate
     /**
      * Define o horário do registro.
      *
-     * @param string|null  $time hh-mm-ss
-     *
-     * @return static
+     * @param string|null $time hh-mm-ss
      */
     private function setTime(?string $time): static
     {
@@ -144,10 +130,6 @@ final class LogRecordTemplate
 
     /**
      * Define o ambiente.
-     *
-     * @param string|null  $env
-     *
-     * @return static
      */
     private function setEnv(?string $env): static
     {
@@ -162,11 +144,7 @@ final class LogRecordTemplate
     /**
      * Define o log nos termos da PSR-3.
      *
-     * @param string|null  $level
-     *
-     * @return static
-     *
-     * @link https://www.php-fig.org/psr/psr-3/
+     * @see https://www.php-fig.org/psr/psr-3/
      */
     private function setLevel(?string $level): static
     {
@@ -189,10 +167,6 @@ final class LogRecordTemplate
 
     /**
      * Define a mensagem.
-     *
-     * @param string|null  $message
-     *
-     * @return static
      */
     private function setMessage(?string $message): static
     {
@@ -206,10 +180,6 @@ final class LogRecordTemplate
 
     /**
      * Define a mensagem de contexto.
-     *
-     * @param string|null  $context
-     *
-     * @return static
      */
     private function setContext(?string $context): static
     {
@@ -223,10 +193,6 @@ final class LogRecordTemplate
 
     /**
      * Define as informações extras.
-     *
-     * @param string|null  $extra
-     *
-     * @return static
      */
     private function setExtra(?string $extra): static
     {
@@ -246,8 +212,8 @@ final class LogRecordTemplate
      * Note que a string que será alvo da subtisuição é uma propriedade desta
      * classe, portanto, ela não é enviada por parâmetro.
      *
-     * @param string  $patten
-     * @param string  $replacement
+     * @param string $patten
+     * @param string $replacement
      */
     private function replace(string $pattern, ?string $replacement): void
     {

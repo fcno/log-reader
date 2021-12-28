@@ -7,13 +7,13 @@
 
 Leitor de arquivos de log diários para aplicações **[Laravel](https://laravel.com/docs)**.
 
-Além da função primária, este *package* oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha de maneira transparente, possibilitando trabalhos com arquivos grandes, sem carregá-los inteiramente em memória.
+Além da função primária, este *package* oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha de maneira transparente, possibilitando trabalhos com arquivos grandes sem carregá-los inteiramente em memória.
 
 ```php
 use Fcno\LogReader\Facades\RecordReader;
 
-RecordReader::from('file_system_name')
-            ->infoAbout('filename.log')
+RecordReader::from(disk: 'file_system_name')
+            ->infoAbout(log_file: 'filename.log')
             ->get();
 ```
 
@@ -21,7 +21,7 @@ RecordReader::from('file_system_name')
 
 ---
 
-[Notas](#notas) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Licença](#licença)
+[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Licença](#licença)
 
 ---
 
@@ -29,7 +29,19 @@ RecordReader::from('file_system_name')
 
 ⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/docs)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
 
-⭐ Esta *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada dada as preferências pessoas de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
+⭐ Este *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada dada as preferências pessoais de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
+
+&nbsp;
+
+## Pré-requisitos
+
+PHP ^8.0
+
+Para uma [checagem completa dos pré-requisitos](https://getcomposer.org/doc/03-cli.md#check-platform-reqs):
+
+```bash
+composer check-platform-reqs
+```
 
 &nbsp;
 
@@ -103,7 +115,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***from***
 
-    Assinatura e uso: informa a este *package* em que disco a aplicação armazena os arquivos de log
+    Assinatura e uso: informa ao *package* em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\LogReader;
@@ -172,7 +184,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * 
      * @return \Illuminate\Support\Collection
      * 
-     * @throws \RuntimeException $page < 1 || $per_page < 1
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException $page < 1 || $per_page < 1
      */
     LogReader::from(disk: 'disk_name')
                 ->paginate(page: 2, per_page: 5);
@@ -189,7 +201,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     🚨 ***Exceptions***:
 
     - O método ***paginate*** da classe **LogReader** lança:
-        - ***\RuntimeException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
+        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1..
 
     &nbsp;
 
@@ -207,7 +219,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***from***
 
-    Assinatura e uso: informa a este *package* em que disco a aplicação armazena os arquivos de log
+    Assinatura e uso: informa ao *package* em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\RecordReader;
@@ -228,13 +240,13 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***infoAbout***
 
-    Assinatura e uso: informa a este *package* qual arquivo de log deve ser trabalhado
+    Assinatura e uso: informa ao *package* qual arquivo de log deve ser trabalhado
 
     ```php
     use Fcno\LogReader\Facades\RecordReader;
 
     /**
-     * @param string  $log_file nome do arquivo de log que deve ser trabalhado
+     * @param string  $log_file nome do arquivo de log que deve ser examinado
      * 
      * @return static
      * 
@@ -307,7 +319,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * 
      * @return \Illuminate\Support\Collection
      * 
-     * @throws \RuntimeException $page < 1 || $per_page < 1
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException $page < 1 || $per_page < 1
      */
     RecordReader::from(disk: 'disk_name')
                 ->infoAbout(log_file: 'filename.log')
@@ -326,14 +338,14 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
-    - O método **infoAbout** da classe **RecordReader** lança:
+    - O método ***infoAbout*** da classe **RecordReader** lança:
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 
         - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**.
 
     - O método ***paginate*** lança:
-        - ***\RuntimeException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
+        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
 
     &nbsp;
 
@@ -351,7 +363,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***from***
 
-    Assinatura: informa a este *package* em que disco a aplicação armazena os arquivos de log
+    Assinatura: informa ao *package* em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
@@ -372,13 +384,13 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***infoAbout***
 
-    Assinatura e uso: informa a este *package* qual arquivo de log deve ser trabalhado
+    Assinatura e uso: informa ao *package* qual arquivo de log deve ser trabalhado
 
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
 
     /**
-     * @param string  $log_file nome do arquivo de log que deve ser trabalhado
+     * @param string  $log_file nome do arquivo de log que deve ser examinado
      * 
      * @return static
      * 
@@ -431,7 +443,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
-    - O método **infoAbout** da classe **SummaryReader** lança:
+    - O método ***infoAbout*** da classe **SummaryReader** lança:
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 

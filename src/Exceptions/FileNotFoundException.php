@@ -13,4 +13,5 @@ use Exception;
  */
 class FileNotFoundException extends Exception
 {
+    protected $message = 'O arquivo informado não foi encontrado';
 }

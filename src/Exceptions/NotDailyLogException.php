@@ -14,4 +14,5 @@ use Exception;
  */
 class NotDailyLogException extends Exception
 {
+    protected $message = 'Arquivo com nome inválido. Padrão aceito: laravel-yyyy-mm-dd.log';
 }

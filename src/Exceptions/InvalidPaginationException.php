@@ -9,7 +9,7 @@ use Exception;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
- * @link https://laravel.com/docs/8.x/errors
+ * @see https://laravel.com/docs/8.x/errors
  */
 class InvalidPaginationException extends Exception
 {

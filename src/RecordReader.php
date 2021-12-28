@@ -27,19 +27,19 @@ final class RecordReader extends BaseContentReader implements IPaginate
     /**
      * @var int
      *
-     * Página da paginação que será exibida quando o resultado for paginado.
+     * Página da paginação que será exibida quando o resultado for paginado
      */
     private $page;
 
     /**
      * @var int
      *
-     * Quantidada de registros por página que serão exibidos quando da paginação.
+     * Quantidada de registros por página que serão exibidos quando da paginação
      */
     private $per_page;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Nesse caso, os registros do arquivo de log diário.
      */
@@ -49,7 +49,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Nesse caso, os registros do arquivo de log diário.
      */
@@ -64,7 +64,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getLineGenerator(): \LimitIterator|\Generator
     {
@@ -80,7 +80,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Interesse em:
      * - date

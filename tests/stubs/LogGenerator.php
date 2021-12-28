@@ -27,7 +27,7 @@ final class LogGenerator
     /**
      * @var \Illuminate\Contracts\Filesystem\Filesystem
      *
-     * File system onde os logs serão armazenados.
+     * File system onde os logs serão armazenados
      */
     private $file_system;
 
@@ -49,9 +49,7 @@ final class LogGenerator
     /**
      * Define o file system onde os logs serão armazenados.
      *
-     * @param string  $disk nome do file system
-     *
-     * @return static
+     * @param string $disk nome do file system
      */
     public static function on(string $disk): static
     {
@@ -61,7 +59,7 @@ final class LogGenerator
     /**
      * Cria uma instância do objeto.
      *
-     * @param string  $disk nome do file system
+     * @param string $disk nome do file system
      */
     public function __construct(string $disk)
     {
@@ -70,10 +68,6 @@ final class LogGenerator
 
     /**
      * Cria os registros de acordo com as definições informadas.
-     *
-     * @param array|null  $def
-     *
-     * @return static
      */
     public function create(?array $def): static
     {
@@ -83,20 +77,18 @@ final class LogGenerator
     }
 
     /**
-     * Cria uma determinada quantidade de arquivos de logs
+     * Cria uma determinada quantidade de arquivos de logs.
      *
-     * @param int  $files quantidade de arquivos de logs que serão criada
-     * @param int  $records quantidade de registros por arquivo de log
+     * @param int $files   quantidade de arquivos de logs que serão criada
+     * @param int $records quantidade de registros por arquivo de log
      *
-     * @return static
-     *
-     * @throws RuntimeException  Se `$files < 1 || $records < 1`
+     * @throws RuntimeException Se `$files < 1 || $records < 1`
      */
     public function count(int $files, int $records): static
     {
         throw_if($files < 1 || $records < 1);
 
-        for ($i = 0; $i < $files; $i++) {
+        for ($i = 0; $i < $files; ++$i) {
             $this->setDate($i);
 
             $this->file_system->put(
@@ -117,10 +109,6 @@ final class LogGenerator
      * chaves de definição.
      * Ou seja, se for informado um novo env, este será utilizado.
      * Por fim, não é possível sobrescrever a propriedade **date**.
-     *
-     * @param array|null  $def
-     *
-     * @return void
      */
     private function setDefinition(?array $def): void
     {
@@ -141,19 +129,17 @@ final class LogGenerator
     }
 
     /**
-     * Adiciona uma determinada quantidade de registros a um arquivo existente
+     * Adiciona uma determinada quantidade de registros a um arquivo existente.
      *
      * Todos os registros adicionados terão o mesmo level, porém os demais
      * dados do registro serão gerados de maneira randômica.
      *
-     * @param string  $log_file arquivo de log que terá os registros inseridos
-     * @param int  $records quantidade de registros a serem inseridos
-     * @param string  $level level do registro
-     *
-     * @return static
+     * @param string $log_file arquivo de log que terá os registros inseridos
+     * @param int    $records  quantidade de registros a serem inseridos
+     * @param string $level    level do registro
      *
      * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
-     * @throws RuntimeException  Se `$records < 1`
+     * @throws RuntimeException                                 Se `$records < 1`
      */
     public function appendLevel(string $log_file, int $records, string $level): static
     {
@@ -177,8 +163,6 @@ final class LogGenerator
      * a quantidade de dias informados.
      * Esse data será usada para definir o nome do arquivo, bem como a data dos
      * registros em seu conteúdo.
-     *
-     * @return void
      */
     private function setDate(int $days_ago): void
     {
@@ -193,8 +177,6 @@ final class LogGenerator
      * Nome do arquivo de log no padrão Laraval para log diário.
      *
      * Ex.: laravel-yyyy-mm-dd.log
-     *
-     * @return string
      */
     private function getFileName(): string
     {
@@ -208,9 +190,7 @@ final class LogGenerator
     /**
      * Define o conteúdo fake do arquivo de log.
      *
-     * @param int  $records quantidade de registros por arquivo de log
-     *
-     * @return string
+     * @param int $records quantidade de registros por arquivo de log
      */
     private function getFileContents(int $records): string
     {
@@ -220,7 +200,7 @@ final class LogGenerator
 
         $records = collect();
 
-        for ($i = 0; $i < $amount; $i++) {
+        for ($i = 0; $i < $amount; ++$i) {
             $records->push($this->getRecord());
         }
 
@@ -228,14 +208,12 @@ final class LogGenerator
     }
 
     /**
-     * Registro a ser inserido no arquivo de log
+     * Registro a ser inserido no arquivo de log.
      *
      * O registro é uma linha no arquivo de log e representa um determinado log
      * ocorrido naquele dia.
      * Um arquivo de log pode ter inúmeros registros, um para cada evento de
      * interesse.
-     *
-     * @return string
      */
     private function getRecord(): string
     {

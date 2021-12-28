@@ -3,7 +3,7 @@
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use Fcno\LogReader\Exceptions\FileNotFoundException;
@@ -26,7 +26,6 @@ beforeEach(function () {
                             ->append(now()->format('Y-m-d'))
                             ->finish('.log')
                             ->__toString();
-    ;
 });
 
 test('o facade retorna o objeto da classe corretamente', function () {
@@ -80,7 +79,7 @@ test('lança exceção ao tentar paginar com página ou por página menor que 1'
     expect(
         fn () => RecordReader::from($this->fs_name)
                                 ->infoAbout($this->file_name)
-                                ->paginate(page:-1, per_page: 1)
+                                ->paginate(page: -1, per_page: 1)
     )->toThrow(InvalidPaginationException::class);
 
     expect(

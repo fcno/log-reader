@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
 final class LogReader extends BaseReader implements IReader, IPaginate
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Nesse caso, a lista dos arquivos de log diários.
      */
@@ -35,7 +35,7 @@ final class LogReader extends BaseReader implements IReader, IPaginate
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * Nesse caso, a lista de arquivos de log diários.
      */

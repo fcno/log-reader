@@ -7,17 +7,17 @@ namespace Fcno\LogReader;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
- * @link https://www.youtube.com/watch?v=a178TJOZPIo&list=PLpzy7FIRqpGBQ_aqz_hXDBch1aAA-lmgu&index=6
- * @link https://www.phpliveregex.com/#tab-preg-match
- * @link https://stackoverflow.com/questions/34578333/correct-way-to-add-comments-to-a-regular-expression-in-php?answertab=votes#tab-top
- * @link https://chromatichq.com/insights/selfdocumenting-regular-expressions
+ * @see https://www.youtube.com/watch?v=a178TJOZPIo&list=PLpzy7FIRqpGBQ_aqz_hXDBch1aAA-lmgu&index=6
+ * @see https://www.phpliveregex.com/#tab-preg-match
+ * @see https://stackoverflow.com/questions/34578333/correct-way-to-add-comments-to-a-regular-expression-in-php?answertab=votes#tab-top
+ * @see https://chromatichq.com/insights/selfdocumenting-regular-expressions
  */
 class Regex
 {
     /**
      * @var string
      *
-     * Padrão da regex para extração dos dados de um registro de log diário.
+     * Padrão da regex para extração dos dados de um registro de log diário
      */
     public const RECORD = '/
     ^\#@\#                                  # Caracteres que definem o inicio do padrão

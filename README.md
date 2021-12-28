@@ -7,7 +7,7 @@
 
 Leitor de arquivos de log diários para aplicações **[Laravel](https://laravel.com/docs)**.
 
-Além da função primária, este *package* oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha de maneira transparente, possibilitando trabalhos com arquivos grandes, sem carregá-los inteiramente em memória.
+Além da função primária, este *package* oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha de maneira transparente, possibilitando trabalhos com arquivos grandes sem carregá-los inteiramente em memória.
 
 ```php
 use Fcno\LogReader\Facades\RecordReader;
@@ -115,7 +115,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***from***
 
-    Assinatura e uso: informa a este *package* em que disco a aplicação armazena os arquivos de log
+    Assinatura e uso: informa ao *package* em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\LogReader;
@@ -219,7 +219,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***from***
 
-    Assinatura e uso: informa a este *package* em que disco a aplicação armazena os arquivos de log
+    Assinatura e uso: informa ao *package* em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\RecordReader;
@@ -240,7 +240,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***infoAbout***
 
-    Assinatura e uso: informa a este *package* qual arquivo de log deve ser trabalhado
+    Assinatura e uso: informa ao *package* qual arquivo de log deve ser trabalhado
 
     ```php
     use Fcno\LogReader\Facades\RecordReader;
@@ -338,7 +338,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
-    - O método **infoAbout** da classe **RecordReader** lança:
+    - O método ***infoAbout*** da classe **RecordReader** lança:
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 
@@ -363,7 +363,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***from***
 
-    Assinatura: informa a este *package* em que disco a aplicação armazena os arquivos de log
+    Assinatura: informa ao *package* em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
@@ -384,7 +384,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ ***infoAbout***
 
-    Assinatura e uso: informa a este *package* qual arquivo de log deve ser trabalhado
+    Assinatura e uso: informa ao *package* qual arquivo de log deve ser trabalhado
 
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
@@ -443,7 +443,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
-    - O método **infoAbout** da classe **SummaryReader** lança:
+    - O método ***infoAbout*** da classe **SummaryReader** lança:
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 

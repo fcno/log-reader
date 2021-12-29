@@ -25,7 +25,7 @@ beforeEach(function () {
                             ->__toString();
 });
 
-test('o Facade retorna o objeto da classe corretamente', function () {
+test('o Facade retorna o objeto da classe', function () {
     expect(LogReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });
 
@@ -67,7 +67,7 @@ test('obtém a quantidade de arquivos esperada de acordo com a paginação solic
     [4, 0],  // página 4 retorna 0 arquivos. Paginação já chegou ao fim
 ]);
 
-test('deleta um arquivo de log como esperado', function () {
+test('deleta um arquivo de log', function () {
     LogGenerator::on($this->fs_name)
                 ->create(null)
                 ->count(files: 1, records: 1);
@@ -80,7 +80,7 @@ test('deleta um arquivo de log como esperado', function () {
     $this->file_system->assertMissing($this->file_name);
 });
 
-test('faz o download de um arquivo de log como esperado', function () {
+test('faz o download de um arquivo de log', function () {
     LogGenerator::on($this->fs_name)
                 ->create(null)
                 ->count(files: 1, records: 1);

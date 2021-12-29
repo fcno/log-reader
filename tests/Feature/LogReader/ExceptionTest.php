@@ -7,10 +7,10 @@
  */
 
 use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\LogReader;
-use Fcno\LogReader\Tests\Stubs\LogGenerator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -27,7 +27,25 @@ beforeEach(function () {
                             ->__toString();
 });
 
-test('lança exceção ao tentar paginar com número da página ou com a quantidade de itens por página menor que 1', function () {
+test('lança exceção ao acionar métodos detele, download, get e paginate sem previamente definir o File System', function () {
+    expect(
+        fn () => LogReader::delete($this->file_name)
+    )->toThrow(FileSystemNotDefinedException::class);
+
+    expect(
+        fn () => LogReader::download($this->file_name)
+    )->toThrow(FileSystemNotDefinedException::class);
+
+    expect(
+        fn () => LogReader::get($this->file_name)
+    )->toThrow(FileSystemNotDefinedException::class);
+
+    expect(
+        fn () => LogReader::paginate(page: 2, per_page: 5)
+    )->toThrow(FileSystemNotDefinedException::class);
+});
+
+test('lança exceção ao acionar método paginate com número da página ou com a quantidade de itens por página menor que 1', function () {
     expect(
         fn () => LogReader::from($this->fs_name)
                             ->paginate(page: -1, per_page: 1)
@@ -39,52 +57,31 @@ test('lança exceção ao tentar paginar com número da página ou com a quantid
     )->toThrow(InvalidPaginationException::class);
 });
 
-test('lança exceção ao tentar deletar arquivo de log inexistente', function () {
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->delete('laravel-2500-12-30.log')
-    )->toThrow(FileNotFoundException::class);
-});
-
-test('lança exceção ao tentar deletar arquivo de log com nome fora do padrão Laravel para logs diários', function () {
-    $new_name = 'laravel.log';
-
-    LogGenerator::on($this->fs_name)
-                ->create(null)
-                ->count(files: 1, records: 1);
-
-    $this->file_system->move(
-        from: $this->file_name,
-        to: $new_name
-    );
+test('lança exceção ao acionar métodos delete ou download informando arquivo de log com nome fora do padrão Laravel para logs diários', function () {
+    // padrão correto é laravel-yyyy-mm-dd.log
+    $file_name = 'laravel.log';
 
     expect(
         fn () => LogReader::from($this->fs_name)
-                            ->delete($new_name)
+                            ->delete($file_name)
+    )->toThrow(NotDailyLogException::class);
+
+    expect(
+        fn () => LogReader::from($this->fs_name)
+                            ->download($file_name)
     )->toThrow(NotDailyLogException::class);
 });
 
-test('lança exceção ao tentar fazer download de arquivo de log inexistente', function () {
+test('lança exceção ao acionar métodos delete ou download informando arquivo de log inexistente', function () {
+    $file_name = 'laravel-1500-01-30.log';
+
     expect(
         fn () => LogReader::from($this->fs_name)
-                            ->download('laravel-2500-12-30.log')
+                            ->delete($file_name)
     )->toThrow(FileNotFoundException::class);
-});
-
-test('lança exceção ao tentar fazer download de arquivo de log com nome fora do padrão Laravel para logs diários', function () {
-    $new_name = 'laravel.log';
-
-    LogGenerator::on($this->fs_name)
-                ->create(null)
-                ->count(files: 1, records: 1);
-
-    $this->file_system->move(
-        from: $this->file_name,
-        to: $new_name
-    );
 
     expect(
         fn () => LogReader::from($this->fs_name)
-                            ->download($new_name)
-    )->toThrow(NotDailyLogException::class);
+                            ->download($file_name)
+    )->toThrow(FileNotFoundException::class);
 });

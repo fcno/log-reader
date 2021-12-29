@@ -23,9 +23,6 @@ return (new PhpCsFixer\Config())
         ],
         'phpdoc_line_span' => true,
         'phpdoc_order' => true,
-        'phpdoc_order_by_value' => [
-            'annotations' => ['author', 'covers', 'coversNothing', 'dataProvider', 'depends', 'group', 'internal', 'method', 'property', 'property-read', 'property-write', 'requires', 'throws', 'uses']
-        ],
         'phpdoc_types_order' => [
             'null_adjustment' => 'always_last', 'sort_algorithm' => 'alpha'
         ],

@@ -530,9 +530,9 @@ Por favor, veja na [política de segurança](../../security/policy) como reporta
 
 &nbsp;
 
-## 👋 Agradecimentos 👋
+## Agradecimentos
 
-Agradeço às pessoas e organizações abaixo por terem doado seu tempo na construção de projetos open-source que foram usados neste ***Package***.
+👋 Agradeço às pessoas e organizações abaixo por terem doado seu tempo na construção de projetos open-source que foram usados neste ***Package***.
 
 - ❤️ [Laravel](https://github.com/laravel) pelos ***packages***:
 
@@ -581,6 +581,8 @@ Agradeço às pessoas e organizações abaixo por terem doado seu tempo na const
   - [phpstan/phpstan-deprecation-rules](https://github.com/phpstan/phpstan-deprecation-rules)
 
   - [phpstan/phpstan-phpunit](https://github.com/phpstan/phpstan-phpunit)
+
+💸 Algumas dessas pessoas ou organizações possuem alguns produtos/serviços que podem ser comprados. Se você puder ajudá-los comprando algum deles ou se tornando um patrocinador, mesmo que por curto período, ajudará toda a comunidade ***open-source*** a continuar desenvolvendo soluções para todos.
 
 &nbsp;
 

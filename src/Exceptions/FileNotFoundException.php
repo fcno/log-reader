@@ -5,7 +5,7 @@ namespace Fcno\LogReader\Exceptions;
 use Exception;
 
 /**
- * Arquivo de log diário não existe no file system.
+ * Arquivo de log diário não existe no ***File System***.
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *

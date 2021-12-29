@@ -10,12 +10,13 @@ use Illuminate\Support\Collection;
 interface IReader
 {
     /**
-     * Define o file system de armazenamento dos logs diários da aplicação de
-     * acordo com o nome informado.
+     * Define o ***File System*** de armazenamento dos logs diários da
+     * aplicação de acordo com o nome informado.
      *
-     * Trata-se do file system em que esta library buscará pelos arquivos.
+     * Trata-se do ***file system*** em que este ***package*** buscará pelos
+     * arquivos de log.
      *
-     * @param string $disk nome do file system
+     * @param string $disk nome do ***File System***
      */
     public function from(string $disk): static;
 

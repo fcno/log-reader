@@ -17,7 +17,7 @@ class Regex
     /**
      * @var string
      *
-     * Padrão da regex para extração dos dados de um registro de log diário
+     * Padrão da ***regex*** para extração dos dados do registro de log diário
      */
     public const RECORD = '/
     ^\#@\#                                  # Caracteres que definem o inicio do padrão
@@ -40,7 +40,7 @@ class Regex
     /**
      * @var string
      *
-     * Padrão para o nome do arquivo de log diário.
+     * Padrão da ***regex*** para o nome do arquivo de log diário.
      *
      * Ex.: laravel-2020-04-30.log
      */

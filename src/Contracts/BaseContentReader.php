@@ -37,8 +37,11 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
     }
 
     /**
-     * Retorna um Generator ou LimitIterator de acordo com a necessidade ou não
-     * paginação do resultado.
+     * Retorna um ***Generator*** ou ***LimitIterator*** de acordo com a
+     * necessidade ou não de paginação do resultado.
+     *
+     * @see https://php.net/manual/en/class.limititerator.php
+     * @see https://secure.php.net/manual/en/class.generator.php
      */
     abstract protected function getLineGenerator(): \LimitIterator|\Generator;
 

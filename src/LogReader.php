@@ -13,8 +13,8 @@ use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Illuminate\Support\Collection;
 
 /**
- * Manipular os arquivos de log do file system gerados no padrão laravel diário
- * isto é, no padrão `laravel-2020-09-20.log`.
+ * Manipular os arquivos de log do ***File System*** gerados no padrão
+ * **Laravel** diário, isto é, no padrão `laravel-2020-09-20.log`.
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
@@ -86,11 +86,11 @@ final class LogReader extends BaseReader implements IPaginate, IDelete, IDownloa
     }
 
     /**
-     * Define o cabeçalho para o download do arquivo.
+     * Define o cabeçalho para o ***download*** do arquivo.
      *
      * @param string $log_file Ex.: laravel-2000-12-30.log
      *
-     * @return array headers do download
+     * @return array ***headers*** do download
      */
     private function setDownloadHeaders(string $log_file): array
     {

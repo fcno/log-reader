@@ -10,7 +10,7 @@ use \Symfony\Component\HttpFoundation\StreamedResponse;
 interface IDownload extends IReader
 {
     /**
-     * Faz o download do arquivo informado
+     * Faz o ***download*** do arquivo informado
      *
      * @param string $log_file Ex.: laravel-2000-12-30.log
      *

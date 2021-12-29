@@ -5,7 +5,8 @@ namespace Fcno\LogReader\Exceptions;
 use Exception;
 
 /**
- * Não foi definido o file system antes de inicar a manipulação de um arquivo de log.
+ * Não foi definido o ***File System*** antes de inicar a manipulação de um
+ * arquivo de log.
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *

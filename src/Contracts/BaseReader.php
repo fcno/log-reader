@@ -12,7 +12,7 @@ abstract class BaseReader implements IReader
     /**
      * @var \Illuminate\Contracts\Filesystem\Filesystem
      *
-     * File System onde estão armazenados os arquivos de log diário da
+     * ***File System*** onde estão armazenados os arquivos de log diário da
      * aplicação
      */
     protected $file_system;

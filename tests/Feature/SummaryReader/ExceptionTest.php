@@ -51,6 +51,6 @@ test('lança exceção ao acionar método infoAbout informando arquivo de log in
 
     expect(
         fn () => SummaryReader::from($this->fs_name)
-                            ->infoAbout($file_name)
+                                ->infoAbout($file_name)
     )->toThrow(FileNotFoundException::class);
 });

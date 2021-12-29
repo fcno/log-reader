@@ -5,6 +5,7 @@ namespace Fcno\LogReader;
 use Bcremer\LineReader\LineReader;
 use Fcno\LogReader\Contracts\BaseContentReader;
 use Fcno\LogReader\Contracts\IPaginate;
+use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Illuminate\Support\Collection;
 
@@ -45,6 +46,8 @@ final class RecordReader extends BaseContentReader implements IPaginate
      */
     public function get(): Collection
     {
+        throw_if(! $this->file_system, FileSystemNotDefinedException::class);
+
         return $this->readLog();
     }
 
@@ -55,6 +58,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
      */
     public function paginate(int $page, int $per_page): Collection
     {
+        throw_if(! $this->file_system,       FileSystemNotDefinedException::class);
         throw_if($page < 1 || $per_page < 1, InvalidPaginationException::class);
 
         $this->page = $page;

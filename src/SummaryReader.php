@@ -4,6 +4,7 @@ namespace Fcno\LogReader;
 
 use Bcremer\LineReader\LineReader;
 use Fcno\LogReader\Contracts\BaseContentReader;
+use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Illuminate\Support\Collection;
 
 /**
@@ -26,6 +27,8 @@ final class SummaryReader extends BaseContentReader
      */
     public function get(): Collection
     {
+        throw_if(! $this->file_system, FileSystemNotDefinedException::class);
+
         return $this->readyToGoSummary(
             $this->readLog()
         );

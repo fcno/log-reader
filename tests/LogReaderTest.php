@@ -28,11 +28,11 @@ beforeEach(function () {
                             ->__toString();
 });
 
-test('o facade retorna o objeto da classe corretamente', function () {
+test('o Facade retorna o objeto da classe corretamente', function () {
     expect(LogReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });
 
-test('obtém todos os arquivos de log do file system ordenados do mais recente para o mais antigo', function () {
+test('obtém todos os arquivos de log do File System ordenados do mais recente para o mais antigo', function () {
     $amount = 10;
     $last_log_file = Str::of('laravel-')
                         ->append(
@@ -55,7 +55,7 @@ test('obtém todos os arquivos de log do file system ordenados do mais recente p
     ->last()->toBe($last_log_file);
 });
 
-test('lança exceção ao tentar paginar com página ou por página menor que 1', function () {
+test('lança exceção ao tentar paginar com número da página ou com a quantidade de itens por página menor que 1', function () {
     expect(
         fn () => LogReader::from($this->fs_name)
                             ->paginate(page: -1, per_page: 1)
@@ -89,7 +89,7 @@ test('lança exceção ao tentar deletar arquivo de log inexistente', function (
     )->toThrow(FileNotFoundException::class);
 });
 
-test('lança exceção ao tentar deletar arquivo de log com nome fora do padrão laravel diário', function () {
+test('lança exceção ao tentar deletar arquivo de log com nome fora do padrão Laravel para logs diários', function () {
     $new_name = 'laravel.log';
 
     LogGenerator::on($this->fs_name)
@@ -128,7 +128,7 @@ test('lança exceção ao tentar fazer download de arquivo de log inexistente', 
     )->toThrow(FileNotFoundException::class);
 });
 
-test('lança exceção ao tentar fazer download de arquivo de log com nome fora do padrão laravel diário', function () {
+test('lança exceção ao tentar fazer download de arquivo de log com nome fora do padrão Laravel para logs diários', function () {
     $new_name = 'laravel.log';
 
     LogGenerator::on($this->fs_name)

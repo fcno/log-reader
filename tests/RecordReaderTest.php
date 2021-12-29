@@ -28,7 +28,7 @@ beforeEach(function () {
                             ->__toString();
 });
 
-test('o facade retorna o objeto da classe corretamente', function () {
+test('o Facade retorna o objeto da classe corretamente', function () {
     expect(RecordReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });
 
@@ -39,7 +39,7 @@ test('lança exceção ao tentar ler registro de arquivo de log inexistente', fu
     )->toThrow(FileNotFoundException::class);
 });
 
-test('lança exceção ao tentar ler registro de arquivo de log com nome fora do padrão laravel diário', function () {
+test('lança exceção ao tentar ler registro de arquivo de log com nome fora do padrão Laravel para logs diários', function () {
     $new_name = 'laravel.log';
 
     LogGenerator::on($this->fs_name)
@@ -71,7 +71,7 @@ test('obtém informações completas acerca dos registros de um determinado arqu
     ->get('date')->toBe(now()->format('Y-m-d'));
 });
 
-test('lança exceção ao tentar paginar com página ou por página menor que 1', function () {
+test('lança exceção ao tentar paginar com número da página ou com a quantidade de itens por página menor que 1', function () {
     LogGenerator::on($this->fs_name)
                 ->create(null)
                 ->count(files: 1, records: 1);

@@ -27,7 +27,7 @@ beforeEach(function () {
                             ->__toString();
 });
 
-test('o facade retorna o objeto da classe corretamente', function () {
+test('o Facade retorna o objeto da classe corretamente', function () {
     expect(SummaryReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });
 
@@ -38,7 +38,7 @@ test('lança exceção ao tentar ler sumário de arquivo de log inexistente', fu
     )->toThrow(FileNotFoundException::class);
 });
 
-test('lança exceção ao tentar ler sumário de arquivo de log com nome fora do padrão laravel diário', function () {
+test('lança exceção ao tentar ler sumário de arquivo de log com nome fora do padrão Laravel para logs diários', function () {
     $new_name = 'laravel.log';
 
     LogGenerator::on($this->fs_name)
@@ -56,7 +56,7 @@ test('lança exceção ao tentar ler sumário de arquivo de log com nome fora do
     )->toThrow(NotDailyLogException::class);
 });
 
-test('sumariza corretamente a quantidade de registros de um determinado tipo e a sua data', function () {
+test('sumariza corretamente a quantidade de registros do arquivo de log por nível e informa a sua data', function () {
     $level = 'alert';
     $amount = 5;
     $appended_level = 'debug';

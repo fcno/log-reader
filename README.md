@@ -21,7 +21,7 @@ RecordReader::from(disk: 'file_system_name')
 
 ---
 
-[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Suporte e Atualizações](#suporte-e-atualizações) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Licença](#licença)
+[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Suporte e Atualizações](#suporte-e-atualizações) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Agradecimentos](#agradecimentos) 🔹 [Licença](#licença)
 
 ---
 
@@ -524,8 +524,63 @@ Por favor, veja na [política de segurança](../../security/policy) como reporta
 
 ## Créditos
 
-- [Fabio Cassiano](https://github.com/fcno)
+- [Fábio Cassiano](https://github.com/fcno)
+
 - [All Contributors](../../contributors)
+
+&nbsp;
+
+## 👋 Agradecimentos 👋
+
+Agradeço às pessoas e organizações abaixo por terem doado seu tempo na construção de projetos open-source que foram usados neste ***Package***.
+
+- ❤️ [Laravel](https://github.com/laravel) pelos ***packages***:
+
+  - [illuminate/collections](https://github.com/illuminate/collections)
+
+  - [illuminate/contracts](https://github.com/illuminate/contracts)
+
+  - [illuminate/filesystem](https://github.com/illuminate/filesystem)
+
+  - [illuminate/support](https://github.com/illuminate/support)
+
+- ❤️ [Spatie](https://github.com/spatie) pelos ***packages***:
+
+  - [spatie/package-skeleton-laravel](https://github.com/spatie/package-skeleton-laravel)
+
+  - [spatie/laravel-package-tools](https://github.com/spatie/laravel-package-tools)
+
+  - [spatie/laravel-ray](https://github.com/spatie/laravel-ray)
+
+- ❤️ [Orchestra Platform](https://github.com/orchestral) pelo ***package*** [orchestral/testbench](https://github.com/orchestral/testbench)
+
+- ❤️ [Nuno Maduro](https://github.com/FakerPHP) pelos ***packages***:
+
+  - [nunomaduro/collision](https://github.com/nunomaduro/collision)
+
+  - [nunomaduro/larastan](https://github.com/nunomaduro/larastan)
+
+- ❤️ [PEST](https://github.com/pestphp) pelos ***packages***:
+
+  - [pestphp/pest](https://github.com/pestphp/pest)
+
+  - [pestphp/pest-plugin-laravel](https://github.com/pestphp/pest-plugin-laravel)
+
+- ❤️ [Benjamin Cremer](https://github.com/bcremer) pelo ***package*** [bcremer/LineReader](https://github.com/bcremer/LineReader)
+
+- ❤️ [Jordi Boggiano](https://github.com/Seldaek) pelo ***package*** [Seldaek/monolog](https://github.com/Seldaek/monolog)
+
+- ❤️ [Sebastian Bergmann](https://github.com/sebastianbergmann) pelo ***package*** [sebastianbergmann/phpunit](https://github.com/sebastianbergmann/phpunit)
+
+- ❤️ [FakerPHP](https://github.com/FakerPHP) pelo ***package*** [FakerPHP/Faker](https://github.com/FakerPHP/Faker)
+
+- ❤️ [PHPStan](https://github.com/phpstan) pelos ***packages***:
+
+  - [phpstan/phpstan](https://github.com/phpstan/phpstan)
+
+  - [phpstan/phpstan-deprecation-rules](https://github.com/phpstan/phpstan-deprecation-rules)
+
+  - [phpstan/phpstan-phpunit](https://github.com/phpstan/phpstan-phpunit)
 
 &nbsp;
 

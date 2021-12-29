@@ -6,7 +6,7 @@ use Exception;
 
 /**
  * Arquivo informado não respeita o padrão de log diário do laravel, isto é, o
- * padrão `laravel-yyyy-mm-dd.log`.
+ * padrão de nome `laravel-yyyy-mm-dd.log`.
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *

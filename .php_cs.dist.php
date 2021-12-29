@@ -22,7 +22,11 @@ return (new PhpCsFixer\Config())
             'statements' => ['break', 'continue', 'declare', 'return', 'throw', 'try'],
         ],
         'phpdoc_line_span' => true,
-        'phpdoc_var_without_name' => false,
+        'phpdoc_order' => true,
+        'phpdoc_types_order' => [
+            'null_adjustment' => 'always_last', 'sort_algorithm' => 'alpha'
+        ],
+        'phpdoc_var_annotation_correct_order' => true,
         'method_argument_space' => [
             'on_multiline' => 'ensure_fully_multiline',
             'keep_multiple_spaces_after_comma' => true,

@@ -6,31 +6,16 @@
  * @see https://pestphp.com/docs/
  */
 
-use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Fcno\LogReader\Facades\LogReader;
 use Fcno\LogReader\LogReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-beforeEach(function () {
-    $this->fs_name = 'log-aplicacao';
-
-    $this->file_system = Storage::fake($this->fs_name, [
-        'driver' => 'local',
-    ]);
-
-    $this->file_name = Str::of('laravel-')
-                            ->append(now()->format('Y-m-d'))
-                            ->finish('.log')
-                            ->__toString();
-});
-
-test('o facade retorna o objeto da classe corretamente', function () {
+test('o Facade retorna o objeto da classe', function () {
     expect(LogReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });
 
-test('obtém todos os arquivos de log do file system ordenados do mais recente para o mais antigo', function () {
+test('obtém todos os arquivos de log do File System ordenados do mais recente para o mais antigo', function () {
     $amount = 10;
     $last_log_file = Str::of('laravel-')
                         ->append(
@@ -53,19 +38,7 @@ test('obtém todos os arquivos de log do file system ordenados do mais recente p
     ->last()->toBe($last_log_file);
 });
 
-test('lança exceção ao tentar paginar com página ou por página menor que 1', function () {
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->paginate(page: -1, per_page: 1)
-    )->toThrow(InvalidPaginationException::class);
-
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->paginate(page: 1, per_page: -1)
-    )->toThrow(InvalidPaginationException::class);
-});
-
-test('obtém a quantidade de arquivos esperada de acordo com a paginação solicitada ordenados do mais recente para o mais antigo', function ($page, $expect) {
+test('obtém a quantidade de arquivos de log de acordo com a paginação solicitada ordenados do mais recente para o mais antigo', function ($page, $expect) {
     LogGenerator::on($this->fs_name)
                 ->create(null)
                 ->count(files: 14, records: 1);
@@ -79,3 +52,28 @@ test('obtém a quantidade de arquivos esperada de acordo com a paginação solic
     [3, 4], // página 3 retorna 4 arquivos. Página incompleta, chegou-se ao fim
     [4, 0],  // página 4 retorna 0 arquivos. Paginação já chegou ao fim
 ]);
+
+test('deleta um arquivo de log', function () {
+    LogGenerator::on($this->fs_name)
+                ->create(null)
+                ->count(files: 1, records: 1);
+
+    $this->file_system->assertExists($this->file_name);
+    expect(
+        LogReader::from($this->fs_name)
+                    ->delete($this->file_name)
+    )->toBeTrue();
+    $this->file_system->assertMissing($this->file_name);
+});
+
+test('faz o download de um arquivo de log', function () {
+    LogGenerator::on($this->fs_name)
+                ->create(null)
+                ->count(files: 1, records: 1);
+
+    $response = LogReader::from($this->fs_name)
+                            ->download($this->file_name);
+
+    expect($response->headers->get('content-disposition'))
+    ->toBe("attachment; filename={$this->file_name}");
+});

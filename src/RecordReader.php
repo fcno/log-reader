@@ -4,7 +4,8 @@ namespace Fcno\LogReader;
 
 use Bcremer\LineReader\LineReader;
 use Fcno\LogReader\Contracts\BaseContentReader;
-use Fcno\LogReader\Contracts\IPaginate;
+use Fcno\LogReader\Contracts\IPageable;
+use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Illuminate\Support\Collection;
 
@@ -22,21 +23,21 @@ use Illuminate\Support\Collection;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class RecordReader extends BaseContentReader implements IPaginate
+final class RecordReader extends BaseContentReader implements IPageable
 {
     /**
      * @var int
      *
      * Página da paginação que será exibida quando o resultado for paginado
      */
-    private $page;
+    private int $page;
 
     /**
      * @var int
      *
      * Quantidada de registros por página que serão exibidos quando da paginação
      */
-    private $per_page;
+    private int $per_page;
 
     /**
      * {@inheritdoc}
@@ -45,6 +46,8 @@ final class RecordReader extends BaseContentReader implements IPaginate
      */
     public function get(): Collection
     {
+        throw_if(empty($this->file_system), FileSystemNotDefinedException::class);
+
         return $this->readLog();
     }
 
@@ -55,6 +58,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
      */
     public function paginate(int $page, int $per_page): Collection
     {
+        throw_if(empty($this->file_system),  FileSystemNotDefinedException::class);
         throw_if($page < 1 || $per_page < 1, InvalidPaginationException::class);
 
         $this->page = $page;
@@ -70,7 +74,7 @@ final class RecordReader extends BaseContentReader implements IPaginate
     {
         $line_generator = LineReader::readLines($this->getFullPath());
 
-        return ($this->page && $this->per_page)
+        return (isset($this->page) && isset($this->per_page))
         ? new \LimitIterator(
             iterator: $line_generator,
             offset: ($this->page - 1) * $this->per_page,

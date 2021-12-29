@@ -3,6 +3,7 @@
 namespace Fcno\LogReader\Contracts;
 
 use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Regex;
 use Illuminate\Support\Collection;
@@ -10,7 +11,7 @@ use Illuminate\Support\Collection;
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-abstract class BaseContentReader extends BaseReader implements IContentReader
+abstract class BaseContentReader extends BaseReader implements IContentReadable
 {
     /**
      * @var string
@@ -19,15 +20,16 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
      *
      * Ex.: laravel-2020-12-30.log
      */
-    protected $log_file;
+    protected string $log_file;
 
     /**
      * {@inheritdoc}
      */
     public function infoAbout(string $log_file): static
     {
-        throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
+        throw_if(empty($this->file_system),                FileSystemNotDefinedException::class);
         throw_if(! preg_match(Regex::LOG_FILE, $log_file), NotDailyLogException::class);
+        throw_if($this->file_system->missing($log_file),   FileNotFoundException::class);
 
         $this->log_file = $log_file;
 
@@ -35,8 +37,12 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
     }
 
     /**
-     * Retorna um Generator ou LimitIterator de acordo com a necessidade ou não
-     * paginação do resultado.
+     * Retorna um ***Generator*** ou ***LimitIterator*** de acordo com a para
+     * ler, linha a linha, o arquivo de log de acordo com a necessidade ou não
+     * de se paginar os resultados.
+     *
+     * @see https://php.net/manual/en/class.limititerator.php
+     * @see https://secure.php.net/manual/en/class.generator.php
      */
     abstract protected function getLineGenerator(): \LimitIterator|\Generator;
 

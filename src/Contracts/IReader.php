@@ -2,25 +2,19 @@
 
 namespace Fcno\LogReader\Contracts;
 
-use Illuminate\Support\Collection;
-
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 interface IReader
 {
     /**
-     * Define o file system de armazenamento dos logs diários da aplicação de
-     * acordo com o nome informado.
+     * Define o ***File System*** de armazenamento dos logs diários da
+     * aplicação de acordo com o nome informado.
      *
-     * Trata-se do file system em que esta library buscará pelos arquivos.
+     * Trata-se do disco do ***File System*** em que este ***Package*** buscará
+     * os arquivos de log.
      *
-     * @param string $disk nome do file system
+     * @param string $disk nome do disco de log do ***File System***
      */
     public function from(string $disk): static;
-
-    /**
-     * Obtém as informações solicitadas.
-     */
-    public function get(): Collection;
 }

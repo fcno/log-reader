@@ -4,6 +4,7 @@ namespace Fcno\LogReader;
 
 use Bcremer\LineReader\LineReader;
 use Fcno\LogReader\Contracts\BaseContentReader;
+use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Illuminate\Support\Collection;
 
 /**
@@ -26,6 +27,8 @@ final class SummaryReader extends BaseContentReader
      */
     public function get(): Collection
     {
+        throw_if(empty($this->file_system), FileSystemNotDefinedException::class);
+
         return $this->readyToGoSummary(
             $this->readLog()
         );
@@ -34,7 +37,7 @@ final class SummaryReader extends BaseContentReader
     /**
      * {@inheritdoc}
      *
-     * Nesse caso, um Generator devido a desnecessidade de paginação.
+     * Nesse caso, um ***Generator*** devido a desnecessidade de paginação.
      */
     protected function getLineGenerator(): \Generator
     {

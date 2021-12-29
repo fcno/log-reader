@@ -21,7 +21,7 @@ RecordReader::from(disk: 'file_system_name')
 
 ---
 
-[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Licença](#licença)
+[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Suporte e Atualizações](#suporte-e-atualizações) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Agradecimentos](#agradecimentos) 🔹 [Licença](#licença)
 
 ---
 
@@ -122,7 +122,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\LogReader;
 
     /**
-     * @param string  $disk Nome do disco de log
+     * @param string $disk nome do disco de log do ***File System***
      * 
      * @return static
      */
@@ -143,6 +143,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\LogReader;
 
     /**
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
      * @return \Illuminate\Support\Collection
      */
     LogReader::from(disk: 'disk_name')
@@ -183,9 +185,10 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * @param int  $page número da página
      * @param int  $per_page itens por página
      * 
-     * @return \Illuminate\Support\Collection
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
      * 
-     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException $page < 1 || $per_page < 1
+     * @return \Illuminate\Support\Collection
      */
     LogReader::from(disk: 'disk_name')
                 ->paginate(page: 2, per_page: 5);
@@ -201,8 +204,15 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
+    - O método ***get*** da classe **LogReader** lança:
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
+
     - O método ***paginate*** da classe **LogReader** lança:
-        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1..
+
+        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
 
     &nbsp;
 
@@ -226,7 +236,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\RecordReader;
 
     /**
-     * @param string  $disk Nome do disco de log
+     * @param string $disk nome do disco de log do ***File System***
      * 
      * @return static
      */
@@ -247,12 +257,13 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\RecordReader;
 
     /**
-     * @param string  $log_file nome do arquivo de log que deve ser examinado
-     * 
-     * @return static
+     * @param string  $log_file nome do arquivo de log que que será trabalhado
      * 
      * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
      * @throws \Fcno\LogReader\Exceptions\NotDailyLogException
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
+     * @return static
      */
     RecordReader::from(disk: 'disk_name')
                 ->infoAbout(log_file: 'filename.log');
@@ -271,7 +282,9 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     ```php
     use Fcno\LogReader\Facades\RecordReader;
 
-    /**
+   /**
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
      * @return \Illuminate\Support\Collection
      */
     RecordReader::from(disk: 'disk_name')
@@ -318,9 +331,10 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * @param int  $page número da página
      * @param int  $per_page itens por página
      * 
-     * @return \Illuminate\Support\Collection
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
      * 
-     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException $page < 1 || $per_page < 1
+     * @return \Illuminate\Support\Collection
      */
     RecordReader::from(disk: 'disk_name')
                 ->infoAbout(log_file: 'filename.log')
@@ -339,14 +353,23 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
+    - O método ***get*** da classe **RecordReader** lança:
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
+
     - O método ***infoAbout*** da classe **RecordReader** lança:
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 
         - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**.
 
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
+
     - O método ***paginate*** lança:
-        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
+
+        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
 
     &nbsp;
 
@@ -370,7 +393,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\SummaryReader;
 
     /**
-     * @param string  $disk Nome do disco de log
+     * @param string $disk nome do disco de log do ***File System***
      * 
      * @return static
      */
@@ -391,12 +414,13 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\SummaryReader;
 
     /**
-     * @param string  $log_file nome do arquivo de log que deve ser examinado
-     * 
-     * @return static
+     * @param string  $log_file nome do arquivo de log que que será trabalhado
      * 
      * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
      * @throws \Fcno\LogReader\Exceptions\NotDailyLogException
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
+     * @return static
      */
     SummaryReader::from(disk: 'disk_name')
                     ->infoAbout(log_file: 'filename.log');
@@ -411,7 +435,9 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
 
-    /**
+   /**
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
      * @return \Illuminate\Support\Collection
      */
     SummaryReader::from(disk: 'disk_name')
@@ -444,11 +470,17 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
+    - O método ***get*** da classe **SummaryReader** lança:
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
+
     - O método ***infoAbout*** da classe **SummaryReader** lança:
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 
         - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**.
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
 
     &nbsp;
 
@@ -474,6 +506,16 @@ Por favor, veja [CONTRIBUTING](.github/CONTRIBUTING.md) para maiores detalhes.
 
 &nbsp;
 
+## Suporte e Atualizações
+
+A versão mais recente receberá suporte e atualizações sempre que houver necessidade. As demais receberão apenas atualizações para corrigir [vulnerabilidades de segurança](#vulnerabilidades-e-segurança) por até 06 meses após ela ter sido substituída por uma nova versão.
+
+🐛 Encontrou um bug?!?! Abra um ***issue***.
+
+✨ Alguma ideia nova?!?! Inicie uma discussão.
+
+&nbsp;
+
 ## Vulnerabilidades e Segurança
 
 Por favor, veja na [política de segurança](../../security/policy) como reportar vulnerabilidades ou falha de segurança.
@@ -482,8 +524,65 @@ Por favor, veja na [política de segurança](../../security/policy) como reporta
 
 ## Créditos
 
-- [Fabio Cassiano](https://github.com/fcno)
+- [Fábio Cassiano](https://github.com/fcno)
+
 - [All Contributors](../../contributors)
+
+&nbsp;
+
+## Agradecimentos
+
+👋 Agradeço às pessoas e organizações abaixo por terem doado seu tempo na construção de projetos open-source que foram usados neste ***Package***.
+
+- ❤️ [Laravel](https://github.com/laravel) pelos ***packages***:
+
+  - [illuminate/collections](https://github.com/illuminate/collections)
+
+  - [illuminate/contracts](https://github.com/illuminate/contracts)
+
+  - [illuminate/filesystem](https://github.com/illuminate/filesystem)
+
+  - [illuminate/support](https://github.com/illuminate/support)
+
+- ❤️ [Spatie](https://github.com/spatie) pelos ***packages***:
+
+  - [spatie/package-skeleton-laravel](https://github.com/spatie/package-skeleton-laravel)
+
+  - [spatie/laravel-package-tools](https://github.com/spatie/laravel-package-tools)
+
+  - [spatie/laravel-ray](https://github.com/spatie/laravel-ray)
+
+- ❤️ [Orchestra Platform](https://github.com/orchestral) pelo ***package*** [orchestral/testbench](https://github.com/orchestral/testbench)
+
+- ❤️ [Nuno Maduro](https://github.com/FakerPHP) pelos ***packages***:
+
+  - [nunomaduro/collision](https://github.com/nunomaduro/collision)
+
+  - [nunomaduro/larastan](https://github.com/nunomaduro/larastan)
+
+- ❤️ [PEST](https://github.com/pestphp) pelos ***packages***:
+
+  - [pestphp/pest](https://github.com/pestphp/pest)
+
+  - [pestphp/pest-plugin-laravel](https://github.com/pestphp/pest-plugin-laravel)
+
+- ❤️ [Benjamin Cremer](https://github.com/bcremer) pelo ***package*** [bcremer/LineReader](https://github.com/bcremer/LineReader)
+
+- ❤️ [Jordi Boggiano](https://github.com/Seldaek) pelo ***package*** [Seldaek/monolog](https://github.com/Seldaek/monolog)
+
+- ❤️ [Sebastian Bergmann](https://github.com/sebastianbergmann) pelo ***package*** [sebastianbergmann/phpunit](https://github.com/sebastianbergmann/phpunit)
+
+- ❤️ [FakerPHP](https://github.com/FakerPHP) pelo ***package*** [FakerPHP/Faker](https://github.com/FakerPHP/Faker)
+
+- ❤️ [PHPStan](https://github.com/phpstan) pelos ***packages***:
+
+  - [phpstan/phpstan](https://github.com/phpstan/phpstan)
+
+  - [phpstan/phpstan-deprecation-rules](https://github.com/phpstan/phpstan-deprecation-rules)
+
+  - [phpstan/phpstan-phpunit](https://github.com/phpstan/phpstan-phpunit)
+
+💸 Algumas dessas pessoas ou organizações possuem alguns produtos/serviços que podem ser comprados. Se você puder ajudá-los comprando algum deles ou se tornando um patrocinador, mesmo que por curto período, ajudará toda a comunidade ***open-source*** a continuar desenvolvendo soluções para todos.
 
 &nbsp;
 

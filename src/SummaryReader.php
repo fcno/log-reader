@@ -37,7 +37,7 @@ final class SummaryReader extends BaseContentReader
     /**
      * {@inheritdoc}
      *
-     * Nesse caso, um Generator devido a desnecessidade de paginação.
+     * Nesse caso, um ***Generator*** devido a desnecessidade de paginação.
      */
     protected function getLineGenerator(): \Generator
     {

@@ -16,6 +16,7 @@ interface IDownload extends IReader
      *
      * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
      * @throws \Fcno\LogReader\Exceptions\NotDailyLogException
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
      *
      * @see https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels
      *

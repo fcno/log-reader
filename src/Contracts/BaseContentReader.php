@@ -3,6 +3,7 @@
 namespace Fcno\LogReader\Contracts;
 
 use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Regex;
 use Illuminate\Support\Collection;
@@ -26,8 +27,9 @@ abstract class BaseContentReader extends BaseReader implements IContentReader
      */
     public function infoAbout(string $log_file): static
     {
-        throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
+        throw_if(! $this->file_system,                     FileSystemNotDefinedException::class);
         throw_if(! preg_match(Regex::LOG_FILE, $log_file), NotDailyLogException::class);
+        throw_if($this->file_system->missing($log_file),   FileNotFoundException::class);
 
         $this->log_file = $log_file;
 

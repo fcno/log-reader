@@ -21,6 +21,8 @@ interface IReader
 
     /**
      * Obtém as informações solicitadas.
+     *
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
      */
     public function get(): Collection;
 }

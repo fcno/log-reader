@@ -7,6 +7,7 @@ use Fcno\LogReader\Contracts\IDelete;
 use Fcno\LogReader\Contracts\IDownload;
 use Fcno\LogReader\Contracts\IPaginate;
 use Fcno\LogReader\Exceptions\FileNotFoundException;
+use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Illuminate\Support\Collection;
@@ -26,6 +27,8 @@ final class LogReader extends BaseReader implements IPaginate, IDelete, IDownloa
      */
     public function get(): Collection
     {
+        throw_if(! $this->file_system, FileSystemNotDefinedException::class);
+
         $collection = collect($this->file_system->files());
 
         $filtered = $collection->filter(function ($value, $key) {
@@ -44,6 +47,7 @@ final class LogReader extends BaseReader implements IPaginate, IDelete, IDownloa
      */
     public function paginate(int $page, int $per_page): Collection
     {
+        throw_if(! $this->file_system,       FileSystemNotDefinedException::class);
         throw_if($page < 1 || $per_page < 1, InvalidPaginationException::class);
 
         return $this->get()
@@ -58,9 +62,10 @@ final class LogReader extends BaseReader implements IPaginate, IDelete, IDownloa
      */
     public function delete(string $log_file): bool
     {
-        throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
+        throw_if(! $this->file_system,                     FileSystemNotDefinedException::class);
         throw_if(! preg_match(Regex::LOG_FILE, $log_file), NotDailyLogException::class);
-        // filesystem not definied exception
+        throw_if($this->file_system->missing($log_file),   FileNotFoundException::class);
+
         return $this->file_system->delete($log_file);
     }
 
@@ -69,9 +74,10 @@ final class LogReader extends BaseReader implements IPaginate, IDelete, IDownloa
      */
     public function download(string $log_file): \Symfony\Component\HttpFoundation\StreamedResponse
     {
-        throw_if($this->file_system->missing($log_file), FileNotFoundException::class);
+        throw_if(! $this->file_system,                     FileSystemNotDefinedException::class);
         throw_if(! preg_match(Regex::LOG_FILE, $log_file), NotDailyLogException::class);
-        // filesystem not definied exception
+        throw_if($this->file_system->missing($log_file),   FileNotFoundException::class);
+
         return $this->file_system->download(
             $log_file,
             $log_file,

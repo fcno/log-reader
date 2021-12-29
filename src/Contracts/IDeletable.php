@@ -8,7 +8,7 @@ namespace Fcno\LogReader\Contracts;
 interface IDeletable extends IReader
 {
     /**
-     * Deleta o arquivo informado
+     * Deleta o arquivo informado.
      *
      * @param string $log_file Ex.: laravel-2000-12-30.log
      *

@@ -2,15 +2,15 @@
 
 namespace Fcno\LogReader\Contracts;
 
-use \Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-interface IDownloadable  extends IReader
+interface IDownloadable extends IReader
 {
     /**
-     * Faz o ***download*** do arquivo informado
+     * Faz o ***download*** do arquivo informado.
      *
      * @param string $log_file Ex.: laravel-2000-12-30.log
      *

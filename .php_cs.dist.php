@@ -27,7 +27,6 @@ return (new PhpCsFixer\Config())
             'null_adjustment' => 'always_last', 'sort_algorithm' => 'alpha'
         ],
         'phpdoc_var_annotation_correct_order' => true,
-        'phpdoc_var_without_name' => false,
         'method_argument_space' => [
             'on_multiline' => 'ensure_fully_multiline',
             'keep_multiple_spaces_after_comma' => true,

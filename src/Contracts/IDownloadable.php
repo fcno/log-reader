@@ -19,8 +19,6 @@ interface IDownloadable extends IReader
      * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
      *
      * @see https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels
-     *
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function download(string $log_file): StreamedResponse;
 }

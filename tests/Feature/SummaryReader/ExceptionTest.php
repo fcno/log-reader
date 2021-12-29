@@ -10,8 +10,6 @@ use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\SummaryReader;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 test('lança exceção ao acionar métodos get e infoAbout sem previamente definir o File System', function () {
     expect(

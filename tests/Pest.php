@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 uses(TestCase::class)
-    ->beforeEach(function() {
+    ->beforeEach(function () {
         $this->fs_name = 'log-aplicacao';
 
         $this->file_system = Storage::fake($this->fs_name, [

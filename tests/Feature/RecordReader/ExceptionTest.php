@@ -11,8 +11,6 @@ use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\RecordReader;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 test('lança exceção ao acionar métodos get, infoAbout e paginate sem previamente definir o File System', function () {
     expect(

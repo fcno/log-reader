@@ -9,8 +9,6 @@
 use Fcno\LogReader\Facades\SummaryReader;
 use Fcno\LogReader\SummaryReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 test('o Facade retorna o objeto da classe', function () {
     expect(SummaryReader::from($this->fs_name))->toBeInstanceOf(Reader::class);

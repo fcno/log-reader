@@ -122,7 +122,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\LogReader;
 
     /**
-     * @param string  $disk Nome do disco de log
+     * @param string $disk nome do disco de log do ***File System***
      * 
      * @return static
      */
@@ -143,6 +143,8 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\LogReader;
 
     /**
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
      * @return \Illuminate\Support\Collection
      */
     LogReader::from(disk: 'disk_name')
@@ -183,9 +185,10 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * @param int  $page número da página
      * @param int  $per_page itens por página
      * 
-     * @return \Illuminate\Support\Collection
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
      * 
-     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException $page < 1 || $per_page < 1
+     * @return \Illuminate\Support\Collection
      */
     LogReader::from(disk: 'disk_name')
                 ->paginate(page: 2, per_page: 5);
@@ -201,8 +204,15 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
+    - O método ***get*** da classe **LogReader** lança:
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
+
     - O método ***paginate*** da classe **LogReader** lança:
-        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1..
+
+        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
 
     &nbsp;
 
@@ -226,7 +236,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\RecordReader;
 
     /**
-     * @param string  $disk Nome do disco de log
+     * @param string $disk nome do disco de log do ***File System***
      * 
      * @return static
      */
@@ -247,12 +257,13 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\RecordReader;
 
     /**
-     * @param string  $log_file nome do arquivo de log que deve ser examinado
-     * 
-     * @return static
+     * @param string  $log_file nome do arquivo de log que que será trabalhado
      * 
      * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
      * @throws \Fcno\LogReader\Exceptions\NotDailyLogException
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
+     * @return static
      */
     RecordReader::from(disk: 'disk_name')
                 ->infoAbout(log_file: 'filename.log');
@@ -271,7 +282,9 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     ```php
     use Fcno\LogReader\Facades\RecordReader;
 
-    /**
+   /**
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
      * @return \Illuminate\Support\Collection
      */
     RecordReader::from(disk: 'disk_name')
@@ -318,9 +331,10 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
      * @param int  $page número da página
      * @param int  $per_page itens por página
      * 
-     * @return \Illuminate\Support\Collection
+     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
      * 
-     * @throws \Fcno\LogReader\Exceptions\InvalidPaginationException $page < 1 || $per_page < 1
+     * @return \Illuminate\Support\Collection
      */
     RecordReader::from(disk: 'disk_name')
                 ->infoAbout(log_file: 'filename.log')
@@ -339,14 +353,23 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
+    - O método ***get*** da classe **RecordReader** lança:
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
+
     - O método ***infoAbout*** da classe **RecordReader** lança:
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 
         - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**.
 
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
+
     - O método ***paginate*** lança:
-        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1.
+
+        - ***\Fcno\LogReader\Exceptions\InvalidPaginationException*** caso ***$page*** ou ***$per_page*** sejam menores que 1
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
 
     &nbsp;
 
@@ -370,7 +393,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\SummaryReader;
 
     /**
-     * @param string  $disk Nome do disco de log
+     * @param string $disk nome do disco de log do ***File System***
      * 
      * @return static
      */
@@ -391,12 +414,13 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\SummaryReader;
 
     /**
-     * @param string  $log_file nome do arquivo de log que deve ser examinado
-     * 
-     * @return static
+     * @param string  $log_file nome do arquivo de log que que será trabalhado
      * 
      * @throws \Fcno\LogReader\Exceptions\FileNotFoundException
      * @throws \Fcno\LogReader\Exceptions\NotDailyLogException
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
+     * @return static
      */
     SummaryReader::from(disk: 'disk_name')
                     ->infoAbout(log_file: 'filename.log');
@@ -411,7 +435,9 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
 
-    /**
+   /**
+     * @throws \Fcno\LogReader\Exceptions\FileSystemNotDefinedException
+     * 
      * @return \Illuminate\Support\Collection
      */
     SummaryReader::from(disk: 'disk_name')
@@ -444,11 +470,17 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     🚨 ***Exceptions***:
 
+    - O método ***get*** da classe **SummaryReader** lança:
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
+
     - O método ***infoAbout*** da classe **SummaryReader** lança:
 
         - ***Fcno\LogReader\Exceptions\FileNotFoundException*** caso o arquivo não seja encontrado;
 
         - ***Fcno\LogReader\Exceptions\NotDailyLogException*** caso o aquivo não seja no padrão **laravel-yyy-mm-dd.log**.
+
+        - ***\Fcno\LogReader\Exceptions\FileSystemNotDefinedException*** caso o método seja acionado sem previamente se definir o **disco** do ***File System***
 
     &nbsp;
 

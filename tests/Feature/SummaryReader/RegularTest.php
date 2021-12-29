@@ -25,11 +25,11 @@ beforeEach(function () {
                             ->__toString();
 });
 
-test('o Facade retorna o objeto da classe corretamente', function () {
+test('o Facade retorna o objeto da classe', function () {
     expect(SummaryReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });
 
-test('sumariza corretamente a quantidade de registros do arquivo de log por nível e informa a sua data', function () {
+test('sumariza a quantidade de registros do arquivo de log por nível e informa a sua data', function () {
     $level = 'alert';
     $amount = 5;
     $appended_level = 'debug';

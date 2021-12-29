@@ -25,7 +25,7 @@ beforeEach(function () {
                             ->__toString();
 });
 
-test('o Facade retorna o objeto da classe', function () {
+test('o Facade retorna o objeto da classe corretamente', function () {
     expect(RecordReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });
 

@@ -52,7 +52,7 @@ test('obtém todos os arquivos de log do File System ordenados do mais recente p
     ->last()->toBe($last_log_file);
 });
 
-test('obtém a quantidade de arquivos de log esperada de acordo com a paginação solicitada ordenados do mais recente para o mais antigo', function ($page, $expect) {
+test('obtém a quantidade de arquivos de log de acordo com a paginação solicitada ordenados do mais recente para o mais antigo', function ($page, $expect) {
     LogGenerator::on($this->fs_name)
                 ->create(null)
                 ->count(files: 14, records: 1);

@@ -96,7 +96,7 @@ final class LogReader extends BaseReader implements IPageable, IDeletable, IDown
     {
         return [
             'Content-Type' => 'text/plain',
-            'Content-Disposition' => 'attachment; filename=' . $log_file,
+            'Content-Disposition' => 'attachment; filename='.$log_file,
         ];
     }
 }

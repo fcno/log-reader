@@ -37,12 +37,16 @@ RecordReader::from(disk: 'file_system_name')
 
 PHP ^8.0
 
-Para uma [checagem completa dos pré-requisitos](https://getcomposer.org/doc/03-cli.md#check-platform-reqs):
+Para uma checagem completa dos pré-requisitos:[checagem completa dos pré-requisitos](https://getcomposer.org/doc/03-cli.md#check-platform-reqs):
+
+1. Via [Composer](https://getcomposer.org/doc/03-cli.md#check-platform-reqs)
 
 ```bash
 composer require fcno/log-reader
 composer check-platform-reqs
 ```
+
+2. Via [GitHub Dependencies](../../network/dependencies)
 
 &nbsp;
 

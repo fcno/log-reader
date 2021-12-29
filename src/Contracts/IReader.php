@@ -13,7 +13,7 @@ interface IReader
      * Define o ***File System*** de armazenamento dos logs diários da
      * aplicação de acordo com o nome informado.
      *
-     * Trata-se do ***file system*** em que este ***package*** buscará pelos
+     * Trata-se do ***File System*** em que este ***Package*** buscará pelos
      * arquivos de log.
      *
      * @param string $disk nome do ***File System***

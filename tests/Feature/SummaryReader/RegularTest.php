@@ -6,8 +6,6 @@
  * @see https://pestphp.com/docs/
  */
 
-use Fcno\LogReader\Exceptions\FileNotFoundException;
-use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\SummaryReader;
 use Fcno\LogReader\SummaryReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
@@ -29,31 +27,6 @@ beforeEach(function () {
 
 test('o Facade retorna o objeto da classe corretamente', function () {
     expect(SummaryReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
-});
-
-test('lança exceção ao tentar ler sumário de arquivo de log inexistente', function () {
-    expect(
-        fn () => SummaryReader::from($this->fs_name)
-                                ->infoAbout('laravel-2500-12-30.log')
-    )->toThrow(FileNotFoundException::class);
-});
-
-test('lança exceção ao tentar ler sumário de arquivo de log com nome fora do padrão Laravel para logs diários', function () {
-    $new_name = 'laravel.log';
-
-    LogGenerator::on($this->fs_name)
-                ->create(null)
-                ->count(files: 1, records: 1);
-
-    $this->file_system->move(
-        from: $this->file_name,
-        to: $new_name
-    );
-
-    expect(
-        fn () => SummaryReader::from($this->fs_name)
-                                ->infoAbout($new_name)
-    )->toThrow(NotDailyLogException::class);
 });
 
 test('sumariza corretamente a quantidade de registros do arquivo de log por nível e informa a sua data', function () {

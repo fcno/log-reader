@@ -6,9 +6,6 @@
  * @see https://pestphp.com/docs/
  */
 
-use Fcno\LogReader\Exceptions\FileNotFoundException;
-use Fcno\LogReader\Exceptions\InvalidPaginationException;
-use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\LogReader;
 use Fcno\LogReader\LogReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
@@ -55,18 +52,6 @@ test('obtém todos os arquivos de log do File System ordenados do mais recente p
     ->last()->toBe($last_log_file);
 });
 
-test('lança exceção ao tentar paginar com número da página ou com a quantidade de itens por página menor que 1', function () {
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->paginate(page: -1, per_page: 1)
-    )->toThrow(InvalidPaginationException::class);
-
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->paginate(page: 1, per_page: -1)
-    )->toThrow(InvalidPaginationException::class);
-});
-
 test('obtém a quantidade de arquivos esperada de acordo com a paginação solicitada ordenados do mais recente para o mais antigo', function ($page, $expect) {
     LogGenerator::on($this->fs_name)
                 ->create(null)
@@ -82,31 +67,6 @@ test('obtém a quantidade de arquivos esperada de acordo com a paginação solic
     [4, 0],  // página 4 retorna 0 arquivos. Paginação já chegou ao fim
 ]);
 
-test('lança exceção ao tentar deletar arquivo de log inexistente', function () {
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->delete('laravel-2500-12-30.log')
-    )->toThrow(FileNotFoundException::class);
-});
-
-test('lança exceção ao tentar deletar arquivo de log com nome fora do padrão Laravel para logs diários', function () {
-    $new_name = 'laravel.log';
-
-    LogGenerator::on($this->fs_name)
-                ->create(null)
-                ->count(files: 1, records: 1);
-
-    $this->file_system->move(
-        from: $this->file_name,
-        to: $new_name
-    );
-
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->delete($new_name)
-    )->toThrow(NotDailyLogException::class);
-});
-
 test('deleta um arquivo de log como esperado', function () {
     LogGenerator::on($this->fs_name)
                 ->create(null)
@@ -118,32 +78,6 @@ test('deleta um arquivo de log como esperado', function () {
                     ->delete($this->file_name)
     )->toBeTrue();
     $this->file_system->assertMissing($this->file_name);
-});
-
-
-test('lança exceção ao tentar fazer download de arquivo de log inexistente', function () {
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->download('laravel-2500-12-30.log')
-    )->toThrow(FileNotFoundException::class);
-});
-
-test('lança exceção ao tentar fazer download de arquivo de log com nome fora do padrão Laravel para logs diários', function () {
-    $new_name = 'laravel.log';
-
-    LogGenerator::on($this->fs_name)
-                ->create(null)
-                ->count(files: 1, records: 1);
-
-    $this->file_system->move(
-        from: $this->file_name,
-        to: $new_name
-    );
-
-    expect(
-        fn () => LogReader::from($this->fs_name)
-                            ->download($new_name)
-    )->toThrow(NotDailyLogException::class);
 });
 
 test('faz o download de um arquivo de log como esperado', function () {

@@ -10,7 +10,6 @@ use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Facades\RecordReader;
-use Fcno\LogReader\RecordReader as Reader;
 use Fcno\LogReader\Tests\Stubs\LogGenerator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -26,10 +25,6 @@ beforeEach(function () {
                             ->append(now()->format('Y-m-d'))
                             ->finish('.log')
                             ->__toString();
-});
-
-test('o Facade retorna o objeto da classe corretamente', function () {
-    expect(RecordReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });
 
 test('lança exceção ao tentar ler registro de arquivo de log inexistente', function () {
@@ -57,20 +52,6 @@ test('lança exceção ao tentar ler registro de arquivo de log com nome fora do
     )->toThrow(NotDailyLogException::class);
 });
 
-test('obtém informações completas acerca dos registros de um determinado arquivo de log', function () {
-    LogGenerator::on($this->fs_name)
-                ->create(null)
-                ->count(files: 1, records: 1);
-
-    $response = RecordReader::from($this->fs_name)
-                            ->infoAbout($this->file_name)
-                            ->get();
-
-    expect($response->first())
-    ->toHaveKeys(['date', 'time', 'env', 'level', 'message', 'context', 'extra'])
-    ->get('date')->toBe(now()->format('Y-m-d'));
-});
-
 test('lança exceção ao tentar paginar com número da página ou com a quantidade de itens por página menor que 1', function () {
     LogGenerator::on($this->fs_name)
                 ->create(null)
@@ -88,19 +69,3 @@ test('lança exceção ao tentar paginar com número da página ou com a quantid
                                 ->paginate(page: 1, per_page: -1)
     )->toThrow(InvalidPaginationException::class);
 });
-
-test('obtém a quantidade de registros do arquivo de log de acordo com a paginação solicitada', function ($page, $expect) {
-    LogGenerator::on($this->fs_name)
-                ->create(null)
-                ->count(files: 1, records: 14);
-
-    $response = RecordReader::from($this->fs_name)
-                            ->infoAbout($this->file_name)
-                            ->paginate(page: $page, per_page: 5);
-
-    expect($response)->toHaveCount($expect);
-})->with([
-    [2, 5], // página 2 retorna 5 registros. Página completa
-    [3, 4], // página 3 retorna 4 registros. Página incompleta, chegou-se ao fim
-    [4, 0],  // página 3 retorna 0 registros. Paginação já chegou ao fim
-]);

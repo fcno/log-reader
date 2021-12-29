@@ -27,7 +27,7 @@ final class LogReader extends BaseReader implements IPageable, IDeletable, IDown
      */
     public function get(): Collection
     {
-        throw_if(! $this->file_system, FileSystemNotDefinedException::class);
+        throw_if(empty($this->file_system), FileSystemNotDefinedException::class);
 
         $collection = collect($this->file_system->files());
 
@@ -47,7 +47,7 @@ final class LogReader extends BaseReader implements IPageable, IDeletable, IDown
      */
     public function paginate(int $page, int $per_page): Collection
     {
-        throw_if(! $this->file_system,       FileSystemNotDefinedException::class);
+        throw_if(empty($this->file_system),  FileSystemNotDefinedException::class);
         throw_if($page < 1 || $per_page < 1, InvalidPaginationException::class);
 
         return $this->get()
@@ -62,7 +62,7 @@ final class LogReader extends BaseReader implements IPageable, IDeletable, IDown
      */
     public function delete(string $log_file): bool
     {
-        throw_if(! $this->file_system,                     FileSystemNotDefinedException::class);
+        throw_if(empty($this->file_system),                FileSystemNotDefinedException::class);
         throw_if(! preg_match(Regex::LOG_FILE, $log_file), NotDailyLogException::class);
         throw_if($this->file_system->missing($log_file),   FileNotFoundException::class);
 
@@ -74,7 +74,7 @@ final class LogReader extends BaseReader implements IPageable, IDeletable, IDown
      */
     public function download(string $log_file): \Symfony\Component\HttpFoundation\StreamedResponse
     {
-        throw_if(! $this->file_system,                     FileSystemNotDefinedException::class);
+        throw_if(empty($this->file_system),                FileSystemNotDefinedException::class);
         throw_if(! preg_match(Regex::LOG_FILE, $log_file), NotDailyLogException::class);
         throw_if($this->file_system->missing($log_file),   FileNotFoundException::class);
 

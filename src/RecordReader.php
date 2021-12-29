@@ -46,7 +46,7 @@ final class RecordReader extends BaseContentReader implements IPageable
      */
     public function get(): Collection
     {
-        throw_if(! $this->file_system, FileSystemNotDefinedException::class);
+        throw_if(empty($this->file_system), FileSystemNotDefinedException::class);
 
         return $this->readLog();
     }
@@ -58,7 +58,7 @@ final class RecordReader extends BaseContentReader implements IPageable
      */
     public function paginate(int $page, int $per_page): Collection
     {
-        throw_if(! $this->file_system,       FileSystemNotDefinedException::class);
+        throw_if(empty($this->file_system),  FileSystemNotDefinedException::class);
         throw_if($page < 1 || $per_page < 1, InvalidPaginationException::class);
 
         $this->page = $page;

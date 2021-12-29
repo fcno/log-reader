@@ -27,7 +27,7 @@ final class SummaryReader extends BaseContentReader
      */
     public function get(): Collection
     {
-        throw_if(! $this->file_system, FileSystemNotDefinedException::class);
+        throw_if(empty($this->file_system), FileSystemNotDefinedException::class);
 
         return $this->readyToGoSummary(
             $this->readLog()

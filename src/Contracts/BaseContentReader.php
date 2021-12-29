@@ -27,7 +27,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReadable
      */
     public function infoAbout(string $log_file): static
     {
-        throw_if(! $this->file_system,                     FileSystemNotDefinedException::class);
+        throw_if(empty($this->file_system),                FileSystemNotDefinedException::class);
         throw_if(! preg_match(Regex::LOG_FILE, $log_file), NotDailyLogException::class);
         throw_if($this->file_system->missing($log_file),   FileNotFoundException::class);
 

@@ -7,7 +7,7 @@ use \Symfony\Component\HttpFoundation\StreamedResponse;
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-interface IDownload extends IReader
+interface IDownloadable  extends IReader
 {
     /**
      * Faz o ***download*** do arquivo informado

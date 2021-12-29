@@ -5,10 +5,10 @@ namespace Fcno\LogReader\Contracts;
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-interface IContentReader extends IReader
+interface IDeletable extends IReader
 {
     /**
-     * Define o arquivo de log diário que será trabalhado.
+     * Deleta o arquivo informado
      *
      * @param string $log_file Ex.: laravel-2000-12-30.log
      *
@@ -18,5 +18,5 @@ interface IContentReader extends IReader
      *
      * @see https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels
      */
-    public function infoAbout(string $log_file): static;
+    public function delete(string $log_file): bool;
 }

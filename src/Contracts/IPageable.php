@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-interface IPaginate
+interface IPageable extends IReader
 {
     /**
      * Resultados paginados.

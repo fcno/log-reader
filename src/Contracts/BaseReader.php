@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-abstract class BaseReader implements IReader
+abstract class BaseReader implements IReader, IReadable
 {
     /**
      * @var \Illuminate\Contracts\Filesystem\Filesystem

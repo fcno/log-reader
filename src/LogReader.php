@@ -3,9 +3,9 @@
 namespace Fcno\LogReader;
 
 use Fcno\LogReader\Contracts\BaseReader;
-use Fcno\LogReader\Contracts\IDelete;
-use Fcno\LogReader\Contracts\IDownload;
-use Fcno\LogReader\Contracts\IPaginate;
+use Fcno\LogReader\Contracts\IDeletable;
+use Fcno\LogReader\Contracts\IDownloadable;
+use Fcno\LogReader\Contracts\IPageable;
 use Fcno\LogReader\Exceptions\FileNotFoundException;
 use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
@@ -18,7 +18,7 @@ use Illuminate\Support\Collection;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class LogReader extends BaseReader implements IPaginate, IDelete, IDownload
+final class LogReader extends BaseReader implements IPageable, IDeletable, IDownloadable
 {
     /**
      * {@inheritdoc}

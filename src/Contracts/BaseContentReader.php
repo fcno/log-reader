@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-abstract class BaseContentReader extends BaseReader implements IContentReader
+abstract class BaseContentReader extends BaseReader implements IContentReadable
 {
     /**
      * @var string

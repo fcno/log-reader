@@ -4,7 +4,7 @@ namespace Fcno\LogReader;
 
 use Bcremer\LineReader\LineReader;
 use Fcno\LogReader\Contracts\BaseContentReader;
-use Fcno\LogReader\Contracts\IPaginate;
+use Fcno\LogReader\Contracts\IPageable;
 use Fcno\LogReader\Exceptions\FileSystemNotDefinedException;
 use Fcno\LogReader\Exceptions\InvalidPaginationException;
 use Illuminate\Support\Collection;
@@ -23,7 +23,7 @@ use Illuminate\Support\Collection;
  *
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
-final class RecordReader extends BaseContentReader implements IPaginate
+final class RecordReader extends BaseContentReader implements IPageable
 {
     /**
      * @var int

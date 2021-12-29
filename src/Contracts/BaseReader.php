@@ -2,6 +2,7 @@
 
 namespace Fcno\LogReader\Contracts;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -15,7 +16,7 @@ abstract class BaseReader implements IReader, IReadable
      * ***File System*** onde estão armazenados os arquivos de log diário da
      * aplicação
      */
-    protected $file_system;
+    protected Filesystem $file_system;
 
     /**
      * {@inheritdoc}

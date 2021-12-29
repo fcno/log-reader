@@ -30,14 +30,14 @@ final class RecordReader extends BaseContentReader implements IPageable
      *
      * Página da paginação que será exibida quando o resultado for paginado
      */
-    private $page;
+    private int $page;
 
     /**
      * @var int
      *
      * Quantidada de registros por página que serão exibidos quando da paginação
      */
-    private $per_page;
+    private int $per_page;
 
     /**
      * {@inheritdoc}

@@ -20,7 +20,7 @@ abstract class BaseContentReader extends BaseReader implements IContentReadable
      *
      * Ex.: laravel-2020-12-30.log
      */
-    protected $log_file;
+    protected string $log_file;
 
     /**
      * {@inheritdoc}

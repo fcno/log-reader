@@ -122,7 +122,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\LogReader;
 
     /**
-     * @param string $disk nome do disco de log do ***File System***
+     * @param string $disk nome do disco de log do File System
      * 
      * @return static
      */
@@ -236,7 +236,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\RecordReader;
 
     /**
-     * @param string $disk nome do disco de log do ***File System***
+     * @param string $disk nome do disco de log do File System
      * 
      * @return static
      */
@@ -393,7 +393,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
     use Fcno\LogReader\Facades\SummaryReader;
 
     /**
-     * @param string $disk nome do disco de log do ***File System***
+     * @param string $disk nome do disco de log do File System
      * 
      * @return static
      */

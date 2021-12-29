@@ -14,19 +14,6 @@ use Fcno\LogReader\Facades\RecordReader;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-beforeEach(function () {
-    $this->fs_name = 'log-aplicacao';
-
-    $this->file_system = Storage::fake($this->fs_name, [
-        'driver' => 'local',
-    ]);
-
-    $this->file_name = Str::of('laravel-')
-                            ->append(now()->format('Y-m-d'))
-                            ->finish('.log')
-                            ->__toString();
-});
-
 test('lança exceção ao acionar métodos get, infoAbout e paginate sem previamente definir o File System', function () {
     expect(
         fn () => RecordReader::get($this->file_name)

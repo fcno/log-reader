@@ -12,19 +12,6 @@ use Fcno\LogReader\Tests\Stubs\LogGenerator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-beforeEach(function () {
-    $this->fs_name = 'log-aplicacao';
-
-    $this->file_system = Storage::fake($this->fs_name, [
-        'driver' => 'local',
-    ]);
-
-    $this->file_name = Str::of('laravel-')
-                            ->append(now()->format('Y-m-d'))
-                            ->finish('.log')
-                            ->__toString();
-});
-
 test('o Facade retorna o objeto da classe corretamente', function () {
     expect(RecordReader::from($this->fs_name))->toBeInstanceOf(Reader::class);
 });

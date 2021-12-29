@@ -74,7 +74,7 @@ final class RecordReader extends BaseContentReader implements IPageable
     {
         $line_generator = LineReader::readLines($this->getFullPath());
 
-        return ($this->page && $this->per_page)
+        return (isset($this->page) && isset($this->per_page))
         ? new \LimitIterator(
             iterator: $line_generator,
             offset: ($this->page - 1) * $this->per_page,

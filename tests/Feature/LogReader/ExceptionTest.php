@@ -27,7 +27,7 @@ beforeEach(function () {
                             ->__toString();
 });
 
-test('lança exceção ao acionar métodos detele, download, get e paginate sem previamente definir o File System', function () {
+test('lança exceção ao acionar métodos delete, download, get e paginate sem previamente definir o File System', function () {
     expect(
         fn () => LogReader::delete($this->file_name)
     )->toThrow(FileSystemNotDefinedException::class);

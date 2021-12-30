@@ -21,7 +21,7 @@ RecordReader::from(disk: 'file_system_name')
 
 ---
 
-[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Suporte e Atualizações](#suporte-e-atualizações) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Créditos](#créditos) 🔹 [Agradecimentos](#agradecimentos) 🔹 [Licença](#licença)
+[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Suporte e Atualizações](#suporte-e-atualizações) 🔹 [Créditos](#créditos) 🔹 [Agradecimentos](#agradecimentos) 🔹 [Licença](#licença)
 
 ---
 
@@ -510,19 +510,19 @@ Por favor, veja [CONTRIBUTING](.github/CONTRIBUTING.md) para maiores detalhes.
 
 &nbsp;
 
+## Vulnerabilidades e Segurança
+
+Por favor, veja na [política de segurança](../../security/policy) como reportar vulnerabilidades ou falha de segurança.
+
+&nbsp;
+
 ## Suporte e Atualizações
 
 A versão mais recente receberá suporte e atualizações sempre que houver necessidade. As demais receberão apenas atualizações para corrigir [vulnerabilidades de segurança](#vulnerabilidades-e-segurança) por até 06 meses após ela ter sido substituída por uma nova versão.
 
-🐛 Encontrou um bug?!?! Abra um ***issue***.
+🐛 Encontrou um bug?!?! Abra um ***[issue](../../issues/new)***.
 
-✨ Alguma ideia nova?!?! Inicie uma discussão.
-
-&nbsp;
-
-## Vulnerabilidades e Segurança
-
-Por favor, veja na [política de segurança](../../security/policy) como reportar vulnerabilidades ou falha de segurança.
+✨ Alguma ideia nova?!?! Inicie [uma discussão](../../discussions/new?category=ideas).
 
 &nbsp;
 

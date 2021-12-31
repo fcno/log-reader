@@ -1,4 +1,4 @@
-name: normalize composer.json
+name: Normalize composer.json
 
 on:
   push:
@@ -18,6 +18,6 @@ jobs:
           composer normalize
 
       - name: Auto Commit
-        uses: stefanzweifel/git-auto-commit-action@v4.12.0
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: normalize composer.json
+          commit_message: Normalize composer.json

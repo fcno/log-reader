@@ -1,4 +1,4 @@
-name: run-tests
+name: Unit and Feature tests
 
 on:
   push:

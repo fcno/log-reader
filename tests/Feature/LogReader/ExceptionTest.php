@@ -22,7 +22,7 @@ test('lança exceção ao acionar métodos delete, download, get e paginate sem 
     )->toThrow(FileSystemNotDefinedException::class);
 
     expect(
-        fn () => LogReader::get($this->file_name)
+        fn () => LogReader::get()
     )->toThrow(FileSystemNotDefinedException::class);
 
     expect(

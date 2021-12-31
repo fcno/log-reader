@@ -14,7 +14,7 @@ use Fcno\LogReader\Facades\RecordReader;
 
 test('lança exceção ao acionar métodos get, infoAbout e paginate sem previamente definir o File System', function () {
     expect(
-        fn () => RecordReader::get($this->file_name)
+        fn () => RecordReader::get()
     )->toThrow(FileSystemNotDefinedException::class);
 
     expect(

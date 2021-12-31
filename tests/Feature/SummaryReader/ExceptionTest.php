@@ -13,7 +13,7 @@ use Fcno\LogReader\Facades\SummaryReader;
 
 test('lança exceção ao acionar métodos get e infoAbout sem previamente definir o File System', function () {
     expect(
-        fn () => SummaryReader::get($this->file_name)
+        fn () => SummaryReader::get()
     )->toThrow(FileSystemNotDefinedException::class);
 
     expect(

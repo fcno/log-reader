@@ -40,7 +40,7 @@ Before submitting a pull request:
 
 If the project maintainer has any additional requirements, you will find them listed here.
 
-- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](https://pear.php.net/package/PHP_CodeSniffer).
+- **[Symfony Coding Standard](https://symfony.com/doc/current/contributing/code/standards.html)** - We use this package to apply the conventions [PHP Coding Standards Fixer (PHP CS Fixer)](https://github.com/FriendsOfPHP/PHP-CS-Fixer).
 
 - **Add tests!** - Your patch won't be accepted if it doesn't have tests.
 

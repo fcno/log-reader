@@ -212,7 +212,7 @@ final class LogRecordTemplate
      * Note que a string que será alvo da subtisuição é uma propriedade desta
      * classe, portanto, ela não é enviada por parâmetro.
      *
-     * @param string $patten
+     * @param string $pattern
      * @param string $replacement
      */
     private function replace(string $pattern, ?string $replacement): void

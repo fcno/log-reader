@@ -40,7 +40,7 @@ Before submitting a pull request:
 
 If the project maintainer has any additional requirements, you will find them listed here.
 
-- **[Symfony Coding Standard](https://symfony.com/doc/current/contributing/code/standards.html)** - We use this package to apply the conventions [PHP Coding Standards Fixer (PHP CS Fixer)](https://github.com/FriendsOfPHP/PHP-CS-Fixer).
+- **[Symfony Coding Standard](https://symfony.com/doc/current/contributing/code/standards.html)** - We use [PHP Coding Standards Fixer (PHP CS Fixer)](https://github.com/FriendsOfPHP/PHP-CS-Fixer) package to apply the conventions.
 
   - Specific patterns beyond Symfony
 

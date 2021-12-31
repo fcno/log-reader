@@ -40,7 +40,7 @@ Before submitting a pull request:
 
 If the project maintainer has any additional requirements, you will find them listed here.
 
-- **[Symfony Coding Standard](https://symfony.com/doc/current/contributing/code/standards.html)** - We use this package to apply the conventions [PHP Coding Standards Fixer (PHP CS Fixer)](https://github.com/FriendsOfPHP/PHP-CS-Fixer).
+- **[Symfony Coding Standard](https://symfony.com/doc/current/contributing/code/standards.html)** - We use the package [PHP Coding Standards Fixer (PHP CS Fixer)](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to apply the conventions.
 
   - Specific patterns beyond Symfony
 
@@ -63,7 +63,7 @@ If the project maintainer has any additional requirements, you will find them li
 
 - **Add tests!** - Your patch won't be accepted if it doesn't have tests.
 
-- **Document any change in behaviour** - Make sure the [README.md](README.md) and any other relevant documentation are kept up-to-date.
+- **Document any change in behaviour** - Make sure the [README.md](../README.md) and any other relevant documentation are kept up-to-date.
 
 - **Consider our release cycle** - We try to follow [SemVer v2.0.0](https://semver.org/). Randomly breaking public APIs is not an option.
 

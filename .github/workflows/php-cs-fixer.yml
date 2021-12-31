@@ -1,4 +1,4 @@
-name: Check & fix styling
+name: PHP Coding Standards Fixer
 
 on: [push]
 
@@ -18,6 +18,6 @@ jobs:
           args: --config=.php_cs.dist.php --allow-risky=yes
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4.12.0
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Fix styling
+          commit_message: CS Fix styling

@@ -556,7 +556,7 @@ composer test-coverage
 
 ## Changelog
 
-Please see the [CHANGELOG](../CHANGELOG.md) for more information on what has changed in each release.
+Please see the [CHANGELOG](CHANGELOG.md) for more information on what has changed in each release.
 
 ⬆️ [Back](#table-of-contents)
 
@@ -564,7 +564,7 @@ Please see the [CHANGELOG](../CHANGELOG.md) for more information on what has cha
 
 ## Contribution
 
-Please see [CONTRIBUTING](../.github/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ⬆️ [Back](#table-of-contents)
 
@@ -660,6 +660,6 @@ The latest version will be supported and updated as needed. The others will only
 
 ## License
 
-The MIT License (MIT). Please see **[License File](../LICENSE.md)** for more information.
+The MIT License (MIT). Please see **[License File](LICENSE.md)** for more information.
 
 ⬆️ [Back](#table-of-contents)

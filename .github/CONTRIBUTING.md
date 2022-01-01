@@ -61,9 +61,11 @@ If the project maintainer has any additional requirements, you will find them li
   ],
   ```
 
+- **[PHPStan - PHP Static Analysis Tool](https://phpstan.org/user-guide/getting-started)** - We use the package [phpstan/phpstan](https://github.com/phpstan/phpstan) to php static code analysis.
+
 - **Add tests!** - Your patch won't be accepted if it doesn't have tests.
 
-- **Document any change in behaviour** - Make sure the [README.md](../README.md) and any other relevant documentation are kept up-to-date.
+- **Document any change in behaviour** - Make sure the [README.md](../docs/README.md) and any other relevant documentation are kept up-to-date.
 
 - **Consider our release cycle** - We try to follow [SemVer v2.0.0](https://semver.org/). Randomly breaking public APIs is not an option.
 

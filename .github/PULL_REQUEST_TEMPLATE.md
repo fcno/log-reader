@@ -8,9 +8,9 @@ Describe the big picture of your changes here to communicate to the maintainers 
 
 2. What is the new behavior? (if appropriate)
 
-    - a
+    - Something
 
-    - b
+    - Another
 
 ## Pull Request Types (mandatory)
 

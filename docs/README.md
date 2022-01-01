@@ -13,7 +13,7 @@
 
 Leitor de arquivos de log diários para aplicações **[Laravel](https://laravel.com/docs)**.
 
-Além da função primária, este *package* oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha de maneira transparente, possibilitando trabalhos com arquivos grandes sem carregá-los inteiramente em memória.
+Além da função primária, este package oferece paginação do conteúdo e dos arquivos de log, bem como leitura linha a linha de maneira transparente, possibilitando trabalhos com arquivos grandes sem carregá-los inteiramente em memória.
 
 ```php
 use Fcno\LogReader\Facades\RecordReader;
@@ -63,9 +63,9 @@ RecordReader::from(disk: 'file_system_name')
 
 ## Notas
 
-⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/docs)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
+⭐ Este package é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/docs)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
 
-⭐ Este *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada, dada as preferências pessoais de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
+⭐ Este package não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada, dada as preferências pessoais de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
 
 ⬆️ [Voltar](#conteúdo)
 
@@ -115,7 +115,7 @@ Para uma checagem completa dos pré-requisitos:
 
     &nbsp;
 
-2. Definir a variável *env* **LOG_CHANNEL** para usar o *channel* criado
+2. Definir a variável env **LOG_CHANNEL** para usar o channel criado
 
     ```php
     // .env
@@ -140,7 +140,7 @@ Para uma checagem completa dos pré-requisitos:
 
     &nbsp;
 
-4. Instalar o *package* via **[composer](https://getcomposer.org/)**:
+4. Instalar o package via **[composer](https://getcomposer.org/)**:
 
     ```bash
     composer require fcno/log-reader
@@ -152,7 +152,7 @@ Para uma checagem completa dos pré-requisitos:
 
 ## Como funciona
 
-Este *package* expôe três maneiras de interagir com os arquivos de log, cada uma por meio de uma **[Facade](https://laravel.com/docs/8.x/facades)** com objetivos específicos:
+Este package expôe três maneiras de interagir com os arquivos de log, cada uma por meio de uma **[Facade](https://laravel.com/docs/8.x/facades)** com objetivos específicos:
 
 &nbsp;
 
@@ -162,7 +162,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ **from**
 
-    Assinatura e uso: informa ao *package* em que disco a aplicação armazena os arquivos de log
+    Assinatura e uso: informa ao package em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\LogReader;
@@ -270,15 +270,15 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
 2. ### **Fcno\LogReader\Facades\RecordReader**
 
-    Responsável por ler o conteúdo (registros / *records*) do arquivo de log.
+    Responsável por ler o conteúdo (registros / records) do arquivo de log.
 
-    O registro (*record*) é o nome dado ao conjunto de informações que foram adicionadas ao log para registrar dados sobre um evento de interesse.
+    O registro (record) é o nome dado ao conjunto de informações que foram adicionadas ao log para registrar dados sobre um evento de interesse.
 
     Um arquivo de log pode conter um ou mais registros e, dada a sua infinidade, podem ser paginados a critério do desenvolvedor da aplicação.
 
     ✏️ **from**
 
-    Assinatura e uso: informa ao *package* em que disco a aplicação armazena os arquivos de log
+    Assinatura e uso: informa ao package em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\RecordReader;
@@ -299,7 +299,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ **infoAbout**
 
-    Assinatura e uso: informa ao *package* qual arquivo de log deve ser trabalhado
+    Assinatura e uso: informa ao package qual arquivo de log deve ser trabalhado
 
     ```php
     use Fcno\LogReader\Facades\RecordReader;
@@ -395,7 +395,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     > Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso os registros já tenham chegado ao seu fim.
     >
-    > Os registros são exibidos na ordem em que estão gravados no arquivo. Não existe ordenação alguma feita por este *package*.
+    > Os registros são exibidos na ordem em que estão gravados no arquivo. Não existe ordenação alguma feita por este package.
 
     &nbsp;
 
@@ -429,15 +429,15 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
 3. ### **Fcno\LogReader\Facades\SummaryReader**
 
-    Responsável por ler o conteúdo (registros / *records*) do arquivo de log e gerar um sumário.
+    Responsável por ler o conteúdo (registros / records) do arquivo de log e gerar um sumário.
 
-    O sumário (*summary*) é o nome dado a contabilização dos registros (*records*) por nível, isto é, a quantidade de registros do tipo **debug**, **info**, **notice** etc.
+    O sumário (summary) é o nome dado a contabilização dos registros (records) por nível, isto é, a quantidade de registros do tipo **debug**, **info**, **notice** etc.
 
     &nbsp;
 
     ✏️ **from**
 
-    Assinatura: informa ao *package* em que disco a aplicação armazena os arquivos de log
+    Assinatura: informa ao package em que disco a aplicação armazena os arquivos de log
 
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
@@ -458,7 +458,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     ✏️ **infoAbout**
 
-    Assinatura e uso: informa ao *package* qual arquivo de log deve ser trabalhado
+    Assinatura e uso: informa ao package qual arquivo de log deve ser trabalhado
 
     ```php
     use Fcno\LogReader\Facades\SummaryReader;
@@ -516,11 +516,11 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     &nbsp;
 
-    > Este *package* não possui cravado em seu código a necessidade de os níveis de log da aplicação serem aderentes à **[PSR-3](https://www.php-fig.org/psr/psr-3/)**. Contudo, é considerado boa prática implementar esse tipo de padrão na aplicação.
+    > Este package não possui cravado em seu código a necessidade de os níveis de log da aplicação serem aderentes à **[PSR-3](https://www.php-fig.org/psr/psr-3/)**. Contudo, é considerado boa prática implementar esse tipo de padrão na aplicação.
     >
     > Níveis que não possuírem registros, não serão retornados (contabilizados) na Coleção.
     >
-    > A data, no padrão **yyyy-mm-dd**, retornada é a presente no primeiro registro. Parte-se do princípio que todos os registros do arquivo foram gerados no mesmo dia, visto que este *package* destina-se aos logs diários.
+    > A data, no padrão **yyyy-mm-dd**, retornada é a presente no primeiro registro. Parte-se do princípio que todos os registros do arquivo foram gerados no mesmo dia, visto que este package destina-se aos logs diários.
 
     &nbsp;
 
@@ -602,9 +602,9 @@ A versão mais recente receberá suporte e atualizações sempre que houver nece
 
 ## Agradecimentos
 
-👋 Agradeço às pessoas e organizações abaixo por terem doado seu tempo na construção de projetos open-source que foram usados neste **Package**.
+👋 Agradeço às pessoas e organizações abaixo por terem doado seu tempo na construção de projetos open-source que foram usados neste package.
 
-- ❤️ [Laravel](https://github.com/laravel) pelos **packages**:
+- ❤️ [Laravel](https://github.com/laravel) pelos packages:
 
   - [illuminate/collections](https://github.com/illuminate/collections)
 
@@ -614,7 +614,7 @@ A versão mais recente receberá suporte e atualizações sempre que houver nece
 
   - [illuminate/support](https://github.com/illuminate/support)
 
-- ❤️ [Spatie](https://github.com/spatie) pelos **packages**:
+- ❤️ [Spatie](https://github.com/spatie) pelos packages:
 
   - [spatie/package-skeleton-laravel](https://github.com/spatie/package-skeleton-laravel)
 
@@ -622,29 +622,29 @@ A versão mais recente receberá suporte e atualizações sempre que houver nece
 
   - [spatie/laravel-ray](https://github.com/spatie/laravel-ray)
 
-- ❤️ [Orchestra Platform](https://github.com/orchestral) pelo **package** [orchestral/testbench](https://github.com/orchestral/testbench)
+- ❤️ [Orchestra Platform](https://github.com/orchestral) pelo package [orchestral/testbench](https://github.com/orchestral/testbench)
 
-- ❤️ [Nuno Maduro](https://github.com/FakerPHP) pelos **packages**:
+- ❤️ [Nuno Maduro](https://github.com/FakerPHP) pelos packages:
 
   - [nunomaduro/collision](https://github.com/nunomaduro/collision)
 
   - [nunomaduro/larastan](https://github.com/nunomaduro/larastan)
 
-- ❤️ [PEST](https://github.com/pestphp) pelos **packages**:
+- ❤️ [PEST](https://github.com/pestphp) pelos packages:
 
   - [pestphp/pest](https://github.com/pestphp/pest)
 
   - [pestphp/pest-plugin-laravel](https://github.com/pestphp/pest-plugin-laravel)
 
-- ❤️ [Benjamin Cremer](https://github.com/bcremer) pelo **package** [bcremer/LineReader](https://github.com/bcremer/LineReader)
+- ❤️ [Benjamin Cremer](https://github.com/bcremer) pelo package [bcremer/LineReader](https://github.com/bcremer/LineReader)
 
-- ❤️ [Jordi Boggiano](https://github.com/Seldaek) pelo **package** [Seldaek/monolog](https://github.com/Seldaek/monolog)
+- ❤️ [Jordi Boggiano](https://github.com/Seldaek) pelo package [Seldaek/monolog](https://github.com/Seldaek/monolog)
 
-- ❤️ [Sebastian Bergmann](https://github.com/sebastianbergmann) pelo **package** [sebastianbergmann/phpunit](https://github.com/sebastianbergmann/phpunit)
+- ❤️ [Sebastian Bergmann](https://github.com/sebastianbergmann) pelo package [sebastianbergmann/phpunit](https://github.com/sebastianbergmann/phpunit)
 
-- ❤️ [FakerPHP](https://github.com/FakerPHP) pelo **package** [FakerPHP/Faker](https://github.com/FakerPHP/Faker)
+- ❤️ [FakerPHP](https://github.com/FakerPHP) pelo package [FakerPHP/Faker](https://github.com/FakerPHP/Faker)
 
-- ❤️ [PHPStan](https://github.com/phpstan) pelos **packages**:
+- ❤️ [PHPStan](https://github.com/phpstan) pelos packages:
 
   - [phpstan/phpstan](https://github.com/phpstan/phpstan)
 

@@ -7,7 +7,7 @@
 
 ---
 
-[English](/../../docs/README-en.md) 🔹 [Português](../../#readme)
+[English](README-en.md) 🔹 [Português](README.md)
 
 ---
 
@@ -516,11 +516,11 @@ This package exposes three ways to interact with log files, each through a **[Fa
 
     &nbsp;
 
-    > This *package* does not have embedded in its code the need for the application's log levels to adhere to **[PSR-3](https://www.php-fig.org/psr/psr-3/)* *. However, it is considered good practice to implement this type of pattern in the application.
+    > This package does not have embedded in its code the need for the application's log levels to adhere to **[PSR-3](https://www.php-fig.org/psr/psr-3/)**. However, it is considered good practice to implement this type of pattern in the application.
     >
     > Levels that do not have records will not be returned (counted) in the Collection.
     >
-    > The date, in the pattern **yyyy-mm-dd**, returned is the one present in the first record. It is assumed that all logs in the file were generated on the same day as this *package* is for daily logs.
+    > The date, in the pattern **yyyy-mm-dd**, returned is the one present in the first record. It is assumed that all logs in the file were generated on the same day as this package is for daily logs.
 
     &nbsp;
 
@@ -556,7 +556,7 @@ composer test-coverage
 
 ## Changelog
 
-Please see the [CHANGELOG](/../../CHANGELOG.md) for more information on what has changed in each release.
+Please see the [CHANGELOG](../CHANGELOG.md) for more information on what has changed in each release.
 
 ⬆️ [Back](#table-of-contents)
 
@@ -564,7 +564,7 @@ Please see the [CHANGELOG](/../../CHANGELOG.md) for more information on what has
 
 ## Contribution
 
-Please see [CONTRIBUTING](/../../.github/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](../.github/CONTRIBUTING.md) for details.
 
 ⬆️ [Back](#table-of-contents)
 
@@ -582,9 +582,9 @@ Please see our [security policy](/../../security/policy) on how to report securi
 
 The latest version will be supported and updated as needed. The others will only receive updates to fix [security vulnerabilities](#security-vulnerabilities) for up to 06 months after it has been replaced by a new version.
 
-🐛 Found a bug?!?! Open a **[issue](/../../issues/new)**.
+🐛 Found a bug?!?! Open a **[issue](../../issues/new)**.
 
-✨ Any new ideas?!?! Start [a discussion](/../../discussions/new?category=ideas).
+✨ Any new ideas?!?! Start [a discussion](../../discussions/new?category=ideas).
 
 ⬆️ [Back](#table-of-contents)
 
@@ -594,7 +594,7 @@ The latest version will be supported and updated as needed. The others will only
 
 - [Fábio Cassiano](https://github.com/fcno)
 
-- [All Contributors](/../../contributors)
+- [All Contributors](../../contributors)
 
 ⬆️ [Back](#table-of-contents)
 
@@ -602,7 +602,7 @@ The latest version will be supported and updated as needed. The others will only
 
 ## Thanks
 
-👋 Thanks to the people and organizations below for taking the time to build open-source projects that were used in this **Package**.
+👋 Thanks to the people and organizations below for taking the time to build open-source projects that were used in this **package**.
 
 - ❤️ [Laravel](https://github.com/laravel) for the  **packages**:
 
@@ -660,6 +660,6 @@ The latest version will be supported and updated as needed. The others will only
 
 ## License
 
-The MIT License (MIT). Please see **[License File](/../../LICENSE.md)** for more information.
+The MIT License (MIT). Please see **[License File](../LICENSE.md)** for more information.
 
 ⬆️ [Back](#table-of-contents)

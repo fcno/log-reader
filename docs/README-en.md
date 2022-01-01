@@ -7,7 +7,7 @@
 
 ---
 
-[English](/docs/README-en.md) 🔹 [Português](/)
+[English](/../../docs/README-en.md) 🔹 [Português](../../#readme)
 
 ---
 
@@ -84,7 +84,7 @@ For a full requirements check:
     composer check-platform-reqs
     ```
 
-2. Via [GitHub Dependencies](../../network/dependencies)
+2. Via [GitHub Dependencies](/../../network/dependencies)
 
 ⬆️ [Back](#table-of-contents)
 
@@ -556,7 +556,7 @@ composer test-coverage
 
 ## Changelog
 
-Please see the [CHANGELOG](CHANGELOG.md) for more information on what has changed in each release.
+Please see the [CHANGELOG](/../../CHANGELOG.md) for more information on what has changed in each release.
 
 ⬆️ [Back](#table-of-contents)
 
@@ -564,7 +564,7 @@ Please see the [CHANGELOG](CHANGELOG.md) for more information on what has change
 
 ## Contribution
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](/../../.github/CONTRIBUTING.md) for details.
 
 ⬆️ [Back](#table-of-contents)
 
@@ -572,7 +572,7 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-Please see our [security policy](../../security/policy) on how to report security vulnerabilities.
+Please see our [security policy](/../../security/policy) on how to report security vulnerabilities.
 
 ⬆️ [Back](#table-of-contents)
 
@@ -582,9 +582,9 @@ Please see our [security policy](../../security/policy) on how to report securit
 
 The latest version will be supported and updated as needed. The others will only receive updates to fix [security vulnerabilities](#security-vulnerabilities) for up to 06 months after it has been replaced by a new version.
 
-🐛 Found a bug?!?! Open a **[issue](../../issues/new)**.
+🐛 Found a bug?!?! Open a **[issue](/../../issues/new)**.
 
-✨ Any new ideas?!?! Start [a discussion](../../discussions/new?category=ideas).
+✨ Any new ideas?!?! Start [a discussion](/../../discussions/new?category=ideas).
 
 ⬆️ [Back](#table-of-contents)
 
@@ -594,7 +594,7 @@ The latest version will be supported and updated as needed. The others will only
 
 - [Fábio Cassiano](https://github.com/fcno)
 
-- [All Contributors](../../contributors)
+- [All Contributors](/../../contributors)
 
 ⬆️ [Back](#table-of-contents)
 
@@ -660,6 +660,6 @@ The latest version will be supported and updated as needed. The others will only
 
 ## License
 
-The MIT License (MIT). Please see **[License File](LICENSE.md)** for more information.
+The MIT License (MIT). Please see **[License File](/../../LICENSE.md)** for more information.
 
 ⬆️ [Back](#table-of-contents)

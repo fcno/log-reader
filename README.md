@@ -21,7 +21,7 @@ RecordReader::from(disk: 'file_system_name')
 
 ---
 
-[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Uso](#uso) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Vulnerabilidades e Segurança](#vulnerabilidades-e-segurança) 🔹 [Suporte e Atualizações](#suporte-e-atualizações) 🔹 [Créditos](#créditos) 🔹 [Agradecimentos](#agradecimentos) 🔹 [Licença](#licença)
+[Notas](#notas) 🔹 [Pré-requisitos](#pré-requisitos) 🔹 [Instalação](#instalação) 🔹 [Como funciona](#como-funciona) ([LogReader](#fcnologReaderfacadeslogreader) 🔸 [RecordReader](#fcnologReaderfacadesrecordreader) 🔸 [SummaryReader](#fcnologReaderfacadessummaryreader)) 🔹 [Testes e Integração Contínua](#testes-e-integração-contínua) 🔹 [Changelog](#changelog) 🔹 [Contribuição](#contribuição) 🔹 [Vulnerabilidades de Segurança](#vulnerabilidades-de-segurança) 🔹 [Suporte e Atualizações](#suporte-e-atualizações) 🔹 [Créditos](#créditos) 🔹 [Agradecimentos](#agradecimentos) 🔹 [Licença](#licença)
 
 ---
 
@@ -29,7 +29,7 @@ RecordReader::from(disk: 'file_system_name')
 
 ⭐ Este *package* é destinado a leitura de arquivos de **[log diários](https://laravel.com/docs/8.x/logging#configuring-the-single-and-daily-channels)** gerados por aplicações **[Laravel](https://laravel.com/docs)**. Utilizá-lo para leitura de outros tipos pode (e irá) trazer resultados equivocados.
 
-⭐ Este *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada dada as preferências pessoais de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
+⭐ Este *package* não provê **[views](https://laravel.com/docs/8.x/views)**, visto que se trata de funcionalidade que seria, na prática, pouco aproveitada, dada as preferências pessoais de cada um. Portanto, a implementação das views fica a cargo do desenvolvedor da aplicação.
 
 &nbsp;
 
@@ -37,14 +37,14 @@ RecordReader::from(disk: 'file_system_name')
 
 PHP ^8.0
 
-Para uma checagem completa dos pré-requisitos:[checagem completa dos pré-requisitos](https://getcomposer.org/doc/03-cli.md#check-platform-reqs):
+Para uma checagem completa dos pré-requisitos: [check-platform-reqs](https://getcomposer.org/doc/03-cli.md#check-platform-reqs):
 
 1. Via [Composer](https://getcomposer.org/doc/03-cli.md#check-platform-reqs)
 
-```bash
-composer require fcno/log-reader
-composer check-platform-reqs
-```
+    ```bash
+    composer require fcno/log-reader
+    composer check-platform-reqs
+    ```
 
 2. Via [GitHub Dependencies](../../network/dependencies)
 
@@ -52,7 +52,7 @@ composer check-platform-reqs
 
 ## Instalação
 
-1. Configurar o *custom channel* para definir os campos e os delimitadores dos registros do arquivo de log
+1. Configurar um ***custom channel*** para definir os campos e os delimitadores dos registros de um arquivo de log diário
 
     ```php
     // config/logging.php
@@ -75,7 +75,7 @@ composer check-platform-reqs
 
     &nbsp;
 
-2. Definir a variável **LOG_CHANNEL** para usar o *channel* criado
+2. Definir a variável *env* **LOG_CHANNEL** para usar o *channel* criado
 
     ```php
     // .env
@@ -108,7 +108,7 @@ composer check-platform-reqs
 
 &nbsp;
 
-## Uso
+## Como funciona
 
 Este *package* expôe três maneiras de interagir com os arquivos de log, cada uma por meio de uma **[Facade](https://laravel.com/docs/8.x/facades)** com objetivos específicos:
 
@@ -202,7 +202,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     Retorno: **[Collection](https://laravel.com/docs/8.x/collections)** paginada com dados no mesmo formato do método ***get***
 
-    > Retornará uma Coleção vazia ou com quantidade de itens menor que a esperada, caso a listagem dos arquivos já tenha chegado ao seu fim.
+    > Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso a listagem dos arquivos já tenha chegado ao seu fim.
 
     &nbsp;
 
@@ -349,7 +349,7 @@ Este *package* expôe três maneiras de interagir com os arquivos de log, cada u
 
     Retorno: **[Collection](https://laravel.com/docs/8.x/collections)**  paginada com dados no mesmo formato do método ***get***
 
-    >Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso os registros já tenham chegado ao seu fim.
+    > Retornará uma **[Collection](https://laravel.com/docs/8.x/collections)** vazia ou com quantidade de itens menor que a esperada, caso os registros já tenham chegado ao seu fim.
     >
     > Os registros são exibidos na ordem em que estão gravados no arquivo. Não existe ordenação alguma feita por este *package*.
 
@@ -510,7 +510,7 @@ Por favor, veja [CONTRIBUTING](.github/CONTRIBUTING.md) para maiores detalhes.
 
 &nbsp;
 
-## Vulnerabilidades e Segurança
+## Vulnerabilidades de Segurança
 
 Por favor, veja na [política de segurança](../../security/policy) como reportar vulnerabilidades ou falha de segurança.
 
@@ -518,7 +518,7 @@ Por favor, veja na [política de segurança](../../security/policy) como reporta
 
 ## Suporte e Atualizações
 
-A versão mais recente receberá suporte e atualizações sempre que houver necessidade. As demais receberão apenas atualizações para corrigir [vulnerabilidades de segurança](#vulnerabilidades-e-segurança) por até 06 meses após ela ter sido substituída por uma nova versão.
+A versão mais recente receberá suporte e atualizações sempre que houver necessidade. As demais receberão apenas atualizações para corrigir [vulnerabilidades de segurança](#vulnerabilidades-de-segurança) por até 06 meses após ela ter sido substituída por uma nova versão.
 
 🐛 Encontrou um bug?!?! Abra um ***[issue](../../issues/new)***.
 

@@ -572,7 +572,7 @@ Por favor, veja [CONTRIBUTING](../.github/CONTRIBUTING.md) para maiores detalhes
 
 ## Vulnerabilidades de Segurança
 
-Por favor, veja na [política de segurança](../../security/policy) como reportar vulnerabilidades ou falha de segurança.
+Por favor, veja na [política de segurança](/../../security/policy) como reportar vulnerabilidades ou falha de segurança.
 
 ⬆️ [Voltar](#conteúdo)
 
@@ -582,9 +582,9 @@ Por favor, veja na [política de segurança](../../security/policy) como reporta
 
 A versão mais recente receberá suporte e atualizações sempre que houver necessidade. As demais receberão apenas atualizações para corrigir [vulnerabilidades de segurança](#vulnerabilidades-de-segurança) por até 06 meses após ela ter sido substituída por uma nova versão.
 
-🐛 Encontrou um bug?!?! Abra um **[issue](../../issues/new)**.
+🐛 Encontrou um bug?!?! Abra um **[issue](/../../issues/new)**.
 
-✨ Alguma ideia nova?!?! Inicie [uma discussão](../../discussions/new?category=ideas).
+✨ Alguma ideia nova?!?! Inicie [uma discussão](/../../discussions/new?category=ideas).
 
 ⬆️ [Voltar](#conteúdo)
 
@@ -594,7 +594,7 @@ A versão mais recente receberá suporte e atualizações sempre que houver nece
 
 - [Fábio Cassiano](https://github.com/fcno)
 
-- [All Contributors](../../contributors)
+- [All Contributors](/../../contributors)
 
 ⬆️ [Voltar](#conteúdo)
 

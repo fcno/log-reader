@@ -582,9 +582,9 @@ Please see our [security policy](/../../security/policy) on how to report securi
 
 The latest version will be supported and updated as needed. The others will only receive updates to fix [security vulnerabilities](#security-vulnerabilities) for up to 06 months after it has been replaced by a new version.
 
-🐛 Found a bug?!?! Open a **[issue](../../issues/new)**.
+🐛 Found a bug?!?! Open a **[issue](/../../issues/new)**.
 
-✨ Any new ideas?!?! Start [a discussion](../../discussions/new?category=ideas).
+✨ Any new ideas?!?! Start [a discussion](/../../discussions/new?category=ideas).
 
 ⬆️ [Back](#table-of-contents)
 
@@ -594,7 +594,7 @@ The latest version will be supported and updated as needed. The others will only
 
 - [Fábio Cassiano](https://github.com/fcno)
 
-- [All Contributors](../../contributors)
+- [All Contributors](/../../contributors)
 
 ⬆️ [Back](#table-of-contents)
 

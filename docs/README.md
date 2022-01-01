@@ -7,7 +7,7 @@
 
 ---
 
-[English](/docs/README-en.md) 🔹 [Português](/)
+[English](README-en.md) 🔹 [Português](README.md)
 
 ---
 
@@ -556,7 +556,7 @@ composer test-coverage
 
 ## Changelog
 
-Por favor, veja o [CHANGELOG](CHANGELOG.md) para maiores informações sobre o que mudou em cada versão.
+Por favor, veja o [CHANGELOG](../CHANGELOG.md) para maiores informações sobre o que mudou em cada versão.
 
 ⬆️ [Voltar](#conteúdo)
 
@@ -564,7 +564,7 @@ Por favor, veja o [CHANGELOG](CHANGELOG.md) para maiores informações sobre o q
 
 ## Contribuição
 
-Por favor, veja [CONTRIBUTING](.github/CONTRIBUTING.md) para maiores detalhes.
+Por favor, veja [CONTRIBUTING](../.github/CONTRIBUTING.md) para maiores detalhes.
 
 ⬆️ [Voltar](#conteúdo)
 
@@ -660,6 +660,6 @@ A versão mais recente receberá suporte e atualizações sempre que houver nece
 
 ## Licença
 
-The MIT License (MIT). Por favor, veja o **[License File](LICENSE.md)** para maiores informações.
+The MIT License (MIT). Por favor, veja o **[License File](../LICENSE.md)** para maiores informações.
 
 ⬆️ [Voltar](#conteúdo)

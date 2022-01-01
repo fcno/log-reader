@@ -49,15 +49,17 @@ RecordReader::from(disk: 'file_system_name')
 
 7. [Contribuição](#contribuição)
 
-8. [Vulnerabilidades de Segurança](#vulnerabilidades-de-segurança)
+8. [Código de Conduta](#código-de-conduta)
 
-9. [Suporte e Atualizações](#suporte-e-atualizações)
+9. [Vulnerabilidades de Segurança](#vulnerabilidades-de-segurança)
 
-10. [Créditos](#créditos)
+10. [Suporte e Atualizações](#suporte-e-atualizações)
 
-11. [Agradecimentos](#agradecimentos)
+11. [Créditos](#créditos)
 
-12. [Licença](#licença)
+12. [Agradecimentos](#agradecimentos)
+
+13. [Licença](#licença)
 
 ---
 
@@ -567,6 +569,14 @@ Por favor, veja o [CHANGELOG](../CHANGELOG.md) para maiores informações sobre 
 Por favor, veja [CONTRIBUTING](../.github/CONTRIBUTING.md) para maiores detalhes.
 
 ⬆️ [Voltar](#conteúdo)
+
+&nbsp;
+
+## Código de Conduta
+
+Para garantir que todos são bem vindos a contribuir com esse projeto open-source, por favor leia e cumpra o [Código de Conduta](../.github/CODE_OF_CONDUCT.md).
+
+⬆️ [Back](#conteúdo)
 
 &nbsp;
 

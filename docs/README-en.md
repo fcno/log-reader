@@ -49,15 +49,17 @@ RecordReader::from(disk: 'file_system_name')
 
 7. [Contribution](#contribution)
 
-8. [Security Vulnerabilities](#security-vulnerabilities)
+8. [Code of Conduct](#code-of-conduct)
 
-9. [Support and Updates](#support-and-updates)
+9. [Security Vulnerabilities](#security-vulnerabilities)
 
-10. [Credits](#credits)
+10. [Support and Updates](#support-and-updates)
 
-11. [Thanks](#thanks)
+11. [Credits](#credits)
 
-12. [License](#license)
+12. [Thanks](#thanks)
+
+13. [License](#license)
 
 ---
 
@@ -565,6 +567,14 @@ Please see the [CHANGELOG](../CHANGELOG.md) for more information on what has cha
 ## Contribution
 
 Please see [CONTRIBUTING](../.github/CONTRIBUTING.md) for details.
+
+⬆️ [Back](#table-of-contents)
+
+&nbsp;
+
+## Code of Conduct
+
+In order to ensure that everyone is welcome to this open-source project, please review and abide by the [Code of Conduct](../.github/CODE_OF_CONDUCT.md).
 
 ⬆️ [Back](#table-of-contents)
 

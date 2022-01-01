@@ -3,7 +3,7 @@ name: Normalize composer.json
 on:
   push:
     paths:
-      - "composer.json"
+      - 'composer.json'
 
 jobs:
   normalize:

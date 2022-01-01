@@ -75,7 +75,7 @@ RecordReader::from(disk: 'file_system_name')
 
 PHP ^8.0
 
-Para uma checagem completa dos pré-requisitos: [check-platform-reqs](https://getcomposer.org/doc/03-cli.md#check-platform-reqs):
+Para uma checagem completa dos pré-requisitos:
 
 1. Via [Composer](https://getcomposer.org/doc/03-cli.md#check-platform-reqs)
 

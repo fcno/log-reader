@@ -75,7 +75,7 @@ RecordReader::from(disk: 'file_system_name')
 
 PHP ^8.0
 
-For a full requirements check: [check-platform-reqs](https://getcomposer.org/doc/03-cli.md#check-platform-reqs):
+For a full requirements check:
 
 1. Via [Composer](https://getcomposer.org/doc/03-cli.md#check-platform-reqs)
 

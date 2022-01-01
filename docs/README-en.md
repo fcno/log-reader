@@ -582,7 +582,7 @@ Please see our [security policy](/../../security/policy) on how to report securi
 
 The latest version will be supported and updated as needed. The others will only receive updates to fix [security vulnerabilities](#security-vulnerabilities) for up to 06 months after it has been replaced by a new version.
 
-🐛 Found a bug?!?! Open a **[issue](/../../issues/new)**.
+🐛 Found a bug?!?! Open a **[issue](/../../issues/new?assignees=fcno&labels=bug%2Ctriage&template=bug_report.yml&title=%5BA+concise+title+for+the+bug%5D)**.
 
 ✨ Any new ideas?!?! Start [a discussion](/../../discussions/new?category=ideas).
 

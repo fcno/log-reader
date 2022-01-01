@@ -84,7 +84,7 @@ Para uma checagem completa dos pré-requisitos:
     composer check-platform-reqs
     ```
 
-2. Via [GitHub Dependencies](../../network/dependencies)
+2. Via [GitHub Dependencies](/../../network/dependencies)
 
 ⬆️ [Voltar](#conteúdo)
 
@@ -582,7 +582,7 @@ Por favor, veja na [política de segurança](/../../security/policy) como report
 
 A versão mais recente receberá suporte e atualizações sempre que houver necessidade. As demais receberão apenas atualizações para corrigir [vulnerabilidades de segurança](#vulnerabilidades-de-segurança) por até 06 meses após ela ter sido substituída por uma nova versão.
 
-🐛 Encontrou um bug?!?! Abra um **[issue](/../../issues/new)**.
+🐛 Encontrou um bug?!?! Abra um **[issue](/../../issues/new?assignees=fcno&labels=bug%2Ctriage&template=bug_report.yml&title=%5BA+concise+title+for+the+bug%5D)**.
 
 ✨ Alguma ideia nova?!?! Inicie [uma discussão](/../../discussions/new?category=ideas).
 

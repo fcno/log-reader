@@ -17,9 +17,13 @@ Describe the big picture of your changes here to communicate to the maintainers 
 > *What types of changes does your code introduce? Put an x in the boxes that apply*
 
 - [ ] Doc update (non-breaking change which fixes typos or improve readability)
+
 - [ ] Bug fix (non-breaking change which fixes an issue)
+
 - [ ] New feature (non-breaking change which adds functionality)
+
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+
 - [ ] Other (please describe):
 
 ## Before you submit a pull request, please make sure you have to following (mandatory)

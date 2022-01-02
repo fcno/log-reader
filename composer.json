@@ -2,6 +2,7 @@
     "name": "fcno/log-reader",
     "description": "Log Reader para aplicações Laravel",
     "license": "MIT",
+    "type": "library",
     "keywords": [
         "fcno",
         "laravel",

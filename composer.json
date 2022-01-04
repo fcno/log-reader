@@ -75,7 +75,7 @@
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse --memory-limit 1G --error-format=github",
-        "test": "vendor/bin/pest",
-        "coverage": "composer test -- --coverage"
+        "coverage": "composer test -- --coverage",
+        "test": "vendor/bin/pest"
     }
 }

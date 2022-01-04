@@ -2,9 +2,6 @@
 
 namespace Fcno\LogReader\Contracts;
 
-/**
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- */
 interface IDeletable extends IReader
 {
     /**

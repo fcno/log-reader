@@ -10,8 +10,6 @@ use RuntimeException;
 
 /**
  * Gera arquivos de log fake.
- *
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 final class LogGenerator
 {

@@ -5,8 +5,6 @@ namespace Fcno\LogReader;
 /**
  * Regex usadas na library.
  *
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- *
  * @see https://www.youtube.com/watch?v=a178TJOZPIo&list=PLpzy7FIRqpGBQ_aqz_hXDBch1aAA-lmgu&index=6
  * @see https://www.phpliveregex.com/#tab-preg-match
  * @see https://stackoverflow.com/questions/34578333/correct-way-to-add-comments-to-a-regular-expression-in-php?answertab=votes#tab-top

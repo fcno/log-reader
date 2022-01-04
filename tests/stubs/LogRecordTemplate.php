@@ -18,8 +18,6 @@ use Illuminate\Support\Carbon;
  * - message - mensagem
  * - context - mensagem de contexto
  * - extra   - dados extras sobre o evento
- *
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 final class LogRecordTemplate
 {

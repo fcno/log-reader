@@ -6,8 +6,6 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- *
  * @see https://github.com/spatie/package-skeleton-laravel
  */
 class LogReaderServiceProvider extends PackageServiceProvider

@@ -4,9 +4,6 @@ namespace Fcno\LogReader\Contracts;
 
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-/**
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- */
 interface IDownloadable extends IReader
 {
     /**

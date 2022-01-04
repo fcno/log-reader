@@ -5,9 +5,6 @@ namespace Fcno\LogReader\Contracts;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 
-/**
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- */
 abstract class BaseReader implements IReader, IReadable
 {
     /**

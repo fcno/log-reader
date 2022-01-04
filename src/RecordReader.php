@@ -20,8 +20,6 @@ use Illuminate\Support\Collection;
  * - message - mensagem
  * - context - mensagem de contexto
  * - extra   - dados extras sobre o evento
- *
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 final class RecordReader extends BaseContentReader implements IPageable
 {

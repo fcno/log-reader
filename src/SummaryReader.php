@@ -13,8 +13,6 @@ use Illuminate\Support\Collection;
  * O sumário é feito por meio da contabilização da quantidade de níveis de logs
  * no arquivo, ou seja, a quantidade de registros do tipo debug, info, etc, bem
  * como a data desses resgistros.
- *
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 final class SummaryReader extends BaseContentReader
 {

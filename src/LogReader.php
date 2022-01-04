@@ -15,8 +15,6 @@ use Illuminate\Support\Collection;
 /**
  * Manipular os arquivos de log do ***File System*** gerados no padrão
  * **Laravel** diário, isto é, no padrão `laravel-2020-09-20.log`.
- *
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  */
 final class LogReader extends BaseReader implements IPageable, IDeletable, IDownloadable
 {

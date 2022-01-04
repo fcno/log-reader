@@ -1,8 +1,6 @@
 <?php
 
 /**
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- *
  * @see https://pestphp.com/docs/
  */
 

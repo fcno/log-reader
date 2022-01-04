@@ -7,8 +7,6 @@ use Exception;
 /**
  * Parâmetros informados para paginação são inválidos.
  *
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- *
  * @see https://laravel.com/docs/8.x/errors
  */
 class InvalidPaginationException extends Exception

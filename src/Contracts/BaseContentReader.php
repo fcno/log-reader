@@ -8,9 +8,6 @@ use Fcno\LogReader\Exceptions\NotDailyLogException;
 use Fcno\LogReader\Regex;
 use Illuminate\Support\Collection;
 
-/**
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- */
 abstract class BaseContentReader extends BaseReader implements IContentReadable
 {
     /**

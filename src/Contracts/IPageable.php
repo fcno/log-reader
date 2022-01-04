@@ -4,9 +4,6 @@ namespace Fcno\LogReader\Contracts;
 
 use Illuminate\Support\Collection;
 
-/**
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- */
 interface IPageable extends IReader
 {
     /**
